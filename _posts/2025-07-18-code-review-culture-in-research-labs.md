@@ -2,7 +2,7 @@
 layout: post
 title:  "Code Review Culture in Research Labs"
 date:   2025-07-18 12:00:00 -0500
-categories: general
+categories: [research, software-engineering]
 ---
 
 ![Cat sitting in front of a laptop studying code](/assets/images/posts/2025-07-18-volodymyr-dobrovolskyy-KrYbarbAx5s-unsplash.jpg)

@@ -2,7 +2,7 @@
 layout: post
 title:  "Why Computational Biologists Need Lab Notebooks"
 date:   2025-07-10 12:00:00 -0500
-categories: general
+categories: research
 ---
 
 Biologists learn to keep lab notebooks in Bio 101. They document experimental designs, observations, what worked, what didn't.

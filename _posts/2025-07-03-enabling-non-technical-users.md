@@ -1,31 +1,40 @@
 ---
 layout: post
-title:  "Why Computational Biologists Need Lab Notebooks"
-date:   2025-07-10 12:00:00 -0500
-categories: general
+title:  "Enabling non-technical Users"
+date:   2025-07-03 12:00:00 -0500
+categories: data-science
 ---
 
-Biologists learn to keep lab notebooks in Bio 101. They document experimental designs, observations, what worked, what didn't.
+After 10+ years of building tools for wetlab scientists, I've learned that making complex genomic data accessible isn't about dumbing it down—it's about smart design.
 
-But somehow, this fundamental practice gets lost when we move to computational biology.
+Here are my 3 core principles:
 
-I've met countless bioinformaticians and data scientists who can tell you the exact pH of their last buffer, but can't remember why they chose specific parameters for an analysis they ran last month.
+1. Start with the Question, Not the Data 
 
-Here's why I think every computational biologist should keep a lab notebook:
+Don't ask "What can we visualize?" 
+Ask "What decision are you trying to make?"
 
-➡️ SCENARIO: You run a complex command line tool with 15 parameters. Six months later, you need to reproduce the analysis on a similar dataset.
+I once spent weeks building a beautiful multi-omics dashboard. Scientists used it twice... Why? It answered questions they weren't asking.
 
-➡️ WITHOUT A NOTEBOOK: You're digging through 10,000 lines of bash history, trying to remember if you used --min-coverage 10 or 20, and WHY you made that choice.
+Now I start every project with a variation on: "Walk me through your Monday morning. 
 
-➡️ WITH A NOTEBOOK: "Tried --min-coverage 10 initially but got too much noise in low-quality regions. Switched to 20 based on Smith et al. 2023 recommendation for similar tissue type."
+What would make you say 'Finally, I can see what's happening'?"
 
-The magic isn't just recording WHAT you did—it's capturing WHY you did it.
-When you document your rationale in real-time, you're not just helping future you. You're building institutional knowledge that can be shared, reviewed, and improved upon.
+2. Make the Common Case Trivial 
 
-Your notebook becomes a roadmap for scaling analyses, training team members, and catching edge cases before they become problems.
+80% of your users need 20% of your features. Make those 20% effortless.
 
-We wouldn't accept a wetlab scientist who couldn't reproduce their experiments. Why do we accept computational work that can't be reproduced?
+Example: Scientists don't need to see every QC metric—they need to know "Is this sample good enough to trust?" One green checkmark beats 15 charts.
+Save the deep-dive complexity for the 20% who need it.
 
-The best part? Your "lab notebook" can be as simple as a markdown file alongside your code. No fancy tools required. (although I personally am a Confluence fan girl 🤓 )
+3. Show Impact, Not Just Data 
 
-Do you keep a computational lab notebook? What's your system for documenting analysis decisions?
+Raw numbers are intimidating. Context is powerful.
+
+Instead of showing "Expression level: 2.3 FPKM," show "3x higher than baseline" with a simple arrow. Instead of p-values, show "Strong evidence of difference."
+
+Scientists are brilliant—they don't need protection from complexity. They need their cognitive load focused on insights, not interpretation.
+
+The goal isn't to make scientists into data analysts. It's to make data analysis invisible so they can focus on being scientists.
+
+What's your experience building tools for non-technical users? What works (or doesn't work) in your field?

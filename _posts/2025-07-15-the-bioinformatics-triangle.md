@@ -2,7 +2,7 @@
 layout: post
 title:  "The Bioinformatics Triangle: Memory, Elegance, and Speed 🧬"
 date:   2025-07-15 12:00:00 -0500
-categories: general
+categories: [data-science, research]
 ---
 
 ![The bioinformatics triangle](/assets/images/posts/2025-07-15-the-bioinformatics-triangle.png)

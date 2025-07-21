@@ -2,7 +2,7 @@
 layout: post
 title:  "A Case for Data Democratization"
 date:   2025-07-01 12:00:00 -0500
-categories: general
+categories: data-science
 ---
 
 There's a critical tipping point every biotech company hits: your computational team can't keep up with the data your scientists produce.

@@ -2,7 +2,7 @@
 layout: post
 title:  "The Power of Strategic Data Infrastructure"
 date:   2025-07-13 12:00:00 -0500
-categories: general
+categories: [data-science, biotech]
 ---
 
 Sometimes the best features come from a single sentence in a meeting.

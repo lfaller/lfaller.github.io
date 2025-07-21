@@ -2,7 +2,7 @@
 layout: post
 title:  "Build vs Buy in Biotech"
 date:   2025-07-21 12:00:00 -0500
-categories: general
+categories: biotech
 ---
 
 ![How to budget for integration costs](/assets/images/posts/2025-07-21-real-cost-of-buying.png)
