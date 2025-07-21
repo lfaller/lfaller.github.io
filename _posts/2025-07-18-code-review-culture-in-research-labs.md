@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "𝐂𝐨𝐝𝐞 𝐑𝐞𝐯𝐢𝐞𝐰 𝐂𝐮𝐥𝐭𝐮𝐫𝐞 𝐢𝐧 𝐑𝐞𝐬𝐞𝐚𝐫𝐜𝐡 𝐋𝐚𝐛𝐬"
+title:  "Code Review Culture in Research Labs"
 date:   2025-07-18 12:00:00 -0500
 categories: general
 ---
