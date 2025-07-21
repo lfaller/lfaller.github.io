@@ -5,6 +5,8 @@ date:   2025-07-21 12:00:00 -0500
 categories: general
 ---
 
+![How to budget for integration costs](/assets/images/posts/2025-07-21-real-cost-of-buying.png)
+
 I've lived on both sides of the "build vs buy" equation in biotech, and honestly? Both extremes taught me expensive lessons.
 
 THE "BUILD EVERYTHING" COMPANY: We built our own LIMS, lab automation software, workflow orchestrators—everything powered by cloud infrastructure. It worked, but the maintenance burden was real.
@@ -22,7 +24,9 @@ The reality I've learned: healthy companies live in the middle. Build your core 
 The most successful biotech teams I've seen ask different questions:
 
 1️⃣ "What gives us competitive advantage?" (Build this)
+
 2️⃣ "What's table stakes for the industry?" (Buy this, but budget for integration)
+
 3️⃣ "Do we have the expertise to maintain this long-term?" (Be honest here)
 
 The "buy everything" approach often comes from leadership who think technology problems can be solved with purchasing decisions. But integration, customization, and ongoing maintenance still require internal technical expertise.

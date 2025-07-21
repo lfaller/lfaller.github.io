@@ -5,6 +5,9 @@ date:   2025-07-18 12:00:00 -0500
 categories: general
 ---
 
+![Cat sitting in front of a laptop studying code](/assets/images/posts/2025-07-18-volodymyr-dobrovolskyy-KrYbarbAx5s-unsplash.jpg)
+*Cats can do science, too! Source: [Volodymyr Dobrovolskyy on Unsplash](https://lnkd.in/e56E35J7)*
+
 Code review in research settings is a classic Goldilocks problem: too little and you risk irreproducible science, too much and you kill discovery momentum.
 
 I've experienced this challenge across teams of all sizes, and the solutions are surprisingly different:
