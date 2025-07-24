@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-07-21T16:08:01-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Lina L. Faller, PhD</title><subtitle>Welcome to my webpage</subtitle><entry><title type="html">Build vs Buy in Biotech</title><link href="http://localhost:4000/general/2025/07/21/build-vs-buy-in-biotech.html" rel="alternate" type="text/html" title="Build vs Buy in Biotech" /><published>2025-07-21T13:00:00-04:00</published><updated>2025-07-21T13:00:00-04:00</updated><id>http://localhost:4000/general/2025/07/21/build-vs-buy-in-biotech</id><content type="html" xml:base="http://localhost:4000/general/2025/07/21/build-vs-buy-in-biotech.html"><![CDATA[<p><img src="/assets/images/posts/2025-07-21-real-cost-of-buying.png" alt="How to budget for integration costs" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-07-21T16:26:03-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Lina L. Faller, PhD</title><subtitle>Welcome to my webpage</subtitle><entry><title type="html">Build vs Buy in Biotech</title><link href="http://localhost:4000/biotech/2025/07/21/build-vs-buy-in-biotech.html" rel="alternate" type="text/html" title="Build vs Buy in Biotech" /><published>2025-07-21T13:00:00-04:00</published><updated>2025-07-21T13:00:00-04:00</updated><id>http://localhost:4000/biotech/2025/07/21/build-vs-buy-in-biotech</id><content type="html" xml:base="http://localhost:4000/biotech/2025/07/21/build-vs-buy-in-biotech.html"><![CDATA[<p><img src="/assets/images/posts/2025-07-21-real-cost-of-buying.png" alt="How to budget for integration costs" /></p>
 
 <p>I’ve lived on both sides of the “build vs buy” equation in biotech, and honestly? Both extremes taught me expensive lessons.</p>
 
@@ -26,7 +26,7 @@
 
 <p>You can’t outsource your way out of needing to understand your own data infrastructure.</p>
 
-<p>What’s your experience with build vs buy in biotech? Where have you seen companies get this balance right (or wrong)?</p>]]></content><author><name></name></author><category term="general" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Code Review Culture in Research Labs</title><link href="http://localhost:4000/general/2025/07/18/code-review-culture-in-research-labs.html" rel="alternate" type="text/html" title="Code Review Culture in Research Labs" /><published>2025-07-18T13:00:00-04:00</published><updated>2025-07-18T13:00:00-04:00</updated><id>http://localhost:4000/general/2025/07/18/code-review-culture-in-research-labs</id><content type="html" xml:base="http://localhost:4000/general/2025/07/18/code-review-culture-in-research-labs.html"><![CDATA[<p><img src="/assets/images/posts/2025-07-18-volodymyr-dobrovolskyy-KrYbarbAx5s-unsplash.jpg" alt="Cat sitting in front of a laptop studying code" />
+<p>What’s your experience with build vs buy in biotech? Where have you seen companies get this balance right (or wrong)?</p>]]></content><author><name></name></author><category term="biotech" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Code Review Culture in Research Labs</title><link href="http://localhost:4000/research/software-engineering/2025/07/18/code-review-culture-in-research-labs.html" rel="alternate" type="text/html" title="Code Review Culture in Research Labs" /><published>2025-07-18T13:00:00-04:00</published><updated>2025-07-18T13:00:00-04:00</updated><id>http://localhost:4000/research/software-engineering/2025/07/18/code-review-culture-in-research-labs</id><content type="html" xml:base="http://localhost:4000/research/software-engineering/2025/07/18/code-review-culture-in-research-labs.html"><![CDATA[<p><img src="/assets/images/posts/2025-07-18-volodymyr-dobrovolskyy-KrYbarbAx5s-unsplash.jpg" alt="Cat sitting in front of a laptop studying code" />
 <em>Cats can do science, too! Source: <a href="https://lnkd.in/e56E35J7">Volodymyr Dobrovolskyy on Unsplash</a></em></p>
 
 <p>Code review in research settings is a classic Goldilocks problem: too little and you risk irreproducible science, too much and you kill discovery momentum.</p>
@@ -50,7 +50,7 @@ We tried it. It failed. The reality? When you’re the only person who understan
 
 <p>Maybe we need research-specific review standards? Maybe pair programming works better than async reviews? Maybe some analyses deserve different review rigor than production pipelines?</p>
 
-<p>What’s your experience with code review in research settings? How do you balance rigor with discovery speed? And solo bioinformaticians—how do you handle this challenge?</p>]]></content><author><name></name></author><category term="general" /><summary type="html"><![CDATA[Cats can do science, too! Source: Volodymyr Dobrovolskyy on Unsplash]]></summary></entry><entry><title type="html">The Bioinformatics Triangle: Memory, Elegance, and Speed 🧬</title><link href="http://localhost:4000/general/2025/07/15/the-bioinformatics-triangle.html" rel="alternate" type="text/html" title="The Bioinformatics Triangle: Memory, Elegance, and Speed 🧬" /><published>2025-07-15T13:00:00-04:00</published><updated>2025-07-15T13:00:00-04:00</updated><id>http://localhost:4000/general/2025/07/15/the-bioinformatics-triangle</id><content type="html" xml:base="http://localhost:4000/general/2025/07/15/the-bioinformatics-triangle.html"><![CDATA[<p><img src="/assets/images/posts/2025-07-15-the-bioinformatics-triangle.png" alt="The bioinformatics triangle" /></p>
+<p>What’s your experience with code review in research settings? How do you balance rigor with discovery speed? And solo bioinformaticians—how do you handle this challenge?</p>]]></content><author><name></name></author><category term="research" /><category term="software-engineering" /><summary type="html"><![CDATA[Cats can do science, too! Source: Volodymyr Dobrovolskyy on Unsplash]]></summary></entry><entry><title type="html">The Bioinformatics Triangle: Memory, Elegance, and Speed 🧬</title><link href="http://localhost:4000/data-science/research/2025/07/15/the-bioinformatics-triangle.html" rel="alternate" type="text/html" title="The Bioinformatics Triangle: Memory, Elegance, and Speed 🧬" /><published>2025-07-15T13:00:00-04:00</published><updated>2025-07-15T13:00:00-04:00</updated><id>http://localhost:4000/data-science/research/2025/07/15/the-bioinformatics-triangle</id><content type="html" xml:base="http://localhost:4000/data-science/research/2025/07/15/the-bioinformatics-triangle.html"><![CDATA[<p><img src="/assets/images/posts/2025-07-15-the-bioinformatics-triangle.png" alt="The bioinformatics triangle" /></p>
 
 <p>Just had a fascinating discussion about generating all 64 possible codons in Python. Three approaches emerged:</p>
 
@@ -66,7 +66,7 @@ We tried it. It failed. The reality? When you’re the only person who understan
 
 <p>The real skill isn’t picking the “right” approach—it’s knowing when each approach fits. Sometimes you need the generator for scalability. Sometimes you need the hardcoded list for reliability. Sometimes you need the elegant one-liner for a quick analysis.</p>
 
-<p>Where do you fall on this spectrum? Are you team “premature optimization is evil” or team “memory efficiency from day one”? How do you balance code aesthetics with performance in your bioinformatics workflows?</p>]]></content><author><name></name></author><category term="general" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">The Power of Strategic Data Infrastructure</title><link href="http://localhost:4000/general/2025/07/13/the-power_of_strategic_data_infrastructure.html" rel="alternate" type="text/html" title="The Power of Strategic Data Infrastructure" /><published>2025-07-13T13:00:00-04:00</published><updated>2025-07-13T13:00:00-04:00</updated><id>http://localhost:4000/general/2025/07/13/the-power_of_strategic_data_infrastructure</id><content type="html" xml:base="http://localhost:4000/general/2025/07/13/the-power_of_strategic_data_infrastructure.html"><![CDATA[<p>Sometimes the best features come from a single sentence in a meeting.</p>
+<p>Where do you fall on this spectrum? Are you team “premature optimization is evil” or team “memory efficiency from day one”? How do you balance code aesthetics with performance in your bioinformatics workflows?</p>]]></content><author><name></name></author><category term="data-science" /><category term="research" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">The Power of Strategic Data Infrastructure</title><link href="http://localhost:4000/data-science/biotech/2025/07/13/the-power_of_strategic_data_infrastructure.html" rel="alternate" type="text/html" title="The Power of Strategic Data Infrastructure" /><published>2025-07-13T13:00:00-04:00</published><updated>2025-07-13T13:00:00-04:00</updated><id>http://localhost:4000/data-science/biotech/2025/07/13/the-power_of_strategic_data_infrastructure</id><content type="html" xml:base="http://localhost:4000/data-science/biotech/2025/07/13/the-power_of_strategic_data_infrastructure.html"><![CDATA[<p>Sometimes the best features come from a single sentence in a meeting.</p>
 
 <p>I was sitting with our wetlab director when she mentioned, almost in passing: “I wish we could see how our controls have performed historically…”</p>
 
@@ -88,7 +88,7 @@ We tried it. It failed. The reality? When you’re the only person who understan
 
 <p>And always, ALWAYS listen for those casual comments in meetings. They’re often treasure maps to your next big win.</p>
 
-<p>What unexpected insights have emerged from your data infrastructure? What “casual wishes” turned into powerful features?</p>]]></content><author><name></name></author><category term="general" /><summary type="html"><![CDATA[Sometimes the best features come from a single sentence in a meeting.]]></summary></entry><entry><title type="html">Why Computational Biologists Need Lab Notebooks</title><link href="http://localhost:4000/general/2025/07/10/enabling-non-technical-users.html" rel="alternate" type="text/html" title="Why Computational Biologists Need Lab Notebooks" /><published>2025-07-10T13:00:00-04:00</published><updated>2025-07-10T13:00:00-04:00</updated><id>http://localhost:4000/general/2025/07/10/enabling-non-technical-users</id><content type="html" xml:base="http://localhost:4000/general/2025/07/10/enabling-non-technical-users.html"><![CDATA[<p>Biologists learn to keep lab notebooks in Bio 101. They document experimental designs, observations, what worked, what didn’t.</p>
+<p>What unexpected insights have emerged from your data infrastructure? What “casual wishes” turned into powerful features?</p>]]></content><author><name></name></author><category term="data-science" /><category term="biotech" /><summary type="html"><![CDATA[Sometimes the best features come from a single sentence in a meeting.]]></summary></entry><entry><title type="html">Why Computational Biologists Need Lab Notebooks</title><link href="http://localhost:4000/research/2025/07/10/computational_biologists_need_lab_notebooks.html" rel="alternate" type="text/html" title="Why Computational Biologists Need Lab Notebooks" /><published>2025-07-10T13:00:00-04:00</published><updated>2025-07-10T13:00:00-04:00</updated><id>http://localhost:4000/research/2025/07/10/computational_biologists_need_lab_notebooks</id><content type="html" xml:base="http://localhost:4000/research/2025/07/10/computational_biologists_need_lab_notebooks.html"><![CDATA[<p>Biologists learn to keep lab notebooks in Bio 101. They document experimental designs, observations, what worked, what didn’t.</p>
 
 <p>But somehow, this fundamental practice gets lost when we move to computational biology.</p>
 
@@ -111,30 +111,45 @@ When you document your rationale in real-time, you’re not just helping future 
 
 <p>The best part? Your “lab notebook” can be as simple as a markdown file alongside your code. No fancy tools required. (although I personally am a Confluence fan girl 🤓 )</p>
 
-<p>Do you keep a computational lab notebook? What’s your system for documenting analysis decisions?</p>]]></content><author><name></name></author><category term="general" /><summary type="html"><![CDATA[Biologists learn to keep lab notebooks in Bio 101. They document experimental designs, observations, what worked, what didn’t.]]></summary></entry><entry><title type="html">Why Computational Biologists Need Lab Notebooks</title><link href="http://localhost:4000/general/2025/07/10/computational_biologists_need_lab_notebooks.html" rel="alternate" type="text/html" title="Why Computational Biologists Need Lab Notebooks" /><published>2025-07-10T13:00:00-04:00</published><updated>2025-07-10T13:00:00-04:00</updated><id>http://localhost:4000/general/2025/07/10/computational_biologists_need_lab_notebooks</id><content type="html" xml:base="http://localhost:4000/general/2025/07/10/computational_biologists_need_lab_notebooks.html"><![CDATA[<p>Biologists learn to keep lab notebooks in Bio 101. They document experimental designs, observations, what worked, what didn’t.</p>
+<p>Do you keep a computational lab notebook? What’s your system for documenting analysis decisions?</p>]]></content><author><name></name></author><category term="research" /><summary type="html"><![CDATA[Biologists learn to keep lab notebooks in Bio 101. They document experimental designs, observations, what worked, what didn’t.]]></summary></entry><entry><title type="html">Enabling non-technical Users</title><link href="http://localhost:4000/data-science/2025/07/03/enabling-non-technical-users.html" rel="alternate" type="text/html" title="Enabling non-technical Users" /><published>2025-07-03T13:00:00-04:00</published><updated>2025-07-03T13:00:00-04:00</updated><id>http://localhost:4000/data-science/2025/07/03/enabling-non-technical-users</id><content type="html" xml:base="http://localhost:4000/data-science/2025/07/03/enabling-non-technical-users.html"><![CDATA[<p>After 10+ years of building tools for wetlab scientists, I’ve learned that making complex genomic data accessible isn’t about dumbing it down—it’s about smart design.</p>
 
-<p>But somehow, this fundamental practice gets lost when we move to computational biology.</p>
+<p>Here are my 3 core principles:</p>
 
-<p>I’ve met countless bioinformaticians and data scientists who can tell you the exact pH of their last buffer, but can’t remember why they chose specific parameters for an analysis they ran last month.</p>
+<ol>
+  <li>Start with the Question, Not the Data</li>
+</ol>
 
-<p>Here’s why I think every computational biologist should keep a lab notebook:</p>
+<p>Don’t ask “What can we visualize?” 
+Ask “What decision are you trying to make?”</p>
 
-<p>➡️ SCENARIO: You run a complex command line tool with 15 parameters. Six months later, you need to reproduce the analysis on a similar dataset.</p>
+<p>I once spent weeks building a beautiful multi-omics dashboard. Scientists used it twice… Why? It answered questions they weren’t asking.</p>
 
-<p>➡️ WITHOUT A NOTEBOOK: You’re digging through 10,000 lines of bash history, trying to remember if you used –min-coverage 10 or 20, and WHY you made that choice.</p>
+<p>Now I start every project with a variation on: “Walk me through your Monday morning.</p>
 
-<p>➡️ WITH A NOTEBOOK: “Tried –min-coverage 10 initially but got too much noise in low-quality regions. Switched to 20 based on Smith et al. 2023 recommendation for similar tissue type.”</p>
+<p>What would make you say ‘Finally, I can see what’s happening’?”</p>
 
-<p>The magic isn’t just recording WHAT you did—it’s capturing WHY you did it.
-When you document your rationale in real-time, you’re not just helping future you. You’re building institutional knowledge that can be shared, reviewed, and improved upon.</p>
+<ol>
+  <li>Make the Common Case Trivial</li>
+</ol>
 
-<p>Your notebook becomes a roadmap for scaling analyses, training team members, and catching edge cases before they become problems.</p>
+<p>80% of your users need 20% of your features. Make those 20% effortless.</p>
 
-<p>We wouldn’t accept a wetlab scientist who couldn’t reproduce their experiments. Why do we accept computational work that can’t be reproduced?</p>
+<p>Example: Scientists don’t need to see every QC metric—they need to know “Is this sample good enough to trust?” One green checkmark beats 15 charts.
+Save the deep-dive complexity for the 20% who need it.</p>
 
-<p>The best part? Your “lab notebook” can be as simple as a markdown file alongside your code. No fancy tools required. (although I personally am a Confluence fan girl 🤓 )</p>
+<ol>
+  <li>Show Impact, Not Just Data</li>
+</ol>
 
-<p>Do you keep a computational lab notebook? What’s your system for documenting analysis decisions?</p>]]></content><author><name></name></author><category term="general" /><summary type="html"><![CDATA[Biologists learn to keep lab notebooks in Bio 101. They document experimental designs, observations, what worked, what didn’t.]]></summary></entry><entry><title type="html">A Case for Data Democratization</title><link href="http://localhost:4000/general/2025/07/01/a-case-for-data-democratization.html" rel="alternate" type="text/html" title="A Case for Data Democratization" /><published>2025-07-01T13:00:00-04:00</published><updated>2025-07-01T13:00:00-04:00</updated><id>http://localhost:4000/general/2025/07/01/a-case-for-data-democratization</id><content type="html" xml:base="http://localhost:4000/general/2025/07/01/a-case-for-data-democratization.html"><![CDATA[<p>There’s a critical tipping point every biotech company hits: your computational team can’t keep up with the data your scientists produce.</p>
+<p>Raw numbers are intimidating. Context is powerful.</p>
+
+<p>Instead of showing “Expression level: 2.3 FPKM,” show “3x higher than baseline” with a simple arrow. Instead of p-values, show “Strong evidence of difference.”</p>
+
+<p>Scientists are brilliant—they don’t need protection from complexity. They need their cognitive load focused on insights, not interpretation.</p>
+
+<p>The goal isn’t to make scientists into data analysts. It’s to make data analysis invisible so they can focus on being scientists.</p>
+
+<p>What’s your experience building tools for non-technical users? What works (or doesn’t work) in your field?</p>]]></content><author><name></name></author><category term="data-science" /><summary type="html"><![CDATA[After 10+ years of building tools for wetlab scientists, I’ve learned that making complex genomic data accessible isn’t about dumbing it down—it’s about smart design.]]></summary></entry><entry><title type="html">A Case for Data Democratization</title><link href="http://localhost:4000/data-science/2025/07/01/a-case-for-data-democratization.html" rel="alternate" type="text/html" title="A Case for Data Democratization" /><published>2025-07-01T13:00:00-04:00</published><updated>2025-07-01T13:00:00-04:00</updated><id>http://localhost:4000/data-science/2025/07/01/a-case-for-data-democratization</id><content type="html" xml:base="http://localhost:4000/data-science/2025/07/01/a-case-for-data-democratization.html"><![CDATA[<p>There’s a critical tipping point every biotech company hits: your computational team can’t keep up with the data your scientists produce.</p>
 
 <p>Suddenly, the very team meant to accelerate discovery becomes the bottleneck. Scientists are waiting days for reports while breakthrough insights sit locked in databases.</p>
 
@@ -150,4 +165,4 @@ When you document your rationale in real-time, you’re not just helping future 
 
 <p>The goal isn’t to replace computational expertise—it’s to democratize access so brilliant scientists can spend their time doing what they do best: making discoveries.</p>
 
-<p>What’s your experience with this tipping point? Have you seen teams successfully navigate this transition?</p>]]></content><author><name></name></author><category term="general" /><summary type="html"><![CDATA[There’s a critical tipping point every biotech company hits: your computational team can’t keep up with the data your scientists produce.]]></summary></entry></feed>
+<p>What’s your experience with this tipping point? Have you seen teams successfully navigate this transition?</p>]]></content><author><name></name></author><category term="data-science" /><summary type="html"><![CDATA[There’s a critical tipping point every biotech company hits: your computational team can’t keep up with the data your scientists produce.]]></summary></entry></feed>
