@@ -20,13 +20,17 @@ Both approaches have their place, and I've learned to recognize when each makes 
 🌟 REACTIVE MODE works when:
 
 ➡️ You're in discovery phase and don't know what questions you'll need to answer
+
 ➡️ Science is moving faster than infrastructure can keep up
+
 ➡️ You need to prove value before investing in scalable solutions
 
 🌟 PROACTIVE MODE works when:
 
 ➡️ You have recurring analytical needs that justify engineering investment
+
 ➡️ The company is ready to think beyond the next experiment
+
 ➡️ You want to empower scientists with self-service capabilities
 
 The key insight? This isn't just about personal preference—it's about organizational maturity.
