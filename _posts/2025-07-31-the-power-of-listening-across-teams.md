@@ -2,7 +2,7 @@
 layout: post
 title:  "The Power of Listening Across Teams"
 date:   2025-07-31 12:00:00 -0500
-categories: data-science
+categories: research
 ---
 
 ![Listen for what's beneath the surface](/assets/images/posts/2025-07-31-the-power-of-listening-across-teams.png)
