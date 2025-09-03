@@ -5,7 +5,7 @@ date:   2025-09-02 8:00:00 -0500
 categories: career-development
 ---
 
-![Connect to your stakeholders will lead to project success](/assets/images/posts/2025-09-02-how-to-turn-stakeholders-from-obstacles-into-advocates.png)
+![Connect to your stakeholders will lead to project success](/assets/images/posts/2025-09-02-how-to-turn-stakeholders-from-obstacles-into-advocates.jpg)
 
 You just got assigned a new project. Your first instinct? Dive into the technical requirements.
 
