@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "The Engineering Report That Never Gets Written"
 date:   2025-08-25 8:00:00 -0500
 categories: software-engineering

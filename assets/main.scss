@@ -1,0 +1,48 @@
+---
+---
+
+@import "minima";
+
+// Custom colorful styling
+.site-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-top: none;
+  border-bottom: 3px solid #2E86AB;
+  
+  .site-title, .site-title:visited {
+    color: white !important;
+    font-weight: bold;
+  }
+  
+  .site-nav .page-link {
+    color: white !important;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.post-title, .page-heading, h1, h2 {
+  color: #2E86AB;
+}
+
+.post-list-heading {
+  color: #764ba2;
+  font-size: 2em;
+}
+
+a {
+  color: #A23B72;
+  &:hover {
+    color: #764ba2;
+  }
+}
+
+.post-meta {
+  color: #666;
+  font-style: italic;
+}
+
+.post-content {
+  line-height: 1.6;
+}

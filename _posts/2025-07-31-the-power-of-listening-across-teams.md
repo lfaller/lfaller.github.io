@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "The Power of Listening Across Teams"
 date:   2025-07-31 12:00:00 -0500
 categories: research
