@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "Enabling non-technical Users"
 date:   2025-07-03 12:00:00 -0500
 categories: data-science

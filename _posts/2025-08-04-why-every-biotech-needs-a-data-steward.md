@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "Why Every Biotech Needs a Data Steward"
 date:   2025-08-04 12:00:00 -0500
 categories: data-science

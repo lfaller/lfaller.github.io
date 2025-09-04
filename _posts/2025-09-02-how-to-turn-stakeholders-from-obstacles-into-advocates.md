@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "How to Turn Stakeholders from Obstacles into Advocates"
 date:   2025-09-02 8:00:00 -0500
 categories: career-development

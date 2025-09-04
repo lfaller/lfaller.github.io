@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "The Art of Saying No (Without Losing Friends)"
 date:   2025-09-04 8:00:00 -0500
 categories: career-development

@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "Code Review Culture in Research Labs"
 date:   2025-07-18 12:00:00 -0500
 categories: [research, software-engineering]

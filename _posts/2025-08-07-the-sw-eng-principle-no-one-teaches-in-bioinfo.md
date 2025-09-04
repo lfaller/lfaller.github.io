@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "The Software Engineering Principle No One Teaches In Bioinformatics"
 date:   2025-08-07 8:00:00 -0500
 categories: software-engineering

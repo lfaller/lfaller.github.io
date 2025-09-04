@@ -1,168 +1,540 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-07-21T16:26:03-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Lina L. Faller, PhD</title><subtitle>Welcome to my webpage</subtitle><entry><title type="html">Build vs Buy in Biotech</title><link href="http://localhost:4000/biotech/2025/07/21/build-vs-buy-in-biotech.html" rel="alternate" type="text/html" title="Build vs Buy in Biotech" /><published>2025-07-21T13:00:00-04:00</published><updated>2025-07-21T13:00:00-04:00</updated><id>http://localhost:4000/biotech/2025/07/21/build-vs-buy-in-biotech</id><content type="html" xml:base="http://localhost:4000/biotech/2025/07/21/build-vs-buy-in-biotech.html"><![CDATA[<p><img src="/assets/images/posts/2025-07-21-real-cost-of-buying.png" alt="How to budget for integration costs" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-09-04T12:49:29-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Lina L. Faller, PhD</title><subtitle>Welcome to my webpage</subtitle><entry><title type="html">The Art of Saying No (Without Losing Friends)</title><link href="http://localhost:4000/career-development/2025/09/04/the-art-of-saying-no-without-losing-friends.html" rel="alternate" type="text/html" title="The Art of Saying No (Without Losing Friends)" /><published>2025-09-04T09:00:00-04:00</published><updated>2025-09-04T09:00:00-04:00</updated><id>http://localhost:4000/career-development/2025/09/04/the-art-of-saying-no-without-losing-friends</id><content type="html" xml:base="http://localhost:4000/career-development/2025/09/04/the-art-of-saying-no-without-losing-friends.html"><![CDATA[<p><img src="/assets/images/posts/2025-09-04-the-art-of-saying-no-without-losing-friends.png" alt="Lots of distractions along the road to success" /></p>
 
-<p>I’ve lived on both sides of the “build vs buy” equation in biotech, and honestly? Both extremes taught me expensive lessons.</p>
+<p>Three weeks into your project, someone says: “Wouldn’t it be nice if we could also…”</p>
 
-<p>THE “BUILD EVERYTHING” COMPANY: We built our own LIMS, lab automation software, workflow orchestrators—everything powered by cloud infrastructure. It worked, but the maintenance burden was real.</p>
+<p>Your heart sinks. You know exactly where this leads. 🚨</p>
 
-<p>THE “BUY EVERYTHING” COMPANY: Management thought we could just purchase our way to efficiency. The budget ballooned fast, and we still needed internal expertise to make anything work together.</p>
+<p>Scope creep is the silent killer of technical projects. Here’s how to prevent it:</p>
 
-<p>Plot twist: None of our shiny new tools could talk to each other without expensive “managed services.” And guess what? We still needed internal project managers to coordinate with those managed services.</p>
+<p>𝗦𝘁𝗲𝗽 𝟭: 𝗗𝗲𝗳𝗶𝗻𝗲 𝗪𝗵𝗮𝘁 𝗬𝗼𝘂’𝗿𝗲 𝗕𝘂𝗶𝗹𝗱𝗶𝗻𝗴 (𝗮𝗻𝗱 𝗪𝗵𝗮𝘁 𝗬𝗼𝘂’𝗿𝗲 𝗡𝗼𝘁)</p>
 
-<p>Here’s what nobody puts in the budget: the hidden cost of integration 💸 💸 💸</p>
+<p>Start with clear requirements. But here’s the secret: also create an explicit “Out of Scope” section.</p>
 
-<p>Buying a tool isn’t buying a solution—it’s buying a component that needs to fit into your ecosystem. That integration work? It still requires your people, your time, and your expertise.</p>
+<p>Those nice-to-have features people mention in meetings? Write them down as “Version 2.0 features.” Acknowledge them, document them, but don’t build them.</p>
 
-<p>The reality I’ve learned: healthy companies live in the middle. Build your core differentiators, buy your commodity functions, but ALWAYS budget for the glue that holds it together.</p>
+<p>This serves two purposes:</p>
 
-<p>The most successful biotech teams I’ve seen ask different questions:</p>
+<p>→ Shows you’re listening to stakeholder ideas</p>
 
-<p>1️⃣ “What gives us competitive advantage?” (Build this)</p>
+<p>→ Creates a clear boundary for current work</p>
 
-<p>2️⃣ “What’s table stakes for the industry?” (Buy this, but budget for integration)</p>
+<p>𝗦𝘁𝗲𝗽 𝟮: 𝗚𝗲𝘁 𝗦𝘁𝗮𝗸𝗲𝗵𝗼𝗹𝗱𝗲𝗿 𝗕𝘂𝘆-𝗶𝗻</p>
 
-<p>3️⃣ “Do we have the expertise to maintain this long-term?” (Be honest here)</p>
+<p>Remember your stakeholder mapping? Make sure your project plan has something that satisfies each key player.</p>
 
-<p>The “buy everything” approach often comes from leadership who think technology problems can be solved with purchasing decisions. But integration, customization, and ongoing maintenance still require internal technical expertise.</p>
+<p>Get them to explicitly agree to the scope. Don’t just send a document—have a conversation.</p>
 
-<p>You can’t outsource your way out of needing to understand your own data infrastructure.</p>
+<p>“This is what we’re building. This is what we’re not building right now. Are we aligned?”</p>
 
-<p>What’s your experience with build vs buy in biotech? Where have you seen companies get this balance right (or wrong)?</p>]]></content><author><name></name></author><category term="biotech" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Code Review Culture in Research Labs</title><link href="http://localhost:4000/research/software-engineering/2025/07/18/code-review-culture-in-research-labs.html" rel="alternate" type="text/html" title="Code Review Culture in Research Labs" /><published>2025-07-18T13:00:00-04:00</published><updated>2025-07-18T13:00:00-04:00</updated><id>http://localhost:4000/research/software-engineering/2025/07/18/code-review-culture-in-research-labs</id><content type="html" xml:base="http://localhost:4000/research/software-engineering/2025/07/18/code-review-culture-in-research-labs.html"><![CDATA[<p><img src="/assets/images/posts/2025-07-18-volodymyr-dobrovolskyy-KrYbarbAx5s-unsplash.jpg" alt="Cat sitting in front of a laptop studying code" />
-<em>Cats can do science, too! Source: <a href="https://lnkd.in/e56E35J7">Volodymyr Dobrovolskyy on Unsplash</a></em></p>
+<p>Get verbal confirmation. Even better, get it in writing.</p>
 
-<p>Code review in research settings is a classic Goldilocks problem: too little and you risk irreproducible science, too much and you kill discovery momentum.</p>
+<p>𝗦𝘁𝗲𝗽 𝟯: 𝗦𝘁𝗮𝘆 𝗼𝗻 𝘁𝗵𝗲 𝗣𝗮𝘁𝗵</p>
 
-<p>I’ve experienced this challenge across teams of all sizes, and the solutions are surprisingly different:</p>
+<p>Here comes the hard part: during implementation, stick to the plan.</p>
 
-<p>➡️ The Solo Bioinformatician Dilemma: You’re embedded in a wetlab team. Who’s your peer? The postdoc who knows R (while you code in Python)? The PI who coded in FORTRAN 20 years ago?</p>
+<p>When someone inevitably says “wouldn’t it be nice if…” your response is:</p>
 
-<p>Honestly, I’m still figuring this one out. Maybe external code review partnerships? Monthly virtual code clubs? I’d love to hear how the community solves this.</p>
+<p>“That’s a great idea! I’m adding it to our Version 2.0 list. Let’s make sure we nail Version 1.0 first.”</p>
 
-<p>➡️ The stretched small team (3 people): Everyone’s on different projects, everyone’s oversubscribed. Code review feels like a luxury you can’t afford.
-We tried it. It failed. The reality? When you’re the only person who understands both the biology AND the pipeline, peer review becomes performative rather than protective.</p>
+<p>𝗧𝗵𝗲 𝗣𝘀𝘆𝗰𝗵𝗼𝗹𝗼𝗴𝘆 𝗼𝗳 𝗦𝗰𝗼𝗽𝗲 𝗖𝗿𝗲𝗲𝗽</p>
 
-<p>➡️ The sweet spot (5-6 people): This was where peer review actually worked—but only because management explicitly protected our time for it. Key insight: leadership has to VALUE code review, not just require it.</p>
+<p>Why do stakeholders keep adding features mid-project?</p>
 
-<p>We established “review debt” as a real metric. If your reviews were backlogged, you couldn’t start new features. Sounds harsh, but it worked.</p>
+<p>→ They get excited seeing progress</p>
 
-<p>Here’s what I learned: code review culture isn’t just about catching bugs. It’s about knowledge sharing, preventing single points of failure, and building team standards.</p>
+<p>→ They think “just one more thing” won’t hurt</p>
 
-<p>But in research, speed often beats perfection. The trick is finding review practices that ADD velocity instead of killing it.</p>
+<p>→ They don’t understand the compounding complexity</p>
 
-<p>Maybe we need research-specific review standards? Maybe pair programming works better than async reviews? Maybe some analyses deserve different review rigor than production pipelines?</p>
+<p>→ They haven’t felt the pain of scope creep before</p>
 
-<p>What’s your experience with code review in research settings? How do you balance rigor with discovery speed? And solo bioinformaticians—how do you handle this challenge?</p>]]></content><author><name></name></author><category term="research" /><category term="software-engineering" /><summary type="html"><![CDATA[Cats can do science, too! Source: Volodymyr Dobrovolskyy on Unsplash]]></summary></entry><entry><title type="html">The Bioinformatics Triangle: Memory, Elegance, and Speed 🧬</title><link href="http://localhost:4000/data-science/research/2025/07/15/the-bioinformatics-triangle.html" rel="alternate" type="text/html" title="The Bioinformatics Triangle: Memory, Elegance, and Speed 🧬" /><published>2025-07-15T13:00:00-04:00</published><updated>2025-07-15T13:00:00-04:00</updated><id>http://localhost:4000/data-science/research/2025/07/15/the-bioinformatics-triangle</id><content type="html" xml:base="http://localhost:4000/data-science/research/2025/07/15/the-bioinformatics-triangle.html"><![CDATA[<p><img src="/assets/images/posts/2025-07-15-the-bioinformatics-triangle.png" alt="The bioinformatics triangle" /></p>
+<p>Your job is to protect them from themselves while keeping them engaged.</p>
 
-<p>Just had a fascinating discussion about generating all 64 possible codons in Python. Three approaches emerged:</p>
+<p>𝗠𝘆 𝗚𝗼-𝗧𝗼 𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲:</p>
 
-<p>1️⃣ The Elegant Approach: Beautiful, concise, readable… but materializes all 64 codons in memory</p>
+<p>“I love the enthusiasm! That feature would definitely add value. Here’s what it would cost us in terms of timeline and current scope. Should we adjust our priorities?”</p>
 
-<p>2️⃣ The Memory-Efficient Approach: Constant memory usage, scales to millions of k-mers</p>
+<p>This does three things:</p>
 
-<p>3️⃣ The Quick-and-Dirty Approach: Copy-paste ready, zero computation, maximum clarity</p>
+<p>→ Acknowledges their idea positively</p>
 
-<p>Here’s the thing: in bioinformatics, we’re constantly juggling massive datasets (think whole genomes), complex algorithms (phylogenetic trees, alignment scoring), and tight deadlines (grant applications, paper submissions).</p>
+<p>→ Makes the trade-off explicit</p>
 
-<p>For 64 codons? Any approach works fine. For analyzing all 15-mers in the human genome? That elegant list comprehension will crash your laptop. 💥</p>
+<p>→ Puts the decision back in their hands</p>
 
-<p>The real skill isn’t picking the “right” approach—it’s knowing when each approach fits. Sometimes you need the generator for scalability. Sometimes you need the hardcoded list for reliability. Sometimes you need the elegant one-liner for a quick analysis.</p>
+<p>𝗧𝗵𝗲 𝗕𝗿𝗶𝗱𝗴𝗲 𝗕𝘂𝗶𝗹𝗱𝗲𝗿 𝗜𝗻𝘀𝗶𝗴𝗵𝘁:</p>
 
-<p>Where do you fall on this spectrum? Are you team “premature optimization is evil” or team “memory efficiency from day one”? How do you balance code aesthetics with performance in your bioinformatics workflows?</p>]]></content><author><name></name></author><category term="data-science" /><category term="research" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">The Power of Strategic Data Infrastructure</title><link href="http://localhost:4000/data-science/biotech/2025/07/13/the-power_of_strategic_data_infrastructure.html" rel="alternate" type="text/html" title="The Power of Strategic Data Infrastructure" /><published>2025-07-13T13:00:00-04:00</published><updated>2025-07-13T13:00:00-04:00</updated><id>http://localhost:4000/data-science/biotech/2025/07/13/the-power_of_strategic_data_infrastructure</id><content type="html" xml:base="http://localhost:4000/data-science/biotech/2025/07/13/the-power_of_strategic_data_infrastructure.html"><![CDATA[<p>Sometimes the best features come from a single sentence in a meeting.</p>
+<p>Scope negotiation isn’t about being rigid—it’s about being intentional. You’re helping stakeholders make informed decisions about trade-offs rather than just saying no.</p>
 
-<p>I was sitting with our wetlab director when she mentioned, almost in passing: “I wish we could see how our controls have performed historically…”</p>
+<p>When you frame scope management as protecting shared success rather than limiting possibilities, stakeholders become your allies in maintaining focus.</p>
 
-<p>My brain lit up. “Wait—you want this data? I HAVE this data!”</p>
+<p>What’s your experience with scope creep? What strategies help you keep projects on track?</p>]]></content><author><name>lina</name></author><category term="career-development" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">How to Turn Stakeholders from Obstacles into Advocates</title><link href="http://localhost:4000/career-development/2025/09/02/how-to-turn-stakeholders-from-obstacles-into-advocates.html" rel="alternate" type="text/html" title="How to Turn Stakeholders from Obstacles into Advocates" /><published>2025-09-02T09:00:00-04:00</published><updated>2025-09-02T09:00:00-04:00</updated><id>http://localhost:4000/career-development/2025/09/02/how-to-turn-stakeholders-from-obstacles-into-advocates</id><content type="html" xml:base="http://localhost:4000/career-development/2025/09/02/how-to-turn-stakeholders-from-obstacles-into-advocates.html"><![CDATA[<p><img src="/assets/images/posts/2025-09-02-how-to-turn-stakeholders-from-obstacles-into-advocates.jpg" alt="Connect to your stakeholders will lead to project success" /></p>
 
-<p>Because we’d built our data warehouse to be comprehensive from day one, this “wish” became reality in under a week. One new tab in our visualization app, and suddenly scientists could track control performance trends across months of experiments.</p>
+<p>You just got assigned a new project. Your first instinct? Dive into the technical requirements.</p>
 
-<p>Here’s what made this magic possible:</p>
+<p>Wrong move. 🚫</p>
 
-<p>➡️ Strategic infrastructure pays dividends: We didn’t just build for today’s requirements—we captured everything we could think of, knowing future questions would emerge. That upfront investment in comprehensive data modeling meant we could pivot to new insights instantly.</p>
+<p>Your first step should be mapping your stakeholders—not just who they are, but what makes them tick.</p>
 
-<p>➡️ Low effort, high impact: The technical lift was minimal because the foundation was solid. No emergency data migrations, no rushed ETL pipelines. Just a new query and some charts.</p>
+<p>𝗦𝘁𝗲𝗽 𝟭: 𝗜𝗱𝗲𝗻𝘁𝗶𝗳𝘆 𝗬𝗼𝘂𝗿 𝗦𝘁𝗮𝗸𝗲𝗵𝗼𝗹𝗱𝗲𝗿𝘀</p>
 
-<p>➡️ Collaboration creates breakthroughs: Here’s my favorite part: I never thought to surface this data on my own. It took a scientist’s domain expertise to recognize the value hidden in our warehouse.</p>
+<p>Beyond the obvious project sponsor, look for:</p>
 
-<p>This is how great science happens—when technical infrastructure meets scientific curiosity. The data was always there, but it took cross-functional conversation to unlock its potential.</p>
+<p>→ The person whose data you’ll need</p>
 
-<p>The lesson? Build your data foundation wide and deep. You never know which “I wish we could see…” will become your next game-changing feature.</p>
+<p>→ The scientist who’ll actually use what you build</p>
 
-<p>And always, ALWAYS listen for those casual comments in meetings. They’re often treasure maps to your next big win.</p>
+<p>→ The team lead who controls resources</p>
 
-<p>What unexpected insights have emerged from your data infrastructure? What “casual wishes” turned into powerful features?</p>]]></content><author><name></name></author><category term="data-science" /><category term="biotech" /><summary type="html"><![CDATA[Sometimes the best features come from a single sentence in a meeting.]]></summary></entry><entry><title type="html">Why Computational Biologists Need Lab Notebooks</title><link href="http://localhost:4000/research/2025/07/10/computational_biologists_need_lab_notebooks.html" rel="alternate" type="text/html" title="Why Computational Biologists Need Lab Notebooks" /><published>2025-07-10T13:00:00-04:00</published><updated>2025-07-10T13:00:00-04:00</updated><id>http://localhost:4000/research/2025/07/10/computational_biologists_need_lab_notebooks</id><content type="html" xml:base="http://localhost:4000/research/2025/07/10/computational_biologists_need_lab_notebooks.html"><![CDATA[<p>Biologists learn to keep lab notebooks in Bio 101. They document experimental designs, observations, what worked, what didn’t.</p>
+<p>→ The domain expert who can make or break adoption</p>
 
-<p>But somehow, this fundamental practice gets lost when we move to computational biology.</p>
+<p>→ The person who’ll maintain this after you move on</p>
 
-<p>I’ve met countless bioinformaticians and data scientists who can tell you the exact pH of their last buffer, but can’t remember why they chose specific parameters for an analysis they ran last month.</p>
+<p>𝗦𝘁𝗲𝗽 𝟮: 𝗨𝗻𝗱𝗲𝗿𝘀𝘁𝗮𝗻𝗱 𝗪𝗵𝗮𝘁 𝗗𝗿𝗶𝘃𝗲𝘀 𝗧𝗵𝗲𝗺</p>
 
-<p>Here’s why I think every computational biologist should keep a lab notebook:</p>
+<p>Each stakeholder has different motivations:</p>
 
-<p>➡️ SCENARIO: You run a complex command line tool with 15 parameters. Six months later, you need to reproduce the analysis on a similar dataset.</p>
+<p>🤝 The Collaborator: wants shared wins and team recognition.</p>
 
-<p>➡️ WITHOUT A NOTEBOOK: You’re digging through 10,000 lines of bash history, trying to remember if you used –min-coverage 10 or 20, and WHY you made that choice.</p>
+<p>🎯 The Individualist: wants personal impact and clear attribution.</p>
 
-<p>➡️ WITH A NOTEBOOK: “Tried –min-coverage 10 initially but got too much noise in low-quality regions. Switched to 20 based on Smith et al. 2023 recommendation for similar tissue type.”</p>
+<p>🧩 The Problem-Solver: wants intellectual challenge.</p>
 
-<p>The magic isn’t just recording WHAT you did—it’s capturing WHY you did it.
-When you document your rationale in real-time, you’re not just helping future you. You’re building institutional knowledge that can be shared, reviewed, and improved upon.</p>
+<p>📊 The Results-Oriented person: wants measurable outcomes and clear timelines.</p>
 
-<p>Your notebook becomes a roadmap for scaling analyses, training team members, and catching edge cases before they become problems.</p>
+<p>𝗦𝘁𝗲𝗽 𝟯: 𝗙𝗶𝗻𝗱 𝘁𝗵𝗲 𝗢𝘃𝗲𝗿𝗹𝗮𝗽</p>
 
-<p>We wouldn’t accept a wetlab scientist who couldn’t reproduce their experiments. Why do we accept computational work that can’t be reproduced?</p>
+<p>Here’s where you build the bridges: connect project components to stakeholder strengths and motivations.</p>
 
-<p>The best part? Your “lab notebook” can be as simple as a markdown file alongside your code. No fancy tools required. (although I personally am a Confluence fan girl 🤓 )</p>
+<p>Data validation → Problem-solver designs checks</p>
 
-<p>Do you keep a computational lab notebook? What’s your system for documenting analysis decisions?</p>]]></content><author><name></name></author><category term="research" /><summary type="html"><![CDATA[Biologists learn to keep lab notebooks in Bio 101. They document experimental designs, observations, what worked, what didn’t.]]></summary></entry><entry><title type="html">Enabling non-technical Users</title><link href="http://localhost:4000/data-science/2025/07/03/enabling-non-technical-users.html" rel="alternate" type="text/html" title="Enabling non-technical Users" /><published>2025-07-03T13:00:00-04:00</published><updated>2025-07-03T13:00:00-04:00</updated><id>http://localhost:4000/data-science/2025/07/03/enabling-non-technical-users</id><content type="html" xml:base="http://localhost:4000/data-science/2025/07/03/enabling-non-technical-users.html"><![CDATA[<p>After 10+ years of building tools for wetlab scientists, I’ve learned that making complex genomic data accessible isn’t about dumbing it down—it’s about smart design.</p>
+<p>User interfaces → Collaborator gathers feedback</p>
 
-<p>Here are my 3 core principles:</p>
+<p>Leadership buy-in → Results person frames metrics</p>
 
-<ol>
-  <li>Start with the Question, Not the Data</li>
-</ol>
+<p>𝗦𝘁𝗲𝗽 𝟰: 𝗠𝗮𝗸𝗲 𝗧𝗵𝗲𝗺 𝗟𝗼𝗼𝗸 𝗚𝗼𝗼𝗱</p>
 
-<p>Don’t ask “What can we visualize?” 
-Ask “What decision are you trying to make?”</p>
+<p>Make every interaction help stakeholders succeed in their roles.</p>
 
-<p>I once spent weeks building a beautiful multi-omics dashboard. Scientists used it twice… Why? It answered questions they weren’t asking.</p>
+<p>Expert prevents pitfall? Recognize their insight.</p>
 
-<p>Now I start every project with a variation on: “Walk me through your Monday morning.</p>
+<p>Owner provides clean data? Highlight their contribution.</p>
 
-<p>What would make you say ‘Finally, I can see what’s happening’?”</p>
+<p>𝗧𝗵𝗲 𝗕𝗿𝗶𝗱𝗴𝗲 𝗕𝘂𝗶𝗹𝗱𝗲𝗿 𝗜𝗻𝘀𝗶𝗴𝗵𝘁:</p>
 
-<ol>
-  <li>Make the Common Case Trivial</li>
-</ol>
+<p>Stakeholder management is alignment, not manipulation.</p>
 
-<p>80% of your users need 20% of your features. Make those 20% effortless.</p>
+<p>When they feel ownership, they become advocates instead of obstacles. ✨</p>
 
-<p>Example: Scientists don’t need to see every QC metric—they need to know “Is this sample good enough to trust?” One green checkmark beats 15 charts.
-Save the deep-dive complexity for the 20% who need it.</p>
+<p>𝗪𝗵𝗮𝘁 𝗧𝗵𝗶𝘀 𝗟𝗼𝗼𝗸𝘀 𝗟𝗶𝗸𝗲:</p>
 
-<ol>
-  <li>Show Impact, Not Just Data</li>
-</ol>
+<p>Instead of: “I need access to the production database.”</p>
 
-<p>Raw numbers are intimidating. Context is powerful.</p>
+<p>Try: “I’d love your input on the safest way to access the data we need. What would make you comfortable with our approach?”</p>
 
-<p>Instead of showing “Expression level: 2.3 FPKM,” show “3x higher than baseline” with a simple arrow. Instead of p-values, show “Strong evidence of difference.”</p>
+<p>Instead of: “The analysis is taking longer than expected.”</p>
 
-<p>Scientists are brilliant—they don’t need protection from complexity. They need their cognitive load focused on insights, not interpretation.</p>
+<p>Try: “We discovered some interesting data quality patterns that might impact future projects. Can we schedule time to discuss what we learned?”</p>
 
-<p>The goal isn’t to make scientists into data analysts. It’s to make data analysis invisible so they can focus on being scientists.</p>
+<p>𝗧𝗵𝗲 𝗕𝗼𝘁𝘁𝗼𝗺 𝗟𝗶𝗻𝗲:</p>
 
-<p>What’s your experience building tools for non-technical users? What works (or doesn’t work) in your field?</p>]]></content><author><name></name></author><category term="data-science" /><summary type="html"><![CDATA[After 10+ years of building tools for wetlab scientists, I’ve learned that making complex genomic data accessible isn’t about dumbing it down—it’s about smart design.]]></summary></entry><entry><title type="html">A Case for Data Democratization</title><link href="http://localhost:4000/data-science/2025/07/01/a-case-for-data-democratization.html" rel="alternate" type="text/html" title="A Case for Data Democratization" /><published>2025-07-01T13:00:00-04:00</published><updated>2025-07-01T13:00:00-04:00</updated><id>http://localhost:4000/data-science/2025/07/01/a-case-for-data-democratization</id><content type="html" xml:base="http://localhost:4000/data-science/2025/07/01/a-case-for-data-democratization.html"><![CDATA[<p>There’s a critical tipping point every biotech company hits: your computational team can’t keep up with the data your scientists produce.</p>
+<p>Technical skills get you the job. Stakeholder management skills make you effective in the job.
+Your project’s success depends more on people dynamics than code quality. Plan accordingly. 🎯</p>
 
-<p>Suddenly, the very team meant to accelerate discovery becomes the bottleneck. Scientists are waiting days for reports while breakthrough insights sit locked in databases.</p>
+<p>What’s your experience with stakeholder management? What strategies have worked (or failed) for you?</p>]]></content><author><name>lina</name></author><category term="career-development" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Where Data Goes to Die (And How to Save It)</title><link href="http://localhost:4000/data-science/2025/08/28/where-data-goes-to-die.html" rel="alternate" type="text/html" title="Where Data Goes to Die (And How to Save It)" /><published>2025-08-28T09:00:00-04:00</published><updated>2025-08-28T09:00:00-04:00</updated><id>http://localhost:4000/data-science/2025/08/28/where-data-goes-to-die</id><content type="html" xml:base="http://localhost:4000/data-science/2025/08/28/where-data-goes-to-die.html"><![CDATA[<p><img src="/assets/images/posts/2025-08-28-where-data-goes-to-die.png" alt="How to organize your data?" /></p>
 
-<p>This is when smart organizations invest in empowering their wetlab scientists with self-service tools. Why? Because science moves at breakneck speed, and handcrafted reports simply can’t scale.</p>
+<p>Your pilot project just got cancelled. The promising drug target didn’t pan out. The exploratory analysis is being shelved.</p>
 
-<p>But here’s the nuance most companies miss: timing matters.</p>
+<p>What happens to all that data you spent months generating? 📊</p>
 
-<p>Early in discovery, when you’re still prototyping analyses and figuring out what’s important, custom reports are essential. You can’t standardize what you haven’t defined yet.</p>
+<p>𝗧𝗵𝗲 𝗰𝗼𝗺𝗺𝗼𝗻 𝘀𝗰𝗲𝗻𝗮𝗿𝗶𝗼:</p>
 
-<p>The magic happens when you graduate from “What should we measure?” to “How do we measure this consistently?” That’s your cue to build tools that let scientists explore their own data.</p>
+<p>Data lives on someone’s laptop. Project gets discontinued. Person moves to different project. Data disappears into the digital void.</p>
 
-<p>I’ve seen teams reduce analysis turnaround from days to minutes by giving scientists intuitive dashboards (personally, I am a big fan of streamlit 🤓 but I am not going to say no to shiny). The computational team shifts from being report factories to building platforms that amplify scientific productivity.</p>
+<p>Sound familiar? 😅</p>
 
-<p>The goal isn’t to replace computational expertise—it’s to democratize access so brilliant scientists can spend their time doing what they do best: making discoveries.</p>
+<p>𝗪𝗵𝘆 𝘁𝗵𝗶𝘀 𝗺𝗮𝘁𝘁𝗲𝗿𝘀:</p>
 
-<p>What’s your experience with this tipping point? Have you seen teams successfully navigate this transition?</p>]]></content><author><name></name></author><category term="data-science" /><summary type="html"><![CDATA[There’s a critical tipping point every biotech company hits: your computational team can’t keep up with the data your scientists produce.]]></summary></entry></feed>
+<p>That “failed” pilot might contain insights valuable for future work. The cancelled project might have generated negative results that save someone else months of effort.</p>
+
+<p>But only if you can find it. 🔍</p>
+
+<p>𝗗𝗼𝗰𝘂𝗺𝗲𝗻𝘁 𝗶𝘁 𝗳𝗶𝗿𝘀𝘁:</p>
+
+<p>Before you archive anything, write it down. Create an “engineering report”:</p>
+
+<p>→ Background: What were you trying to solve?</p>
+
+<p>→ Research question: What hypothesis were you testing?</p>
+
+<p>→ Methods: How did you generate this data?</p>
+
+<p>→ Why it ended: What changed or didn’t work?</p>
+
+<p>Future you will thank you. 🙏</p>
+
+<p>𝗪𝗵𝗲𝗿𝗲 𝘁𝗵𝗲 𝗱𝗮𝘁𝗮 𝘀𝗵𝗼𝘂𝗹𝗱 𝗴𝗼:</p>
+
+<p>🏆 Best case: Already in a database (organized and queryable)</p>
+
+<p>🤷 More common: Scattered across CSV files, scripts, documents</p>
+
+<p>💡 Pragmatic solution: Organized cold storage</p>
+
+<p>For smaller companies, S3 bucket works well:</p>
+
+<p>→ Cheap long-term storage</p>
+
+<p>→ Flexible (dump everything)</p>
+
+<p>→ Easy to retrieve when needed</p>
+
+<p>Downside: S3 is a digital junk drawer without organization. 🗃️</p>
+
+<p>𝗠𝗮𝗸𝗶𝗻𝗴 𝗶𝘁 𝘄𝗼𝗿𝗸:</p>
+
+<p>→ Consistent naming conventions</p>
+
+<p>→ Clear folder structure</p>
+
+<p>→ README files explaining contents</p>
+
+<p>→ Metadata manifest listing all datasets</p>
+
+<p>𝗧𝗵𝗲 𝗶𝗻𝘀𝗶𝗴𝗵𝘁:</p>
+
+<p>Data archiving isn’t just storage—it’s knowledge preservation. Today’s “failed” experiment might be tomorrow’s breakthrough insight, but only if someone can understand what it was and why it mattered. 💡</p>
+
+<p>𝗙𝗼𝗿 𝗹𝗲𝗮𝗱𝗲𝗿𝘀𝗵𝗶𝗽:</p>
+
+<p>Build data sunset procedures into project workflows. The cost of storage is trivial compared to regenerating lost datasets. 💰</p>
+
+<p>𝗧𝗵𝗲 𝗵𝗮𝗿𝗱 𝘁𝗿𝘂𝘁𝗵:</p>
+
+<p>Most biotech companies are terrible at this. We’re great at generating data, mediocre at organizing it, awful at preserving institutional knowledge when projects end.</p>
+
+<p>It doesn’t have to be this way. ✨</p>
+
+<p>What’s your experience with data from discontinued projects? Have you seen companies do this well?</p>]]></content><author><name>lina</name></author><category term="data-science" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">The Engineering Report That Never Gets Written</title><link href="http://localhost:4000/software-engineering/2025/08/25/the-engineering-report-that-never-gets-written.html" rel="alternate" type="text/html" title="The Engineering Report That Never Gets Written" /><published>2025-08-25T09:00:00-04:00</published><updated>2025-08-25T09:00:00-04:00</updated><id>http://localhost:4000/software-engineering/2025/08/25/the-engineering-report-that-never-gets-written</id><content type="html" xml:base="http://localhost:4000/software-engineering/2025/08/25/the-engineering-report-that-never-gets-written.html"><![CDATA[<p><img src="/assets/images/posts/2025-08-25-the-engineering-report-that-never-gets-written.png" alt="Where do you store knowledge?" /></p>
+
+<p>You just finished a three-month bioinformatics project. The analysis is done, results delivered, everyone moves on to the next urgent task.</p>
+
+<p>But what about all the things you learned along the way?</p>
+
+<p>Software engineers routinely write project wrap-up reports. Bioinformaticians? Almost never.</p>
+
+<p>THE MISSING KNOWLEDGE:</p>
+
+<p>➡️ Which approaches worked (and which didn’t)</p>
+
+<p>➡️ What data quality issues you discovered</p>
+
+<p>➡️ Where you spent the most debugging time</p>
+
+<p>➡️ What you’d do differently knowing what you know now</p>
+
+<p>All of that hard-won knowledge just… evaporates.</p>
+
+<p>WHY WE DON’T DO IT: The honest reason? Time. Nobody wants to stop and document when there’s another analysis waiting. Leadership isn’t pushing for it.</p>
+
+<p>THE BUSINESS CASE: Your company just invested weeks or months of your time on this project. What if the next person doing similar work could skip the dead-end approaches you already tried and build on your work instead of reinventing it?</p>
+
+<p>Every repeated mistake is time stolen from innovation.</p>
+
+<p>WHAT IT LOOKS LIKE: It doesn’t need to be formal. A Confluence page, slide deck, or simple document:</p>
+
+<p>⭐ Project overview and key technical decisions</p>
+
+<p>⭐ What worked vs. what didn’t</p>
+
+<p>⭐ Lessons learned and recommendations</p>
+
+<p>⭐ Useful resources discovered</p>
+
+<p>MAKING IT HAPPEN:</p>
+
+<p>✅ Build 2-3 hours of “project wrap-up” into every timeline</p>
+
+<p>✅ Create a simple template</p>
+
+<p>✅ Store reports where people can find them</p>
+
+<p>✅ Make it part of project closure, not an afterthought</p>
+
+<p>KEY INSIGHT: Engineering reports aren’t just documentation—they’re knowledge transfer tools. They help teams build on each other’s work instead of starting from scratch every time.</p>
+
+<p>When people leave, does their knowledge walk out the door with them?
+What’s your experience with project documentation? Have you seen teams successfully capture and share learnings?</p>]]></content><author><name>lina</name></author><category term="software-engineering" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">The Post-Mortem No One Wants to Do (But Everyone Should)</title><link href="http://localhost:4000/software-engineering/2025/08/21/the-post-mortem-no-one-wants-to-do.html" rel="alternate" type="text/html" title="The Post-Mortem No One Wants to Do (But Everyone Should)" /><published>2025-08-21T09:00:00-04:00</published><updated>2025-08-21T09:00:00-04:00</updated><id>http://localhost:4000/software-engineering/2025/08/21/the-post-mortem-no-one-wants-to-do</id><content type="html" xml:base="http://localhost:4000/software-engineering/2025/08/21/the-post-mortem-no-one-wants-to-do.html"><![CDATA[<p><img src="/assets/images/posts/2025-08-21-the-post-mortem-no-one-wants-to-do.png" alt="Continuous Learning Cycle." /></p>
+
+<p>Something breaks. Data pipeline fails. Analysis crashes. Dashboard goes down.</p>
+
+<p>Your first instinct? Fix it fast and move on. Nobody wants to dwell on what went wrong.</p>
+
+<p>But here’s what I’ve learned: the 30 minutes you spend on a post-mortem can save you 30 hours of future firefighting.</p>
+
+<p>THE NATURAL RESPONSE: When things break, we’re frustrated. We want to forget it happened and get back to “real work.” The failure feels like a setback, so we rush to put it behind us.</p>
+
+<p>I get it. Post-mortems feel like dwelling on negative things when you could be building new features.</p>
+
+<p>WHAT POST-MORTEMS ACTUALLY DO:</p>
+
+<p>➡️ Identify systemic issues (not just the immediate bug)</p>
+
+<p>➡️ Reveal process gaps you didn’t know existed</p>
+
+<p>➡️ Prevent the same failure from happening again</p>
+
+<p>➡️ Make your systems more robust by addressing root causes</p>
+
+<p>➡️ Turn failures into learning opportunities for the whole team</p>
+
+<p>A REAL EXAMPLE: Our visualization dashboard went down because a scientist uploaded a malformed CSV. Easy fix: validate the file format.</p>
+
+<p>Post-mortem revealed the real issue: we had no systematic way to communicate data formatting requirements to scientists. The CSV was just the symptom.</p>
+
+<p>Solution: Built an automated data validation step with clear error messages that taught scientists the expected format.</p>
+
+<p>Result: Turned a one-off failure into a system improvement that prevented dozens of future issues.</p>
+
+<p>THE PROCESS THAT WORKS:</p>
+
+<p>1️⃣ Designate someone to lead the investigation (don’t let it fall through the cracks)</p>
+
+<p>2️⃣ Focus on systems, not blame (what failed, not who failed)</p>
+
+<p>3️⃣ Include relevant stakeholders (the people who were affected need to understand what happened)</p>
+
+<p>4️⃣ Document actionable improvements (not just “be more careful next time”)</p>
+
+<p>THE MANAGEMENT CHALLENGE: Here’s the tricky part: post-mortems require time that doesn’t immediately show ROI.</p>
+
+<p>If leadership just wants to “move fast and fix things,” it’s hard to justify spending time on “what went wrong” instead of “what’s next.”</p>
+
+<p>But here’s the business case: every failure that repeats is time stolen from innovation. Post-mortems are an investment in not having the same conversation again in three months.</p>
+
+<p>THE BRIDGE BUILDER PERSPECTIVE: Post-mortems aren’t just technical exercises—they’re communication opportunities. They help teams understand how their work interconnects and where the fragile points are.</p>
+
+<p>When you include stakeholders in post-mortems, you’re not just fixing systems—you’re building shared understanding of how your infrastructure works and why certain practices matter.</p>
+
+<p>Have you found effective ways to make time for post-mortems? How do you convince leadership that this “backward-looking” work is actually forward-thinking?</p>]]></content><author><name>lina</name></author><category term="software-engineering" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">The One Question That Changed How I Build Tools</title><link href="http://localhost:4000/data-science/2025/08/18/the-one-question-that-changed-how-i-build-tools.html" rel="alternate" type="text/html" title="The One Question That Changed How I Build Tools" /><published>2025-08-18T09:00:00-04:00</published><updated>2025-08-18T09:00:00-04:00</updated><id>http://localhost:4000/data-science/2025/08/18/the-one-question-that-changed-how-i-build-tools</id><content type="html" xml:base="http://localhost:4000/data-science/2025/08/18/the-one-question-that-changed-how-i-build-tools.html"><![CDATA[<p><img src="/assets/images/posts/2025-08-18-the-one-question-that-changed-how-i-build-tools.png" alt="One research question can lead to different tool outcomes." /></p>
+
+<p>“Can you make a dashboard for our RNA-seq data?”</p>
+
+<p>I used to jump straight into requirements gathering. What data? Which visualizations? How many samples?</p>
+
+<p>Now I ask one question first: “What does success look like?”</p>
+
+<p>THE SAME REQUEST, DIFFERENT SUCCESS CRITERIA:</p>
+
+<p>Scenario: “We need an RNA-seq dashboard”</p>
+
+<p>⭐ If you’re the Lab Manager: Success = “I can quickly spot failed experiments before they waste downstream resources.” → Build: QC-focused dashboard with clear pass/fail indicators</p>
+
+<p>⭐ If you’re the Principal Investigator: Success = “I can confidently present these results to the grant committee next week.” → Build: Publication-ready visualizations with statistical annotations</p>
+
+<p>⭐ If you’re the Postdoc: Success = “I can explore the data myself without bothering the bioinformatics team every time I have a question.” → Build: Interactive exploration tool with multiple filtering options</p>
+
+<p>Same request. Three completely different tools.</p>
+
+<p>WHY REQUIREMENTS AREN’T ENOUGH: Requirements tell you WHAT to build. Success criteria tell you WHY you’re building it.</p>
+
+<p>➡️ “Show differentially expressed genes” is a requirement.</p>
+
+<p>➡️ “Help me identify the top 3 pathways to focus our next experiments on” is a success criterion.</p>
+
+<p>The second one tells you that you need statistical significance, pathway enrichment, and probably some way to rank or prioritize results.</p>
+
+<p>THE POWER OF STARTING WITH OUTCOMES: When you start with success criteria:</p>
+
+<p>➡️ You build tools people actually use</p>
+
+<p>➡️ You avoid feature creep (if it doesn’t serve the success criteria, it’s not essential)</p>
+
+<p>➡️ You can make trade-offs confidently</p>
+
+<p>➡️ You know when you’re done</p>
+
+<p>A REAL EXAMPLE:</p>
+
+<p>Scientist: “I need a way to visualize our compound screening data.”</p>
+
+<p>Me: “What does success look like?”</p>
+
+<p>Scientist: “I want to walk into Monday’s meeting and confidently say ‘these 5 compounds are worth pursuing’ and defend that decision.”</p>
+
+<p>Suddenly I’m not building a generic visualization tool. I’m building a decision-support system with confidence intervals, statistical significance testing, and clear ranking criteria.</p>
+
+<p>THE BRIDGE BUILDER INSIGHT: Different stakeholders define success differently, even for identical requests. Your job isn’t just to translate requirements – it’s to uncover and align success criteria.</p>
+
+<p>Sometimes the real win is realizing that three different stakeholders need three different tools, not one “comprehensive” solution that satisfies nobody.</p>
+
+<p>What’s your experience with this? Do you find that starting with outcomes changes what you build?</p>]]></content><author><name>lina</name></author><category term="data-science" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">The Hidden Bottleneck in AI-Driven Drug Design</title><link href="http://localhost:4000/biotech/2025/08/11/the-hidden-bottleneck-in-ai-driven-drug-design.html" rel="alternate" type="text/html" title="The Hidden Bottleneck in AI-Driven Drug Design" /><published>2025-08-11T09:00:00-04:00</published><updated>2025-08-11T09:00:00-04:00</updated><id>http://localhost:4000/biotech/2025/08/11/the-hidden-bottleneck-in-ai-driven-drug-design</id><content type="html" xml:base="http://localhost:4000/biotech/2025/08/11/the-hidden-bottleneck-in-ai-driven-drug-design.html"><![CDATA[<p><img src="/assets/images/posts/2025-08-11-the-hidden-bottleneck-in-ai-driven-drug-design.png" alt="AI is being held back by insufficient data pipelines." /></p>
+
+<p>Everyone talks about AI algorithms in drug discovery. The real bottleneck? The data pipelines feeding them.</p>
+
+<p>I spend my days upstream of AI initiatives, and I see the same pattern everywhere: brilliant algorithms starving on broken data infrastructure.</p>
+
+<p>THE SPREADSHEET PROBLEM: Data lives in Excel files emailed between teams. Results shared via Slack attachments. “Final” datasets saved in SharePoint with links passed around like digital hot potatoes.</p>
+
+<p>Sound familiar?</p>
+
+<p>This isn’t just messy—it’s data integrity suicide.</p>
+
+<p>WHAT BREAKS:</p>
+
+<p>➡️ No provenance: Where did this data come from? Which version is current?</p>
+
+<p>➡️ No lineage: How was this dataset processed? Can we reproduce it?</p>
+
+<p>➡️ Human error everywhere: Copy-paste mistakes, version confusion, accidental overwrites</p>
+
+<p>➡️ AI garbage in, garbage out: Your model is only as good as your training data</p>
+
+<p>THE REAL CHALLENGE: You need a framework for where data can live that’s:</p>
+
+<p>➡️ Extensible: Science moves faster than software. Your system needs to adapt.</p>
+
+<p>➡️ Connected: Automated data flow from instruments → LIMS → analysis → notebooks</p>
+
+<p>➡️ Traceable: Every data point has a story you can follow</p>
+
+<p>WHAT THIS LOOKS LIKE: Instead of emailing Excel files, you have:</p>
+
+<p>➡️ Instruments that automatically deposit data into structured systems</p>
+
+<p>➡️ LIMS that captures experimental metadata and sample lineage</p>
+
+<p>➡️ Automated pipelines that connect wet lab data to computational analysis</p>
+
+<p>➡️ Lab notebooks that link directly to the data they reference</p>
+
+<p>THE AI PAYOFF: When your data infrastructure is solid, AI initiatives actually work. Your models train on clean, well-documented data. You can trace every prediction back to its source. You can reproduce and validate results.</p>
+
+<p>When it’s broken? Your data scientists spend 80% of their time hunting for data and questioning its quality.</p>
+
+<p>REALITY CHECK: This is R&amp;D/early discovery perspective. Regulated environments have different (often stricter) requirements. But the principle remains: AI success starts with data infrastructure.</p>
+
+<p>Most biotech companies are trying to solve the algorithm problem when they should be solving the data problem first.</p>
+
+<p>Your AI is only as smart as the data pipeline feeding it. Fix the pipeline, unleash the potential.</p>
+
+<p>What’s your experience with data infrastructure challenges in AI initiatives? Have you seen companies get this balance right?</p>]]></content><author><name>lina</name></author><category term="biotech" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">The Software Engineering Principle No One Teaches In Bioinformatics</title><link href="http://localhost:4000/software-engineering/2025/08/07/the-sw-eng-principle-no-one-teaches-in-bioinfo.html" rel="alternate" type="text/html" title="The Software Engineering Principle No One Teaches In Bioinformatics" /><published>2025-08-07T09:00:00-04:00</published><updated>2025-08-07T09:00:00-04:00</updated><id>http://localhost:4000/software-engineering/2025/08/07/the-sw-eng-principle-no-one-teaches-in-bioinfo</id><content type="html" xml:base="http://localhost:4000/software-engineering/2025/08/07/the-sw-eng-principle-no-one-teaches-in-bioinfo.html"><![CDATA[<p><img src="/assets/images/posts/2025-08-07-the-sw-eng-principle-no-one-teaches-in-bioinfo.png" alt="Let's separate our concerns!" /></p>
+
+<p>Separation of Concerns - it’s one of the most important concepts in software engineering, and somehow it never made it into my bioinformatics courses 🤔 .</p>
+
+<p>I learned this the hard way when trying to scale prototype analyses into maintainable, production-ready tools.</p>
+
+<p>THE PROTOTYPE TRAP: Your initial analysis script works perfectly. It reads data, cleans it, runs analysis, generates plots, and saves results. All in one beautiful 500-line Python script.</p>
+
+<p>Then stakeholders ask: “Can you run this on different data?” “Can we change the visualization?” “What if we use a different algorithm?”</p>
+
+<p>Suddenly, your elegant prototype becomes a maintenance nightmare 😵‍💫 .</p>
+
+<p>WHAT IS SEPARATION OF CONCERNS? Simply put: each part of your code should have one job and do it well.</p>
+
+<p>Instead of one script that does everything, you separate:</p>
+
+<p>➡️ Data ingestion (reading files, databases)</p>
+
+<p>➡️ Data processing (cleaning, transformation, QC)</p>
+
+<p>➡️ Analysis logic (algorithms, statistics)</p>
+
+<p>➡️ Visualization (plotting, reporting)</p>
+
+<p>➡️ Output handling (saving results)</p>
+
+<p>WHY THIS MATTERS: Need to swap your RNA-seq aligner? Easy—you only touch the analysis module. Your data cleaning logic works for multiple projects. You can test each component independently.</p>
+
+<p>NEXTFLOW: SEPARATION OF CONCERNS IN ACTION Many bioinformaticians already use this principle! NextFlow/Snakemake/CWL/etc workflows are a great example:</p>
+
+<p>➡️ Each process handles one specific task</p>
+
+<p>➡️ Swap your aligner? Only modify that process—the rest stays unchanged</p>
+
+<p>THE EDUCATION GAP: Most bioinformatics courses focus on algorithms and statistics (crucial!) but don’t explicitly teach these software engineering principles.</p>
+
+<p>We learn sequence alignment but not why organizing code into modular, single-purpose components makes everything more maintainable.</p>
+
+<p>FOR PRACTITIONERS: If your analysis scripts are becoming unmaintainable monsters, it might be time to refactor with separation of concerns in mind.</p>
+
+<p>What software engineering principles do you wish you’d learned earlier in your bioinformatics career?</p>]]></content><author><name>lina</name></author><category term="software-engineering" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Why Every Biotech Needs a Data Steward</title><link href="http://localhost:4000/data-science/2025/08/04/why-every-biotech-needs-a-data-steward.html" rel="alternate" type="text/html" title="Why Every Biotech Needs a Data Steward" /><published>2025-08-04T13:00:00-04:00</published><updated>2025-08-04T13:00:00-04:00</updated><id>http://localhost:4000/data-science/2025/08/04/why-every-biotech-needs-a-data-steward</id><content type="html" xml:base="http://localhost:4000/data-science/2025/08/04/why-every-biotech-needs-a-data-steward.html"><![CDATA[<p><img src="/assets/images/posts/2025-08-04-why-every-biotech-needs-a-data-steward.png" alt="Data Archeolgy is too expensive" /></p>
+
+<p>I’ve been doing “data stewardship” work for years without calling it that—and definitely without getting paid for it.</p>
+
+<p>Setting up naming conventions, documenting data lineage, establishing quality checks, creating metadata standards. I did it because I knew it would save me headaches later when someone asked, “Can you reproduce that analysis from six months ago?”</p>
+
+<p>But here’s the problem: this critical work is always treated as a “side project” that gets squeezed between “real” deliverables.</p>
+
+<p>WHAT HAPPENS WITHOUT A DATA STEWARD:</p>
+
+<p>➡️ Scientists can’t find the data they generated last quarter</p>
+
+<p>➡️ “Quick analyses” take days because nobody knows which dataset is the “clean” version</p>
+
+<p>➡️ Due diligence fails because data provenance is unclear</p>
+
+<p>➡️ Team members leave and take institutional knowledge with them</p>
+
+<p>➡️ The same data quality issues get discovered (and fixed) repeatedly</p>
+
+<p>WHY DATA ENGINEERS AREN’T ENOUGH: Data engineers build pipelines. Data stewards govern what flows through them.</p>
+
+<p>A data engineer might build an ETL process. A data steward ensures that process includes proper metadata capture, establishes what “clean” means for your organization, and creates the documentation that lets someone else maintain it.</p>
+
+<p>WHAT A DATA STEWARD ACTUALLY DOES:</p>
+
+<p>➡️ Establishes and enforces data standards across teams</p>
+
+<p>➡️ Creates the metadata that makes data findable and trustworthy</p>
+
+<p>➡️ Builds governance processes that scale with your organization</p>
+
+<p>➡️ Serves as the bridge between data generators (scientists) and data consumers (everyone)</p>
+
+<p>➡️ Prevents technical debt before it becomes a crisis</p>
+
+<p>THE BUSINESS CASE: How much time does your team spend hunting for data, questioning data quality, or rebuilding analyses because the original isn’t reproducible?</p>
+
+<p>If each scientist spends even 2 hours per week on “data archaeology,” that’s probably enough to justify a full-time steward.
+Add in the risk mitigation (failed due diligence, regulatory compliance, patent disputes) and the ROI becomes obvious.</p>
+
+<p>TO BIOTECH LEADERS: This isn’t a “nice to have” role. Data stewardship is infrastructure—invisible when it works, catastrophic when it doesn’t.</p>
+
+<p>You wouldn’t run a lab without quality control processes. Don’t run your data operations without data governance.</p>
+
+<p>The question isn’t whether you can afford a data steward. It’s whether you can afford not to have one.</p>
+
+<p>What’s your experience with data governance in biotech? Have you seen companies invest in dedicated stewardship roles, or is this still “everyone’s job” (which usually means no one’s job)?</p>]]></content><author><name>lina</name></author><category term="data-science" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">The Power of Listening Across Teams</title><link href="http://localhost:4000/research/2025/07/31/the-power-of-listening-across-teams.html" rel="alternate" type="text/html" title="The Power of Listening Across Teams" /><published>2025-07-31T13:00:00-04:00</published><updated>2025-07-31T13:00:00-04:00</updated><id>http://localhost:4000/research/2025/07/31/the-power-of-listening-across-teams</id><content type="html" xml:base="http://localhost:4000/research/2025/07/31/the-power-of-listening-across-teams.html"><![CDATA[<p><img src="/assets/images/posts/2025-07-31-the-power-of-listening-across-teams.png" alt="Listen for what's beneath the surface" /></p>
+
+<p>For most of my career, I’ve been the outsider.</p>
+
+<p>The bioinformatician embedded in wetlab teams. The “computer person” in rooms full of bench scientists who’ve spent years mastering their craft.</p>
+
+<p>I have valuable skills, but here’s what I learned: having technical expertise means nothing if you can’t connect with the people who need it.</p>
+
+<p>➡️ THE MISTAKE I USED TO MAKE: Walking into meetings thinking, “I know exactly how to solve this with code.” Then wondering why my brilliant solutions gathered dust.</p>
+
+<p>➡️ WHAT ACTUALLY WORKS: Listening first. Really listening.</p>
+
+<p>When a scientist says “this analysis takes forever,” don’t immediately jump to “I can automate that.” Ask: “What part feels most frustrating? What would success look like to you?”</p>
+
+<p>Sometimes “this takes forever” means “I don’t trust the results” or “I can’t explain this to my boss” or “I’m afraid I’m missing something important.”</p>
+
+<p>The technical solution for each of those is completely different.</p>
+
+<p>🌟 EMPATHY IS A TECHNICAL SKILL I’ve learned that dismissing someone’s pain points—even when they seem “solvable” to you—is the fastest way to lose credibility.</p>
+
+<p>When a postdoc says “I’ve been struggling with this analysis for weeks,” don’t say “that’s easy, just use this tool.” Say “that sounds really frustrating. Walk me through what you’ve tried.”</p>
+
+<p>Their expertise in their domain is as real as your expertise in yours. Respect that.</p>
+
+<p>🚀 THE BREAKTHROUGH MOMENT: When you stop being the person who “fixes things” and become the person who “understands problems,” everything changes.</p>
+
+<p>Scientists start coming to you with their real challenges, not just their surface requests. They trust you with their uncertainties, their experimental constraints, their career pressures.</p>
+
+<p>That’s when you can build solutions that actually matter.</p>
+
+<p>Being the outsider isn’t a disadvantage—it’s your superpower. You see patterns they can’t see, you bring tools they haven’t considered. But only if you earn the right to be heard by truly listening first.</p>
+
+<p>What’s your experience working across different disciplines? How do you build trust when you’re the “outsider” on a team?</p>]]></content><author><name>lina</name></author><category term="research" /><summary type="html"><![CDATA[]]></summary></entry></feed>
