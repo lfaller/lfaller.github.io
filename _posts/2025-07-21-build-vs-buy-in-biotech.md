@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "Build vs Buy in Biotech"
 date:   2025-07-21 12:00:00 -0500
 categories: biotech

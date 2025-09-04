@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "The Post-Mortem No One Wants to Do (But Everyone Should)"
 date:   2025-08-21 8:00:00 -0500
 categories: software-engineering

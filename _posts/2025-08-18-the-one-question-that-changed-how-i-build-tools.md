@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "The One Question That Changed How I Build Tools"
 date:   2025-08-18 8:00:00 -0500
 categories: data-science

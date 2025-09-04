@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "Reactive vs Proactive Bioinformatics"
 date:   2025-07-28 12:00:00 -0500
 categories: data-science

@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "The Bioinformatics Triangle: Memory, Elegance, and Speed 🧬"
 date:   2025-07-15 12:00:00 -0500
 categories: [data-science, research]

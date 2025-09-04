@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "Design Docs for Bioinformatics"
 date:   2025-07-24 12:00:00 -0500
 categories: research

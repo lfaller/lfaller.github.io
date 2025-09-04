@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "Where Data Goes to Die (And How to Save It)"
 date:   2025-08-28 8:00:00 -0500
 categories: data-science

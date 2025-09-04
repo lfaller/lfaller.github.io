@@ -1,5 +1,6 @@
 ---
 layout: post
+author: lina
 title:  "The Hidden Bottleneck in AI-Driven Drug Design"
 date:   2025-08-11 8:00:00 -0500
 categories: biotech
