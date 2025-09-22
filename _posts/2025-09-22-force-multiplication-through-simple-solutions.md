@@ -12,7 +12,7 @@ categories: data-science
 
 𝗧𝗵𝗲 𝗯𝗲𝘀𝘁 𝘁𝗲𝗰𝗵 𝘀𝗼𝗹𝘂𝘁𝗶𝗼𝗻𝘀 𝗮𝗿𝗲𝗻'𝘁 𝗿𝗼𝗰𝗸𝗲𝘁 𝘀𝗰𝗶𝗲𝗻𝗰𝗲. 𝗧𝗵𝗲𝘆'𝗿𝗲 𝗳𝗼𝗿𝗰𝗲 𝗺𝘂𝗹𝘁𝗶𝗽𝗹𝗶𝗲𝗿𝘀. 🚀
 
-One time, a scientist approached: "Can I see how our controls have performed over time?"
+One time, a scientist approached me: "Can I see how our controls have performed over time?"
 
 Within a day, they had a simple scatter plot showing months of control performance data. They immediately dove in and explored trends and patterns that emerged.
 
