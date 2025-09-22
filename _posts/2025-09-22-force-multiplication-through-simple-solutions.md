@@ -19,14 +19,21 @@ Within a day, they had a simple scatter plot showing months of control performan
 But here's what they didn't see: the months of "boring" infrastructure work that made that "simple" request possible.
 
 𝗪𝗵𝗮𝘁 𝘁𝗵𝗲 𝘀𝗰𝗶𝗲𝗻𝘁𝗶𝘀𝘁 𝘀𝗮𝘄: 
+
 → Quick answer to their question 
+
 → Clean, intuitive visualization 
+
 → Immediate insights
 
 𝗪𝗵𝗮𝘁 𝗮𝗰𝘁𝘂𝗮𝗹𝗹𝘆 𝗵𝗮𝗽𝗽𝗲𝗻𝗲𝗱: 
+
 → Strategic data warehouse design enabled rapid querying 
+
 → ETL pipelines ensured data quality and consistency 
+
 → Historical data architecture anticipated future questions 
+
 → APIs made complex time-series analysis feel effortless
 
 The result? They could test new hypotheses immediately instead of waiting weeks for data extraction. Control issues that might have gone unnoticed for months were caught early.
