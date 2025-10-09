@@ -3,7 +3,7 @@ layout: post
 author: lina
 title:  "The Sphere of Influence in Project Management"
 date:   2025-10-09 8:00:00 -0500
-categories: data-engineering
+categories: project-management
 ---
 
 ![Where to focus your energy for maximum impact.](/assets/images/posts/2025-10-08-sphere-of-influence-in-project-management.png)
