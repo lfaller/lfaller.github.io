@@ -12,4 +12,4 @@ I'm Lina L. Faller, a computational biologist passionate about data democratizat
 - [{{ post.title }}]({{ post.url }}) - {{ post.date | date: "%B %d, %Y" }}
 {% endfor %}
 
-[About me](about) | [All posts](blog)
+[About me](about) | [All posts](blog) | [Work With Me](services)
