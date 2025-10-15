@@ -1,15 +1,12 @@
 ---
-layout: page
-title: Home
+title: Lina L. Faller, PhD
+layout: home
+description: Removing data bottlenecks for biotech companies - building self-service tools that get scientists to actionable insights in minutes instead of days.
+intro_image_absolute: false
+intro_image_hide_on_mobile: true
+show_call_box: true
 ---
 
-# Hi, I'm Lina!
+# Remove Data Bottlenecks in Your Biotech
 
-I'm Lina L. Faller, a computational biologist passionate about data democratization and biotech innovation.
-
-## Recent Posts
-{% for post in site.posts limit: 3 %}
-- [{{ post.title }}]({{ post.url }}) - {{ post.date | date: "%B %d, %Y" }}
-{% endfor %}
-
-[About me](about) | [All posts](blog) | [Work With Me](services)
+I help biotech companies build self-service tools that get scientists to actionable insights in **minutes instead of days**, without relying on overworked data scientists.

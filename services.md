@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Work With Me
-permalink: /services/
+permalink: /services
 ---
 
 # Work With Me

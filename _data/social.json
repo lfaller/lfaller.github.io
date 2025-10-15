@@ -1,0 +1,12 @@
+[
+  {
+    "name": "LinkedIn",
+    "link": "https://linkedin.com/in/linafaller",
+    "image": "images/social/linkedin.svg"
+  },
+  {
+    "name": "GitHub",
+    "link": "https://github.com/lfaller",
+    "image": "images/social/github.svg"
+  }
+]
