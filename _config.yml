@@ -1,7 +1,8 @@
 title: Lina L. Faller, PhD
 description: Removing data bottlenecks for biotech companies
-baseurl: '/'
+baseurl: ''
 permalink: pretty
+theme: null
 
 logo:
   mobile: "assets/images/logo-mobile.svg"
