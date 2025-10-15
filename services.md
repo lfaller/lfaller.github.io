@@ -38,4 +38,4 @@ When scientists have frictionless access to their data, breakthroughs happen fas
 
 Ready to unlock your team's productivity? Let's discuss how I can help remove your data bottlenecks.
 
-**Contact:** [LinkedIn](https://linkedin.com/in/linafaller)
+[Schedule a 30-minute consultation](https://calendly.com/lina-l-faller/30min) or connect with me on [LinkedIn](https://linkedin.com/in/linafaller)
