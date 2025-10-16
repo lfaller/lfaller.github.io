@@ -1,5 +1,6 @@
 .logo {
   display: none;
+  margin-right: auto;
   @include media-breakpoint-up(sm) {
     display: block;
   }
@@ -8,7 +9,7 @@
   }
   a {
     display: block;
-    width: 100%;
+    width: fit-content;
     height: 100%;
   }
 }
