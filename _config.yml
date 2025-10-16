@@ -6,11 +6,11 @@ theme: null
 
 logo:
   mobile: "assets/images/carriagetown-logo-mobile.svg"
-  mobile_height: "40px"
-  mobile_width: "40px"
+  mobile_height: "50px"
+  mobile_width: "50px"
   desktop: "assets/images/carriagetown-logo.svg"
-  desktop_height: "60px"
-  desktop_width: "250px"
+  desktop_height: "80px"
+  desktop_width: "350px"
 
 home:
   limit_services: 6

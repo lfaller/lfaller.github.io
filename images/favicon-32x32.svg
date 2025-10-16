@@ -1,10 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <title>Lina Faller</title>
+    <title>Carriagetown Data Solutions</title>
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g>
-            <rect fill="#2C7A7B" x="0" y="0" width="32" height="32" rx="4"></rect>
-            <text x="16" y="23" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#ffffff" text-anchor="middle">L</text>
+            <!-- Dark teal background with rounded corners -->
+            <rect fill="#1E5455" x="0" y="0" width="32" height="32" rx="4"></rect>
+
+            <!-- Wagon Wheel in White - centered at 16,16 -->
+            <g transform="translate(16, 16)">
+                <!-- Outer circle -->
+                <circle cx="0" cy="0" r="12" fill="none" stroke="#FFFFFF" stroke-width="1.2"/>
+
+                <!-- Center hub -->
+                <circle cx="0" cy="0" r="1.5" fill="#FFFFFF"/>
+
+                <!-- Small circles at spoke ends (cardinal directions) -->
+                <circle cx="0" cy="-10.5" r="0.8" fill="#FFFFFF"/>
+                <circle cx="10.5" cy="0" r="0.8" fill="#FFFFFF"/>
+                <circle cx="0" cy="10.5" r="0.8" fill="#FFFFFF"/>
+                <circle cx="-10.5" cy="0" r="0.8" fill="#FFFFFF"/>
+
+                <!-- Diagonal circles -->
+                <circle cx="-7.4" cy="-7.4" r="0.8" fill="#FFFFFF"/>
+                <circle cx="7.4" cy="7.4" r="0.8" fill="#FFFFFF"/>
+                <circle cx="7.4" cy="-7.4" r="0.8" fill="#FFFFFF"/>
+                <circle cx="-7.4" cy="7.4" r="0.8" fill="#FFFFFF"/>
+
+                <!-- Spokes -->
+                <line x1="0" y1="0" x2="0" y2="-10.5" stroke="#FFFFFF" stroke-width="0.6"/>
+                <line x1="0" y1="0" x2="10.5" y2="0" stroke="#FFFFFF" stroke-width="0.6"/>
+                <line x1="0" y1="0" x2="0" y2="10.5" stroke="#FFFFFF" stroke-width="0.6"/>
+                <line x1="0" y1="0" x2="-10.5" y2="0" stroke="#FFFFFF" stroke-width="0.6"/>
+                <line x1="0" y1="0" x2="-7.4" y2="-7.4" stroke="#FFFFFF" stroke-width="0.6"/>
+                <line x1="0" y1="0" x2="7.4" y2="7.4" stroke="#FFFFFF" stroke-width="0.6"/>
+                <line x1="0" y1="0" x2="7.4" y2="-7.4" stroke="#FFFFFF" stroke-width="0.6"/>
+                <line x1="0" y1="0" x2="-7.4" y2="7.4" stroke="#FFFFFF" stroke-width="0.6"/>
+            </g>
         </g>
     </g>
 </svg>
