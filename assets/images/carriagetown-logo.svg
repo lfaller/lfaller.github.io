@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="590 230 380 330" width="380" height="330">
+  <!-- Wagon Wheel -->
+  <g>
+    <!-- Outer circle -->
+    <circle cx="719.367188" cy="344.753906" r="96.65625" fill="none" stroke="#2C7A7B" stroke-width="10"/>
+
+    <!-- Center hub -->
+    <circle cx="719.367188" cy="344.753906" r="12.1875" fill="#2C7A7B"/>
+
+    <!-- Small circles at spoke ends (cardinal directions) -->
+    <circle cx="719.367188" cy="265.40625" r="6.09375" fill="#2C7A7B"/>
+    <circle cx="795.695312" cy="344.753906" r="6.09375" fill="#2C7A7B"/>
+    <circle cx="719.355469" cy="421.085938" r="6.09375" fill="#2C7A7B"/>
+    <circle cx="643.023438" cy="344.746094" r="6.09375" fill="#2C7A7B"/>
+
+    <!-- Diagonal circles -->
+    <circle cx="665.972656" cy="291.113281" r="6.09375" fill="#2C7A7B"/>
+    <circle cx="773.296875" cy="398.695312" r="6.09375" fill="#2C7A7B"/>
+    <circle cx="772.425781" cy="291.972656" r="6.09375" fill="#2C7A7B"/>
+    <circle cx="666.578125" cy="397.527344" r="6.09375" fill="#2C7A7B"/>
+
+    <!-- Spokes -->
+    <line x1="719.367188" y1="344.753906" x2="719.367188" y2="265.40625" stroke="#2C7A7B" stroke-width="5"/>
+    <line x1="719.367188" y1="344.753906" x2="795.695312" y2="344.753906" stroke="#2C7A7B" stroke-width="5"/>
+    <line x1="719.367188" y1="344.753906" x2="719.355469" y2="421.085938" stroke="#2C7A7B" stroke-width="5"/>
+    <line x1="719.367188" y1="344.753906" x2="643.023438" y2="344.746094" stroke="#2C7A7B" stroke-width="5"/>
+    <line x1="719.367188" y1="344.753906" x2="665.972656" y2="291.113281" stroke="#2C7A7B" stroke-width="5"/>
+    <line x1="719.367188" y1="344.753906" x2="773.296875" y2="398.695312" stroke="#2C7A7B" stroke-width="5"/>
+    <line x1="719.367188" y1="344.753906" x2="772.425781" y2="291.972656" stroke="#2C7A7B" stroke-width="5"/>
+    <line x1="719.367188" y1="344.753906" x2="666.578125" y2="397.527344" stroke="#2C7A7B" stroke-width="5"/>
+  </g>
+
+  <!-- CARRIAGETOWN text -->
+  <text x="719" y="490" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="700" fill="#2C7A7B" text-anchor="middle">CARRIAGETOWN</text>
+
+  <!-- DATA SOLUTIONS text -->
+  <text x="719" y="520" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#2C7A7B" text-anchor="middle">DATA SOLUTIONS</text>
+</svg>

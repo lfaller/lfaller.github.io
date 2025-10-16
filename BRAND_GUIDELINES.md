@@ -1,8 +1,11 @@
-# Brand Guidelines - Lina L. Faller, PhD
+# Brand Guidelines - Carriagetown Data Solutions
 
 ## Brand Overview
 
-Professional, serene biotech consulting brand focused on data democratization and removing bottlenecks for biotech companies.
+**Carriagetown Data Solutions** (DBA)
+**Lina L. Faller, PhD**
+
+Professional, serene biotech consulting brand focused on data democratization and removing bottlenecks for biotech companies. The Carriagetown name reflects heritage and reliability, paired with a wagon wheel logo symbolizing movement, progress, and interconnected data solutions.
 
 ## Color Palette
 
@@ -66,20 +69,27 @@ Professional, serene biotech consulting brand focused on data democratization an
 
 ## Logo
 
-**Primary Logo:**
-- Desktop: "LLF" in Helvetica Bold
-- Color: Soft Teal (#2C7A7B)
+**Carriagetown Data Solutions Logo:**
+- **Design**: Wagon wheel with 8 spokes and decorative circles at spoke ends
+- **Color**: Soft Teal (#2C7A7B)
+- **Symbolism**: Movement, progress, interconnected solutions, heritage
+
+**Desktop Logo:**
+- Full logo with wagon wheel, "CARRIAGETOWN" text, and "DATA SOLUTIONS" subtitle
+- Dimensions: 250px width x 60px height
+- File: `assets/images/carriagetown-logo.svg`
 
 **Mobile Logo:**
-- Circle with "L" in center
-- Background: Soft Teal (#2C7A7B)
-- Text: White (#FFFFFF)
+- Wagon wheel icon only (no text)
+- Dimensions: 40px x 40px
+- File: `assets/images/carriagetown-logo-mobile.svg`
 
 **Favicon:**
 - Rounded square with "L" in center
 - Background: Soft Teal (#2C7A7B)
 - Text: White (#FFFFFF)
 - Border Radius: 4px
+- Note: Will be updated to wagon wheel icon in future
 
 ## Design Principles
 
@@ -124,7 +134,7 @@ All color combinations meet WCAG AA accessibility standards:
 ## File Locations
 
 - Color definitions: `/assets/css/style.scss`
-- Logo files: `/assets/images/logo.svg`, `/assets/images/logo-mobile.svg`
+- Logo files: `/assets/images/carriagetown-logo.svg`, `/assets/images/carriagetown-logo-mobile.svg`
 - Favicon: `/images/favicon-32x32.svg`, `/favicon.ico`
 - Social icons: `/images/social/`
 

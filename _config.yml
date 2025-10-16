@@ -5,12 +5,12 @@ permalink: pretty
 theme: null
 
 logo:
-  mobile: "assets/images/logo-mobile.svg"
-  mobile_height: "32px"
-  mobile_width: "32px"
-  desktop: "assets/images/logo.svg"
-  desktop_height: "32px"
-  desktop_width: "120px"
+  mobile: "assets/images/carriagetown-logo-mobile.svg"
+  mobile_height: "40px"
+  mobile_width: "40px"
+  desktop: "assets/images/carriagetown-logo.svg"
+  desktop_height: "60px"
+  desktop_width: "250px"
 
 home:
   limit_services: 6
