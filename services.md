@@ -4,8 +4,6 @@ title: Work With Me
 permalink: /services
 ---
 
-# Work With Me
-
 ## Remove Data Bottlenecks in Your Biotech
 
 I help biotech companies remove data bottlenecks by building self-service tools that get scientists to actionable insights in minutes instead of days, without relying on overworked data scientists.

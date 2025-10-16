@@ -4,8 +4,6 @@ title: Blog
 permalink: /blog
 ---
 
-# Blog
-
 Thoughts on data democratization, software engineering, and biotech innovation.
 
 ---
