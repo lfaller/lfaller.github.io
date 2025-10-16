@@ -1,6 +1,7 @@
 .logo {
   display: none;
   margin-right: auto;
+  margin-left: -10px; // Align with page content by compensating for container padding
   @include media-breakpoint-up(sm) {
     display: block;
   }
