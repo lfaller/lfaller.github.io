@@ -3,7 +3,6 @@ description: Removing data bottlenecks for biotech companies
 baseurl: ''
 permalink: pretty
 theme: null
-future: true
 
 logo:
   mobile: "assets/images/carriagetown-logo-mobile.svg"
