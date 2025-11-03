@@ -2,7 +2,7 @@
 layout: post
 author: lina
 title:  "The Data Layer Guardrails Are The Key To Scalable Self-Service"
-date:   2025-10-27 8:00:00 -0500
+date:   2025-10-30 8:00:00 -0500
 categories: data-science
 ---
 
