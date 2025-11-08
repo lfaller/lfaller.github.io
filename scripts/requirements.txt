@@ -1,0 +1,14 @@
+# LinkedIn Jekyll Cross-Posting Automation
+# Python dependencies
+
+# LinkedIn API calls
+requests>=2.31.0
+
+# Environment variable management
+python-dotenv>=1.0.0
+
+# Markdown processing
+markdown>=3.5.0
+
+# Image processing (optional, for resizing/optimization)
+Pillow>=10.0.0
