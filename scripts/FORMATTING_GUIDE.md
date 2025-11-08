@@ -34,9 +34,26 @@ Headers are converted to Unicode bold and placed on their own line:
 ```
 
 **On LinkedIn:**
-Image references are automatically removed from the text. Future enhancement will support uploading images to LinkedIn.
+Images are automatically uploaded to LinkedIn and attached to your post!
 
-**Note:** Images will still display correctly on your Jekyll site.
+The script:
+1. Detects image references in your markdown
+2. Uploads each image to LinkedIn's media servers
+3. Attaches the uploaded images to your post
+4. Removes the image path text from the post content
+
+**On Jekyll:**
+Images display normally using your Jekyll asset paths.
+
+**Supported Image Paths:**
+- Absolute Jekyll paths: `/assets/images/posts/image.png`
+- Relative paths: `../images/image.png`
+- Multiple images in a single post are supported
+
+**Image Format Requirements:**
+- PNG, JPG, GIF formats supported
+- Maximum file size: 8MB per image
+- Recommended dimensions: 1200x627px (LinkedIn's optimal size)
 
 ## Links
 

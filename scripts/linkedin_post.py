@@ -9,6 +9,7 @@ import sys
 import os
 import re
 import requests
+import json
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -59,6 +60,35 @@ def extract_html_comment_hashtags(content):
         tags = re.findall(r'#\w+', comment)
         hashtags.extend(tags)
     return hashtags
+
+def extract_image_paths(content, post_file_path):
+    """Extract image paths from markdown and convert to absolute paths"""
+    images = []
+
+    # Find markdown image syntax: ![alt](path)
+    matches = re.findall(r'!\[.*?\]\(([^\)]+)\)', content)
+
+    for match in matches:
+        image_path = match.strip()
+
+        # Convert Jekyll asset paths to absolute file paths
+        if image_path.startswith('/assets/'):
+            # /assets/images/posts/example.png -> /Users/.../lfaller.github.io/assets/images/posts/example.png
+            repo_root = Path(post_file_path).parent.parent
+            abs_path = repo_root / image_path.lstrip('/')
+            if abs_path.exists():
+                images.append(str(abs_path))
+        elif image_path.startswith('http'):
+            # Skip external URLs for now
+            pass
+        else:
+            # Relative path from post directory
+            post_dir = Path(post_file_path).parent
+            abs_path = (post_dir / image_path).resolve()
+            if abs_path.exists():
+                images.append(str(abs_path))
+
+    return images
 
 def markdown_to_linkedin(content):
     """Convert markdown to LinkedIn-friendly plain text with Unicode formatting"""
@@ -124,9 +154,9 @@ def extract_category_hashtags(categories):
 
     return hashtags
 
-def post_to_linkedin(author_id, access_token, text):
-    """Post text content to LinkedIn"""
-    url = "https://api.linkedin.com/v2/ugcPosts"
+def register_image_upload(author_id, access_token):
+    """Step 1: Register an image upload with LinkedIn"""
+    url = "https://api.linkedin.com/v2/assets?action=registerUpload"
 
     headers = {
         'Authorization': f'Bearer {access_token}',
@@ -135,15 +165,77 @@ def post_to_linkedin(author_id, access_token, text):
     }
 
     payload = {
+        "registerUploadRequest": {
+            "recipes": ["urn:li:digitalmediaRecipe:feedshare-image"],
+            "owner": author_id,
+            "serviceRelationships": [{
+                "relationshipType": "OWNER",
+                "identifier": "urn:li:userGeneratedContent"
+            }]
+        }
+    }
+
+    response = requests.post(url, headers=headers, json=payload)
+
+    if response.status_code == 200:
+        data = response.json()
+        upload_url = data['value']['uploadMechanism']['com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest']['uploadUrl']
+        asset = data['value']['asset']
+        return True, upload_url, asset
+    else:
+        return False, None, f"Error {response.status_code}: {response.text}"
+
+def upload_image_binary(upload_url, image_path, access_token):
+    """Step 2: Upload the actual image binary to LinkedIn"""
+    headers = {
+        'Authorization': f'Bearer {access_token}'
+    }
+
+    with open(image_path, 'rb') as f:
+        image_data = f.read()
+
+    response = requests.post(upload_url, headers=headers, data=image_data)
+
+    if response.status_code in [200, 201]:
+        return True, "Image uploaded successfully"
+    else:
+        return False, f"Error {response.status_code}: {response.text}"
+
+def post_to_linkedin(author_id, access_token, text, image_assets=None):
+    """Step 3: Post text content (with optional images) to LinkedIn"""
+    url = "https://api.linkedin.com/v2/ugcPosts"
+
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': 'application/json',
+        'X-Restli-Protocol-Version': '2.0.0'
+    }
+
+    # Base payload structure
+    share_content = {
+        "shareCommentary": {
+            "text": text
+        }
+    }
+
+    # Add images if provided
+    if image_assets and len(image_assets) > 0:
+        share_content["shareMediaCategory"] = "IMAGE"
+        share_content["media"] = []
+
+        for asset in image_assets:
+            share_content["media"].append({
+                "status": "READY",
+                "media": asset
+            })
+    else:
+        share_content["shareMediaCategory"] = "NONE"
+
+    payload = {
         "author": author_id,
         "lifecycleState": "PUBLISHED",
         "specificContent": {
-            "com.linkedin.ugc.ShareContent": {
-                "shareCommentary": {
-                    "text": text
-                },
-                "shareMediaCategory": "NONE"
-            }
+            "com.linkedin.ugc.ShareContent": share_content
         },
         "visibility": {
             "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"
@@ -184,6 +276,13 @@ def main():
     print(f"Title: {title}")
     print(f"Categories: {categories}")
 
+    # Extract images before converting content
+    image_paths = extract_image_paths(content, post_file)
+    if image_paths:
+        print(f"\nFound {len(image_paths)} image(s):")
+        for img in image_paths:
+            print(f"  - {img}")
+
     # Convert to LinkedIn format
     linkedin_text, html_hashtags = markdown_to_linkedin(content)
 
@@ -214,12 +313,41 @@ def main():
     print(linkedin_text)
     print("-" * 60)
 
+    # Upload images to LinkedIn
+    image_assets = []
+    if image_paths:
+        print(f"\nUploading {len(image_paths)} image(s) to LinkedIn...")
+        for idx, img_path in enumerate(image_paths, 1):
+            print(f"  [{idx}/{len(image_paths)}] Registering upload for {Path(img_path).name}...")
+
+            # Step 1: Register upload
+            success, upload_url, asset = register_image_upload(author_id, access_token)
+            if not success:
+                print(f"    ✗ Failed to register: {asset}")
+                continue
+
+            print(f"    ✓ Upload registered: {asset}")
+
+            # Step 2: Upload binary
+            print(f"    Uploading image binary...")
+            success, message = upload_image_binary(upload_url, img_path, access_token)
+            if not success:
+                print(f"    ✗ Upload failed: {message}")
+                continue
+
+            print(f"    ✓ {message}")
+            image_assets.append(asset)
+
+        print(f"\n✓ Successfully uploaded {len(image_assets)} image(s)")
+
     # Post to LinkedIn
     print("\nPosting to LinkedIn...")
-    success, message = post_to_linkedin(author_id, access_token, linkedin_text)
+    success, message = post_to_linkedin(author_id, access_token, linkedin_text, image_assets)
 
     if success:
         print(f"✓ {message}")
+        if image_assets:
+            print(f"✓ Posted with {len(image_assets)} image(s)")
     else:
         print(f"✗ {message}")
         sys.exit(1)
