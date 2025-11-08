@@ -1,0 +1,53 @@
+name: Cross-post to LinkedIn
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - '_posts/**'
+  workflow_dispatch:
+
+jobs:
+  crosspost:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # Need to compare with previous commit
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          cd scripts
+          pip install -r requirements.txt
+
+      - name: Get new or modified posts
+        id: changed-files
+        run: |
+          # Get list of added or modified markdown files in _posts/
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            # Manual trigger: get the most recent post
+            LATEST_POST=$(ls -t _posts/*.md | head -n 1)
+            echo "posts=$LATEST_POST" >> $GITHUB_OUTPUT
+          else
+            # Automatic trigger: get changed files
+            CHANGED_FILES=$(git diff --name-only HEAD^ HEAD -- _posts/*.md | tr '\n' ' ')
+            echo "posts=$CHANGED_FILES" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Cross-post to LinkedIn
+        if: steps.changed-files.outputs.posts != ''
+        env:
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_AUTHOR_ID: ${{ secrets.LINKEDIN_AUTHOR_ID }}
+        run: |
+          cd scripts
+          for POST in ${{ steps.changed-files.outputs.posts }}; do
+            echo "Processing: $POST"
+            python linkedin_post.py "../$POST"
+          done

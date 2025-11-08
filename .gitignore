@@ -7,6 +7,16 @@ _site/
 node_modules/
 vendor/
 
+# Python virtual environments
+venv/
+env/
+scripts/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
 # Bundler
 .bundle/
 Gemfile.lock
@@ -36,4 +46,5 @@ Thumbs.db
 
 # Local environment files
 .env
-.env.local_site/
+.env.local
+scripts/.env_site/
