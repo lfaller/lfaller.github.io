@@ -34,27 +34,67 @@ def extract_frontmatter_and_content(file_path):
 
     return metadata, body
 
+def text_to_unicode_bold(text):
+    """Convert ASCII text to Unicode bold sans-serif"""
+    # Unicode bold sans-serif mapping
+    bold_map = {
+        'A': '𝗔', 'B': '𝗕', 'C': '𝗖', 'D': '𝗗', 'E': '𝗘', 'F': '𝗙', 'G': '𝗚', 'H': '𝗛',
+        'I': '𝗜', 'J': '𝗝', 'K': '𝗞', 'L': '𝗟', 'M': '𝗠', 'N': '𝗡', 'O': '𝗢', 'P': '𝗣',
+        'Q': '𝗤', 'R': '𝗥', 'S': '𝗦', 'T': '𝗧', 'U': '𝗨', 'V': '𝗩', 'W': '𝗪', 'X': '𝗫',
+        'Y': '𝗬', 'Z': '𝗭', 'a': '𝗮', 'b': '𝗯', 'c': '𝗰', 'd': '𝗱', 'e': '𝗲', 'f': '𝗳',
+        'g': '𝗴', 'h': '𝗵', 'i': '𝗶', 'j': '𝗷', 'k': '𝗸', 'l': '𝗹', 'm': '𝗺', 'n': '𝗻',
+        'o': '𝗼', 'p': '𝗽', 'q': '𝗾', 'r': '𝗿', 's': '𝘀', 't': '𝘁', 'u': '𝘂', 'v': '𝘃',
+        'w': '𝘄', 'x': '𝘅', 'y': '𝘆', 'z': '𝘇', '0': '𝟬', '1': '𝟭', '2': '𝟮', '3': '𝟯',
+        '4': '𝟰', '5': '𝟱', '6': '𝟲', '7': '𝟳', '8': '𝟴', '9': '𝟵'
+    }
+    return ''.join(bold_map.get(c, c) for c in text)
+
+def extract_html_comment_hashtags(content):
+    """Extract hashtags from HTML comments like <!-- #DataScience #AI -->"""
+    hashtags = []
+    # Find all HTML comments
+    comments = re.findall(r'<!--\s*(.*?)\s*-->', content, re.DOTALL)
+    for comment in comments:
+        # Extract hashtags from comment
+        tags = re.findall(r'#\w+', comment)
+        hashtags.extend(tags)
+    return hashtags
+
 def markdown_to_linkedin(content):
-    """Convert markdown to LinkedIn-friendly plain text"""
+    """Convert markdown to LinkedIn-friendly plain text with Unicode formatting"""
+
+    # Extract hashtags from HTML comments before removing them
+    html_hashtags = extract_html_comment_hashtags(content)
+
     # Remove HTML comments
     content = re.sub(r'<!--.*?-->', '', content, flags=re.DOTALL)
 
-    # Convert bold (**text** or __text__)
-    content = re.sub(r'\*\*(.+?)\*\*', r'*\1*', content)
-    content = re.sub(r'__(.+?)__', r'*\1*', content)
+    # Remove image references (markdown and Jekyll asset paths)
+    content = re.sub(r'!\[.*?\]\(.*?\)', '', content)
+    content = re.sub(r'^/assets/.*$', '', content, flags=re.MULTILINE)
 
-    # Convert italic (*text* or _text_)
+    # Convert bold (**text** or __text__) to Unicode bold
+    def bold_replacer(match):
+        return text_to_unicode_bold(match.group(1))
+
+    content = re.sub(r'\*\*(.+?)\*\*', bold_replacer, content)
+    content = re.sub(r'__(.+?)__', bold_replacer, content)
+
+    # Convert italic (*text* or _text_) - remove formatting for now
     content = re.sub(r'(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)', r'\1', content)
     content = re.sub(r'_(.+?)_', r'\1', content)
 
-    # Convert inline code (`code`)
+    # Convert inline code (`code`) - remove backticks
     content = re.sub(r'`([^`]+)`', r'\1', content)
 
     # Convert links [text](url) to just the URL
     content = re.sub(r'\[([^\]]+)\]\(([^\)]+)\)', r'\2', content)
 
-    # Convert headers (## Header) to just text
-    content = re.sub(r'^#{1,6}\s+(.+)$', r'\1', content, flags=re.MULTILINE)
+    # Convert headers (## Header) to Unicode bold
+    def header_replacer(match):
+        return text_to_unicode_bold(match.group(1))
+
+    content = re.sub(r'^#{1,6}\s+(.+)$', header_replacer, content, flags=re.MULTILINE)
 
     # Clean up bullet points
     content = re.sub(r'^\s*[-*+]\s+', '• ', content, flags=re.MULTILINE)
@@ -62,7 +102,7 @@ def markdown_to_linkedin(content):
     # Remove extra blank lines
     content = re.sub(r'\n{3,}', '\n\n', content)
 
-    return content.strip()
+    return content.strip(), html_hashtags
 
 def extract_category_hashtags(categories):
     """Convert categories to hashtags"""
@@ -145,12 +185,29 @@ def main():
     print(f"Categories: {categories}")
 
     # Convert to LinkedIn format
-    linkedin_text = markdown_to_linkedin(content)
+    linkedin_text, html_hashtags = markdown_to_linkedin(content)
 
-    # Add hashtags
-    hashtags = extract_category_hashtags(categories)
-    if hashtags:
-        linkedin_text += "\n\n" + " ".join(hashtags)
+    # Collect all hashtags (from categories and HTML comments)
+    all_hashtags = []
+
+    # Add category hashtags
+    category_hashtags = extract_category_hashtags(categories)
+    all_hashtags.extend(category_hashtags)
+
+    # Add HTML comment hashtags
+    all_hashtags.extend(html_hashtags)
+
+    # Remove duplicates while preserving order
+    seen = set()
+    unique_hashtags = []
+    for tag in all_hashtags:
+        if tag.lower() not in seen:
+            seen.add(tag.lower())
+            unique_hashtags.append(tag)
+
+    # Add hashtags to post
+    if unique_hashtags:
+        linkedin_text += "\n\n" + " ".join(unique_hashtags)
 
     print(f"\nLinkedIn post preview:")
     print("-" * 60)
