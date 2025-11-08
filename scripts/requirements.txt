@@ -12,3 +12,6 @@ markdown>=3.5.0
 
 # Image processing (optional, for resizing/optimization)
 Pillow>=10.0.0
+
+# Timezone handling for scheduled posts
+pytz>=2024.1
