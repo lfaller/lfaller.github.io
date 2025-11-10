@@ -2,11 +2,11 @@
 layout: post
 author: lina
 title:  "The Strategic Value of Simple Solutions"
-date:   2025-11-11 8:00:00 -0500
+date:   2025-11-10 8:00:00 -0500
 categories: software-engineering
 ---
 
-![How complex does your solution need to be?.](/assets/images/posts/2025-11-11-the-strategic-value-of-simple-solutions.png)
+![How complex does your solution need to be?.](/assets/images/posts/2025-11-10-the-strategic-value-of-simple-solutions.png)
 
 **The best technical solution is usually the simplest one that actually works.**
 
