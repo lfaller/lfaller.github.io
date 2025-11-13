@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Data Engineering & Pipelines",
+    "description": "Building scalable, cloud-based data infrastructure that transforms raw biological data into actionable insights. Expert in architecting automated pipelines for multi-omics data processing."
+  },
+  {
+    "title": "Bioinformatics & Genomics",
+    "description": "10+ years translating complex genomic and multi-omics datasets into biological understanding. Deep expertise in computational biology workflows and analysis strategies."
+  },
+  {
+    "title": "Self-Service Analytics",
+    "description": "Creating intuitive tools that empower scientists to explore data independently. Specializing in democratizing access to complex datasets without requiring computational expertise."
+  },
+  {
+    "title": "Cross-Domain Leadership",
+    "description": "Bridge builder between computational and biological teams. Expert at translating technical concepts for scientific audiences and scientific needs into technical requirements."
+  },
+  {
+    "title": "Technical Stack",
+    "description": "Python, R, SQL, AWS/GCP, Docker, Nextflow/Snakemake, Git, API design, database architecture, and modern software engineering practices adapted for research environments."
+  },
+  {
+    "title": "Drug Discovery Systems",
+    "description": "Building data infrastructure that accelerates biotech R&D. From target identification through preclinical development, implementing systems that scale with your science."
+  }
+]
