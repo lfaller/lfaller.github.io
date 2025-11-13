@@ -24,15 +24,15 @@ The underlying problem was pretty straightforward: sample IDs in the sequencing 
 
 Here's what I now build into every production pipeline:
 
-- Error messages that say what AND why: Instead of "Foreign key constraint violation," try: "Sample ID ABC123 not found in experiment registry. Check your Benchling entry or contact [data team] if this sample should exist."
-- Data quality checks that explain failures in scientific terms: Not "Column 'replicate' contains NULL values." Instead: "Missing replicate numbers for 3 samples in plate P2024-089. Replicates are required for statistical analysis."
-- Logging that tells a story: Timestamps, input files, sample counts, quality metrics. Scientists should be able to reconstruct what happened without reading code.
-- Retry logic that makes sense for biological data: Network glitches? Retry. Negative control failing QC? Don't retry—that's a real problem that needs human judgment.
-- Clear next steps in every failure: Point to documentation, suggest who to contact, or indicate if this is expected behavior they can override.
+- Error messages that say what AND why: "Sample ID ABC123 not found in experiment registry. Check Benchling or contact data team if this sample should exist."
+- Data quality checks in scientific terms: "Missing replicate numbers for 3 samples in plate P2024-089. Replicates required for statistical analysis."
+- Logging that tells a story: Timestamps, input files, sample counts, quality metrics so scientists can reconstruct what happened.
+- Retry logic that makes sense for biology: Retry network glitches. Don't retry failed QC—that needs human judgment.
+- Clear next steps in failures: Point to docs, suggest who to contact, or indicate if this is expected.
 
-The goal isn't eliminating all errors—it's making errors interpretable.
+The goal isn't eliminating errors—it's making them interpretable.
 
-When a scientist sees "QC failed: 12% of reads below quality threshold (expected <5%). Review sequencing run notes or contact sequencing core," they know exactly what to investigate. When they see "ValueError: invalid literal for int() with base 10," they're stuck.
+When a scientist sees "QC failed: 12% of reads below threshold (expected <5%). Contact sequencing core," they know what to do. "ValueError: invalid literal for int()" leaves them stuck.
 
 **The best pipeline is one that makes both teams successful.**
 
