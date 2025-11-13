@@ -6,19 +6,19 @@ permalink: /services
 
 ## Remove Data Bottlenecks in Your Biotech
 
-I help biotech companies remove data bottlenecks by building self-service tools that get scientists to actionable insights in minutes instead of days, without relying on overworked data scientists.
+I help biotech companies **remove data bottlenecks** by building **self-service tools** that get scientists to actionable insights in **minutes instead of days**, without relying on overworked data scientists.
 
 ### The Problem I Solve
 
-Your scientists are brilliant, but they're stuck waiting days or weeks for data analysis. Your data team is overwhelmed with ad-hoc requests, and critical decisions are delayed while insights sit locked in databases.
+Your scientists are brilliant, but they're stuck **waiting days or weeks** for data analysis. Your data team is **overwhelmed with ad-hoc requests**, and critical decisions are delayed while insights sit **locked in databases**.
 
 ### What I Offer
 
 I build intuitive self-service platforms that empower your scientists to:
-- Access and explore complex datasets independently
-- Generate insights without writing code
-- Make faster, data-driven decisions
-- Free up your data science team to focus on strategic work
+- **Access and explore** complex datasets independently
+- **Generate insights** without writing code
+- Make **faster, data-driven decisions**
+- **Free up your data science team** to focus on strategic work
 
 ### My Approach
 
@@ -30,10 +30,10 @@ With 10+ years of experience at the intersection of software engineering and lif
 
 ### Results
 
-When scientists have frictionless access to their data, breakthroughs happen faster. I transform manual, bottlenecked processes into automated, self-service solutions that accelerate scientific discovery.
+When scientists have **frictionless access** to their data, **breakthroughs happen faster**. I transform manual, bottlenecked processes into **automated, self-service solutions** that **accelerate scientific discovery**.
 
 ### Let's Talk
 
-Ready to unlock your team's productivity? Let's discuss how I can help remove your data bottlenecks.
+Ready to **unlock your team's productivity**? Let's discuss how I can help remove your data bottlenecks.
 
 [Schedule a 30-minute consultation](https://calendly.com/lina-l-faller/30min) or connect with me on [LinkedIn](https://linkedin.com/in/linafaller)
