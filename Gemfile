@@ -3,6 +3,8 @@ source "https://rubygems.org"
 gem "jekyll", "~> 4.3.4"
 gem "webrick", "~> 1.8"
 gem "jekyll-sass-converter", "~> 2.2"
+gem "csv", "~> 3.2"
+gem "logger", "~> 1.5"
 
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
