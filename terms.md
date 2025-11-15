@@ -6,7 +6,7 @@ description: Terms of service for Lina L. Faller, PhD
 
 # Terms of Service
 
-**Last Updated: November 2024**
+**Last Updated: November 2025**
 
 ## 1. Agreement to Terms
 
@@ -96,4 +96,4 @@ Massachusetts, USA
 
 ---
 
-*These Terms of Service are effective as of November 2024 and apply to all use of linafaller.com.*
+*These Terms of Service are effective as of November 2025 and apply to all use of linafaller.com.*

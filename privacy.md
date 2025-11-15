@@ -6,7 +6,7 @@ description: Privacy policy for Lina L. Faller, PhD
 
 # Privacy Policy
 
-**Last Updated: November 2024**
+**Last Updated: November 2025**
 
 ## Introduction
 
@@ -91,4 +91,4 @@ Massachusetts, USA
 
 ---
 
-*This privacy policy is effective as of November 2024 and applies to all information collected through linafaller.com.*
+*This privacy policy is effective as of November 2025 and applies to all information collected through linafaller.com.*
