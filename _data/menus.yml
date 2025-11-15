@@ -22,3 +22,9 @@ footer:
   - name: "Writing"
     url: "/blog"
     weight: 4
+  - name: "Privacy"
+    url: "/privacy"
+    weight: 5
+  - name: "Terms"
+    url: "/terms"
+    weight: 6
