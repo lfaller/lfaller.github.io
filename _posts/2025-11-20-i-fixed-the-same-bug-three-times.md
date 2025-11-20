@@ -22,9 +22,9 @@ The people celebrating the "quick fix" weren't here for failures one and two. To
 
 **Why This Happens:**
 
-• Turnover erases memory. After 18 months, people who lived through the first failure are gone.
-• Prevention is invisible. The validation I built that prevents the bug? No one knows it's working.
-• Firefighting is visible. Quick fixes get noticed. Prevention work doesn't.
+- Turnover erases memory. After 18 months, people who lived through the first failure are gone.
+- Prevention is invisible. The validation I built that prevents the bug? No one knows it's working.
+- Firefighting is visible. Quick fixes get noticed. Prevention work doesn't.
 
 **The Cost:**
 
@@ -39,8 +39,6 @@ Write post-mortems for searchable records. Build prevention into urgent fixes—
 Prevention is infrastructure work. It's boring, invisible when it works, and generates no standup updates. But it's the difference between teams constantly firefighting and teams that have space to build.
 
 The better you are at prevention, the less anyone knows you're doing it. There's no glory in disasters that never happen.
-
-**Read the full post:** [link in comments]
 
 Have you fixed the same problem repeatedly? How do you make prevention work visible?
 
