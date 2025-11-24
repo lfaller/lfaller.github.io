@@ -50,7 +50,7 @@ We worked iteratively with the HTS team, building features based on what they ac
 
 #### Workflow Transformation Visualization
 
-{% include_relative ../assets/case-studies/hts-dashboard.html %}
+{% include case-studies/hts-dashboard.html %}
 
 ### The Challenges Nobody Expected
 
