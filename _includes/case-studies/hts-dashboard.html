@@ -1,0 +1,339 @@
+<style>
+.hts-workflow-container {
+    margin: 2rem 0;
+}
+
+.workflows {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.workflow {
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.before {
+    background: #fff5f5;
+    border: 2px solid #e74c3c;
+}
+
+.after {
+    background: #f0fdf4;
+    border: 2px solid #10b981;
+}
+
+.workflow-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.workflow-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.before .workflow-title {
+    color: #e74c3c;
+}
+
+.after .workflow-title {
+    color: #10b981;
+}
+
+.time-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.before .time-badge {
+    background: #e74c3c;
+    color: white;
+}
+
+.after .time-badge {
+    background: #10b981;
+    color: white;
+}
+
+.step {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.step-number {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background: #3498db;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.step-content {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 50px);
+}
+
+.step-title {
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.step-detail {
+    color: #7f8c8d;
+    font-size: 0.9em;
+}
+
+.arrow {
+    text-align: center;
+    color: #95a5a6;
+    font-size: 1.5em;
+    margin: 5px 0;
+}
+
+.error-icon {
+    display: inline-block;
+    color: #e74c3c;
+    font-size: 1.2em;
+    margin-left: 10px;
+}
+
+.issue-tags {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.issue-tag {
+    background: #fee;
+    color: #c0392b;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    border: 1px solid #e74c3c;
+}
+
+.benefit-tags {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.benefit-tag {
+    background: #d1fae5;
+    color: #065f46;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    border: 1px solid #10b981;
+}
+
+.comparison-footer {
+    margin-top: 40px;
+    padding: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+}
+
+.comparison-footer h2 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat {
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+}
+
+.stat-number {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+@media (max-width: 968px) {
+    .workflows {
+        grid-template-columns: 1fr;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<div class="hts-workflow-container">
+    <div class="workflows">
+        <!-- BEFORE -->
+        <div class="workflow before">
+            <div class="workflow-header">
+                <div class="workflow-title">BEFORE: Manual Process</div>
+                <div class="time-badge">⏱️ 8-12 hours/week</div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <div class="step-content">
+                    <div class="step-title">Download CSV Files</div>
+                    <div class="step-detail">Manually export data from database</div>
+                </div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <div class="step-content">
+                    <div class="step-title">Copy to Prism <span class="error-icon">⚠️</span></div>
+                    <div class="step-detail">Manual copy-paste for visualization</div>
+                    <div class="issue-tags">
+                        <span class="issue-tag">Error-prone</span>
+                        <span class="issue-tag">4,608 data points</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <div class="step-content">
+                    <div class="step-title">Copy to PowerPoint <span class="error-icon">⚠️</span></div>
+                    <div class="step-detail">Transfer visualizations for reporting</div>
+                    <div class="issue-tags">
+                        <span class="issue-tag">Repetitive</span>
+                        <span class="issue-tag">Time-consuming</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <div class="step-content">
+                    <div class="step-title">Repeat for Each Experiment</div>
+                    <div class="step-detail">Up to 12 plates per experiment</div>
+                    <div class="issue-tags">
+                        <span class="issue-tag">No cross-experiment comparison</span>
+                        <span class="issue-tag">No institutional memory</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AFTER -->
+        <div class="workflow after">
+            <div class="workflow-header">
+                <div class="workflow-title">AFTER: Self-Service Dashboard</div>
+                <div class="time-badge">⚡ 45 minutes/week</div>
+            </div>
+
+            <div class="step">
+                <span class="step-number">1</span>
+                <div class="step-content">
+                    <div class="step-title">Access Dashboard</div>
+                    <div class="step-detail">Direct connection to database</div>
+                    <div class="benefit-tags">
+                        <span class="benefit-tag">Real-time data</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <div class="step-content">
+                    <div class="step-title">Filter & Compare</div>
+                    <div class="step-detail">Interactive exploration across all experiments</div>
+                    <div class="benefit-tags">
+                        <span class="benefit-tag">Cross-experiment views</span>
+                        <span class="benefit-tag">Pattern recognition</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <div class="step-content">
+                    <div class="step-title">Download Results</div>
+                    <div class="step-detail">Publication-ready visualizations with context</div>
+                    <div class="benefit-tags">
+                        <span class="benefit-tag">Zero copy-paste</span>
+                        <span class="benefit-tag">Detailed legends</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <div class="step">
+                <span class="step-number">4</span>
+                <div class="step-content">
+                    <div class="step-title">Answer Questions in Real-Time</div>
+                    <div class="step-detail">Pull up dashboard during meetings</div>
+                    <div class="benefit-tags">
+                        <span class="benefit-tag">Self-service</span>
+                        <span class="benefit-tag">Collaborative debugging</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="comparison-footer">
+        <h2>🎯 The Impact</h2>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">94%</div>
+                <div class="stat-label">Time Reduction</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">2,000</div>
+                <div class="stat-label">Hours Saved Annually</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">&lt;2</div>
+                <div class="stat-label">Months to ROI</div>
+            </div>
+        </div>
+    </div>
+</div>
