@@ -1,0 +1,157 @@
+---
+layout: default
+bodyClass: "page-basic"
+---
+
+<div class="container pb-6 pt-6 pt-md-10 pb-md-10">
+  <!-- Hero Section -->
+  <div class="row justify-content-center mb-5">
+    <div class="col-12 col-md-10">
+      <h1 class="title text-center mb-4">{{ page.hero_title | default: "Case Studies" }}</h1>
+      <p class="text-center text-lg mb-0">
+        {{ page.hero_subtitle }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Case Study Cards Grid -->
+  <div class="row justify-content-start">
+    <div class="col-12">
+      <div class="case-studies-grid">
+        {% assign case_studies = site.case_studies | sort: 'date' | reverse %}
+        {% for case_study in case_studies %}
+          <div class="case-study-card">
+            <div class="card-content">
+              <h3 class="card-title">{{ case_study.title }}</h3>
+              <p class="card-client">{{ case_study.client_type }}</p>
+              <p class="card-problem">{{ case_study.problem_statement }}</p>
+
+              {% if case_study.impact_metric %}
+              <div class="impact-highlight">
+                <strong>{{ case_study.impact_metric }}</strong>
+              </div>
+              {% endif %}
+
+              {% if case_study.technologies %}
+              <div class="technologies">
+                {% for tech in case_study.technologies %}
+                  <span class="tech-tag">{{ tech }}</span>
+                {% endfor %}
+              </div>
+              {% endif %}
+
+              <a href="{{ case_study.url }}" class="read-more">
+                Read full case study →
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="row justify-content-center mt-5 pt-5 border-top">
+    <div class="col-12 col-md-8 text-center">
+      <p class="text-lg">
+        <strong>Ready to transform your data workflows? Let's talk.</strong>
+      </p>
+      <a href="/contact" class="btn btn-primary">Get in touch</a>
+    </div>
+  </div>
+</div>
+
+<style>
+.case-studies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.case-study-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.case-study-card:hover {
+  border-color: #999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.card-client {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.card-problem {
+  color: #555;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+  line-height: 1.5;
+}
+
+.impact-highlight {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  color: #333;
+  border-left: 4px solid #2c3e50;
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tech-tag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  color: #555;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.read-more {
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: auto;
+  transition: color 0.3s ease;
+}
+
+.read-more:hover {
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .case-studies-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

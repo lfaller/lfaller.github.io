@@ -1,0 +1,202 @@
+---
+layout: default
+---
+
+<div class="container pb-6 pt-6 pt-md-10 pb-md-10">
+  <div class="row justify-content-start">
+    <div class="col-12 col-md-8">
+      <!-- Case Study Header -->
+      <div class="case-study-header mb-4">
+        <h1 class="title">{{ page.title }}</h1>
+
+        <div class="summary-box">
+          {% if page.client_type %}
+          <div class="summary-item">
+            <strong>Client Type:</strong> {{ page.client_type }}
+          </div>
+          {% endif %}
+
+          {% if page.timeline %}
+          <div class="summary-item">
+            <strong>Timeline:</strong> {{ page.timeline }}
+          </div>
+          {% endif %}
+
+          {% if page.technologies %}
+          <div class="summary-item">
+            <strong>Technologies:</strong>
+            <div class="tech-list">
+              {% for tech in page.technologies %}
+                <span class="tech-tag">{{ tech }}</span>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if page.impact_metrics %}
+          <div class="summary-item impact-section">
+            <strong>Impact:</strong>
+            <div class="metrics-list">
+              {% for metric in page.impact_metrics %}
+                <div class="metric">{{ metric }}</div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Case Study Content -->
+      <div class="case-study-content service service-single">
+        <div class="content">
+          {{ content }}
+        </div>
+      </div>
+
+      <!-- Back to case studies link -->
+      <div class="mt-5 pt-4 border-top">
+        <a href="/case-studies/" class="text-link">← Back to case studies</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.case-study-header {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.summary-box {
+  background-color: #f9f9f9;
+  border-left: 4px solid #2c3e50;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border-radius: 4px;
+}
+
+.summary-item {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.summary-item:last-child {
+  margin-bottom: 0;
+}
+
+.summary-item strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-tag {
+  display: inline-block;
+  background-color: #e8e8e8;
+  color: #555;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.impact-section {
+  background-color: #f0f7ff;
+  padding: 1rem;
+  border-radius: 4px;
+  border-left-color: #0066cc;
+  margin: -1.5rem -1.5rem 0 -1.5rem;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.metrics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.metric {
+  font-weight: 500;
+  color: #0066cc;
+}
+
+.case-study-content {
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.case-study-content h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.case-study-content h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.case-study-content p {
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.case-study-content ul,
+.case-study-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.case-study-content li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+}
+
+.case-study-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 2rem 0;
+  border-radius: 4px;
+}
+
+.case-study-content code {
+  background-color: #f4f4f4;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.case-study-content pre {
+  background-color: #f4f4f4;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.text-link {
+  color: #2c3e50;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.text-link:hover {
+  color: #666;
+  text-decoration: underline;
+}
+</style>

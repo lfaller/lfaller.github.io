@@ -19,6 +19,9 @@ collections:
   services:
     output: true
     sort_by: weight
+  case_studies:
+    output: true
+    sort_by: date
 
 defaults:
   - scope:
@@ -26,6 +29,11 @@ defaults:
       type: "services"
     values:
       layout: "service"
+  - scope:
+      path: ""
+      type: "case_studies"
+    values:
+      layout: "case-study"
 
 sass:
   style: compressed
