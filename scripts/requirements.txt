@@ -15,3 +15,6 @@ Pillow>=10.0.0
 
 # Timezone handling for scheduled posts
 pytz>=2024.1
+
+# YAML parsing for Jekyll/Astro frontmatter
+PyYAML>=6.0

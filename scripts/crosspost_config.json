@@ -1,0 +1,24 @@
+{
+  "enabled": true,
+  "description": "Configuration for cross-posting to Boston Women in Bioinformatics webpage",
+  "target_repo": "Boston-area-Women-in-Bioinformatics/webpage",
+  "target_path": "src/content/post/",
+  "bot_branch_prefix": "cross-post/",
+  "author_mapping": {
+    "lina": {
+      "name": "Lina L. Faller, PhD",
+      "linkedin": "https://linkedin.com/in/linafaller"
+    }
+  },
+  "category_mapping": {
+    "biotech": "Deep Dive",
+    "bioinformatics": "Deep Dive",
+    "career": "Career",
+    "tools": "Tools & Resources"
+  },
+  "default_linkedin_url": "https://linkedin.com/in/linafaller",
+  "original_post_url_template": "https://linafaller.github.io/posts/{slug}/",
+  "canonical_url_template": "https://linafaller.github.io/posts/{slug}/",
+  "pr_title_template": "Cross-post: {title}",
+  "pr_description_template": "## Cross-Post from Lina's Blog\n\nThis is an automated cross-post from [Lina L. Faller's blog](https://linafaller.github.io/). Please review and adjust the following fields before merging:\n\n### Review Checklist\n- [ ] Excerpt is appropriate and engaging\n- [ ] Category is correct (current: `{category}`)\n- [ ] Tags are relevant: {tags}\n- [ ] Featured image path is correct: `{image}`\n- [ ] Image alt text is descriptive\n- [ ] Author information is accurate\n- [ ] Canonical link points to original post\n\n### Auto-Generated Fields\nThe following fields were auto-generated from the original Jekyll post:\n- **slug**: Generated from filename\n- **publishDate**: Converted from Jekyll date format\n- **excerpt**: Auto-extracted from post content\n- **image** & **imageAlt**: Extracted from first image in post\n- **authors**: Mapped from Jekyll author field\n\n**Original URL**: {original_url}"
+}
