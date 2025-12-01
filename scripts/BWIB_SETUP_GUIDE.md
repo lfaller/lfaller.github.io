@@ -19,7 +19,7 @@ The cross-posting system automatically:
 
 ## Setup Instructions
 
-### Step 1: Prepare GitHub Token (For Lina)
+### Step 1: Prepare GitHub Token (Lina's Task)
 
 You need a GitHub token with write access to the BWIB repository.
 
@@ -30,9 +30,9 @@ You need a GitHub token with write access to the BWIB repository.
    - `repo` (full control of private repositories)
 5. Generate and copy the token
 
-### Step 2: Store the Secret (For Lina)
+### Step 2: Store the Secret (Lina's Task)
 
-In your repository settings:
+In **your** (Lina's) repository settings:
 
 1. Go to **Settings → Secrets and variables → Actions**
 2. Click **New repository secret**
@@ -47,19 +47,19 @@ Also add the target repository info:
 3. Value: `Boston-area-Women-in-Bioinformatics/webpage`
 4. Click **Add secret**
 
-### Step 3: Grant GitHub Actions Permissions
+### Step 3: Grant GitHub Actions Permissions (Lina's Task)
 
-The workflow needs write permissions:
+The workflow needs write permissions to open PRs:
 
-1. Go to **Settings → Actions → General**
+1. Go to **Settings → Actions → General** (in your repository)
 2. Under "Workflow permissions", select:
    - ☑ **Read and write permissions**
    - ☑ **Allow GitHub Actions to create and approve pull requests**
 3. Save
 
-### Step 4: Install GitHub CLI (For Running Locally)
+### Step 4: Install GitHub CLI (Lina's Task - Optional)
 
-The `crosspost_to_bwib.py` script uses the GitHub CLI to open PRs. Install it:
+The `crosspost_to_bwib.py` script uses the GitHub CLI to open PRs. Install it if you want to run cross-posts locally:
 
 ```bash
 # macOS
@@ -76,7 +76,7 @@ Then authenticate:
 gh auth login
 ```
 
-### Step 5: Test the Setup (Optional)
+### Step 5: Test the Setup (Lina's Task - Optional)
 
 You can test the transformation script manually:
 
@@ -87,11 +87,11 @@ python3 scripts/transform_to_astro.py _posts/2025-11-27-thanksgiving-in-biotech.
 
 This will output the transformed Astro markdown to stdout.
 
-### Step 6: Manual Trigger (Optional)
+### Step 6: Manual Trigger (Lina's Task - Optional)
 
 To manually cross-post a specific post:
 
-1. Go to **Actions → Cross-post to BWIB Webpage**
+1. Go to **Actions → Cross-post to BWIB Webpage** (in your repository)
 2. Click **Run workflow**
 3. Choose your branch (main)
 4. Optionally specify a post file
@@ -112,18 +112,19 @@ When you push new posts to the `_posts/` directory:
 7. Pushes the branch
 8. Opens a PR with a review checklist
 
-### PR Review Process
+### PR Review & Merge Process (Sammy's Task)
 
-When a cross-post PR is opened on the BWIB repository:
+When a cross-post PR is opened on the BWIB repository, Sammy will:
 
-1. Your friend reviews the auto-generated fields
-2. She adjusts any fields that need customization:
+1. Review the auto-generated fields (see [BWIB_PR_REVIEW_GUIDE.md](BWIB_PR_REVIEW_GUIDE.md) for detailed checklist)
+2. Adjust any fields that need customization:
    - **excerpt**: May need to be more specific than auto-generated
-   - **image**: Verify the image path works in her repository
+   - **image**: Download/upload image to `public/blog_images/` and update path
    - **tags**: Add additional relevant tags
    - **category**: Confirm the category is appropriate
-3. She can edit the markdown content if needed
-4. Once approved, she merges the PR
+3. Upload featured image to `public/blog_images/` folder (optional but recommended)
+4. Edit the markdown content if needed
+5. Once approved, merge the PR
 
 ## Field Mapping Reference
 
@@ -141,7 +142,7 @@ When a cross-post PR is opened on the BWIB repository:
 | — | `imagePosition` | Default: `top` (can be adjusted in PR) |
 | — | `metadata` | Auto-generated SEO metadata with canonical link |
 
-## Customization
+## Customization (Lina's Tasks)
 
 ### Update Author Mapping
 
@@ -156,11 +157,11 @@ In `scripts/crosspost_config.json`, the `author_mapping` section maps Jekyll aut
 }
 ```
 
-Add more authors if needed.
+Add more authors if you have guest posts.
 
 ### Update Category Mapping
 
-If you use different categories, update the mapping:
+If you use different categories in your Jekyll posts, update the mapping in `scripts/crosspost_config.json`:
 
 ```json
 "category_mapping": {
@@ -170,9 +171,11 @@ If you use different categories, update the mapping:
 }
 ```
 
+Make sure the values match the categories available in the BWIB Astro site.
+
 ### Update PR Template
 
-The PR description is customizable in `crosspost_config.json`:
+The PR description is customizable in `scripts/crosspost_config.json`:
 
 ```json
 "pr_description_template": "## Cross-Post from Lina's Blog\n..."
@@ -180,36 +183,25 @@ The PR description is customizable in `crosspost_config.json`:
 
 ### Change Attribution Link
 
-By default, posts include an attribution link at the end. To customize:
+By default, posts include an attribution link at the end: `*Originally posted on [Lina L. Faller's blog](URL)*`
+
+To customize:
 
 1. Edit `scripts/transform_to_astro.py`
-2. Find the `include_attribution` parameter
-3. Modify the attribution text in the `content_with_attribution` section
+2. Find the `content_with_attribution` section
+3. Modify the attribution text
 
-## Troubleshooting
+## Troubleshooting (Lina's Tasks)
 
 ### PR Not Opening
 
 **Problem**: Workflow runs but PR doesn't open
 
 **Solutions**:
-- Check that `CROSSPOST_GH_TOKEN` is set correctly
+- Check that `CROSSPOST_GH_TOKEN` is set correctly in your repo secrets
 - Verify the token has `repo` scope
 - Check GitHub Actions workflow logs: **Actions → Cross-post to BWIB Webpage → [Latest run]**
 - Ensure GitHub CLI is installed and authenticated: `gh auth status`
-
-### Image Paths Not Working
-
-**Problem**: Images don't display after cross-posting
-
-**Solutions**:
-- Images are extracted from your posts but **not automatically copied** to BWIB repo
-- Your friend needs to:
-  - Either download the images and add them to her repo
-  - Or update the image paths to point to your blog
-  - Or update the image paths to point to a CDN/external location
-
-The PR will flag this in the review checklist.
 
 ### Transform Script Errors
 
@@ -232,16 +224,50 @@ The PR will flag this in the review checklist.
 
 ## What Not to Cross-Post
 
-Some posts may not be suitable for cross-posting:
+Some posts may not be suitable for cross-posting. If you want to exclude a post:
 
 - Very personal posts about your own journey
 - Posts with site-specific references
 - Posts that are already published on BWIB
 - Posts that are outdated or deprecated
 
-You can selectively publish by using the manual workflow trigger instead of pushing posts to the main folder.
+You can selectively publish by using the manual workflow trigger instead of pushing all posts to the `_posts/` folder.
 
-## Advanced: Running Locally
+## Image Handling
+
+### How Images Work
+
+The transformation script **extracts the image path** from your Jekyll post but does **not automatically copy** the image file. This allows flexibility:
+
+**Option A: Sammy hosts the images** (recommended)
+- Sammy downloads your image from `https://linafaller.github.io/assets/images/posts/{filename}`
+- Uploads to her repo's `public/blog_images/` folder
+- Updates the image path in the PR to `/blog_images/{filename}`
+
+**Option B: Link directly to your blog**
+- Leave the path as-is or update to full URL: `https://linafaller.github.io/assets/images/posts/{filename}`
+- Works fine, but your blog is the source of truth for images
+
+**Option C: Use external CDN**
+- Sammy can host images on Cloudinary, Imgix, or similar
+- Update paths accordingly
+
+### What You Should Do
+
+Make sure your Jekyll posts include a featured image using markdown image syntax:
+
+```markdown
+![Image alt text](/assets/images/posts/2025-11-27-thanksgiving-in-biotech.png)
+```
+
+The transformation script will:
+- Extract this image and its alt text
+- Put the path in the `image` field
+- Put the alt text in the `imageAlt` field
+
+Sammy will then decide in the PR review how to handle the image file.
+
+## Advanced: Running Locally (Lina's Task)
 
 If you want to test or run cross-posting from your machine:
 
@@ -257,12 +283,15 @@ python3 crosspost_to_bwib.py ../_posts/2025-11-27-thanksgiving-in-biotech.md
 
 ## Support
 
-For issues or questions:
-
+**For Lina**: If the workflow isn't working:
 1. Check the troubleshooting section above
 2. Review the GitHub Actions logs
-3. Check the PR that was opened (if it got that far)
-4. Contact Lina or create an issue in the repository
+3. Verify your secrets are set correctly
+4. Re-check that the workflow file permissions are correct
+
+**For Sammy**: Questions about the PR review process are in [BWIB_PR_REVIEW_GUIDE.md](BWIB_PR_REVIEW_GUIDE.md)
+
+**For both**: If you need to pause cross-posting, Lina can set `"enabled": false` in `scripts/crosspost_config.json` and push the change.
 
 ---
 
