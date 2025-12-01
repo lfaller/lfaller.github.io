@@ -1,12 +1,16 @@
-# BWIB Cross-Post PR Review Guide
+# BWIB Cross-Post PR Review Guide for Sammy
 
-This guide is for the BWIB webpage maintainer when reviewing cross-posted PRs from Lina's blog.
+This guide is for Sammy, the BWIB webpage maintainer, when reviewing cross-posted PRs from Lina's blog.
 
 ## About Cross-Posts
 
-Cross-posted PRs are automatically opened by Lina's blog workflow. They transform Jekyll blog posts into Astro format with auto-generated metadata.
+Cross-posted PRs are automatically opened by Lina's blog GitHub Actions workflow. They transform Jekyll blog posts into Astro format with auto-generated metadata.
 
-**Your role**: Review the transformation, adjust fields as needed, and ensure quality before merging.
+**Your role (Sammy's tasks)**:
+- Review the transformation and auto-generated fields
+- Adjust/customize fields for BWIB's audience
+- Download and upload featured images to `public/blog_images/`
+- Ensure quality before merging
 
 ## PR Structure
 
@@ -57,16 +61,25 @@ tags:
 ```
 
 #### ✅ Featured Image
-- Verify the image path is correct
-- Check if image needs to be copied to BWIB repo or external URL
-- Common scenarios:
-  - **If**: `/assets/images/posts/2025-11-27-thanksgiving-in-biotech.png`
-  - **Then**: You may need to:
-    - Download the image from Lina's blog and add to `public/images/`
-    - OR update the URL to point to Lina's blog
-    - OR point to a CDN
 
-**Action**: Update the image path as appropriate for BWIB
+**Current state in PR**: The image path will show the original path from Lina's blog (e.g., `/assets/images/posts/2025-11-27-thanksgiving-in-biotech.png`)
+
+**Your job (Sammy)**:
+1. **Download the image**: Go to `https://linafaller.github.io/assets/images/posts/{filename}` and save it
+2. **Upload to your repo**:
+   - Go to `public/blog_images/` in the BWIB repo
+   - Upload the image file
+   - Note the filename
+3. **Update the image path** in the PR to: `/blog_images/{filename}`
+4. **Commit the change** to the PR branch
+
+**Example**:
+- Original: `/assets/images/posts/2025-11-27-thanksgiving-in-biotech.png`
+- After upload to `public/blog_images/`: `/blog_images/2025-11-27-thanksgiving-in-biotech.png`
+
+**Alternative** (if you prefer not to copy images):
+- Update path to full URL: `https://linafaller.github.io/assets/images/posts/2025-11-27-thanksgiving-in-biotech.png`
+- This links directly to Lina's blog (works fine, but less ideal for independence)
 
 #### ✅ Image Alt Text
 - Should be descriptive and accessible
@@ -109,24 +122,22 @@ Examples:
   ```
 - This is automatic and should be kept
 
-## Common Issues & Fixes
+## Common Issues & Fixes (Sammy's Troubleshooting)
 
 ### Issue: Image Not Found
 
 **Symptom**: Image shows broken link icon when you preview/publish
 
 **Fix Options**:
-1. **Copy the image to BWIB repo**:
+1. **Copy image to BWIB repo** (recommended):
    - Download from `https://linafaller.github.io/assets/images/posts/{filename}`
-   - Add to `public/images/posts/` in BWIB repo
-   - Update frontmatter image path to `/images/posts/{filename}`
+   - Upload to `public/blog_images/` folder
+   - Update image path to `/blog_images/{filename}`
 
-2. **Link directly to Lina's blog** (simpler):
+2. **Link directly to Lina's blog** (simpler alternative):
    - Update path to `https://linafaller.github.io/assets/images/posts/{filename}`
    - Include full URL instead of relative path
-
-3. **Use external CDN**:
-   - If you have another image hosting service, add there and link accordingly
+   - Works fine, just depends on Lina's site for images
 
 ### Issue: Category Not Recognized
 
@@ -167,48 +178,54 @@ For a standard cross-post PR:
 
 **Total**: ~5-10 minutes per post
 
-## Making Changes
+## Making Changes in the PR (Sammy's Tasks)
 
-You can edit files directly in the PR:
+You can make changes in several ways:
 
+### Direct Edits (For small changes)
 1. Click the file (`src/content/post/{slug}.md`)
 2. Click the edit button (✏️)
-3. Make your changes
-4. Commit to the PR branch
+3. Make your changes (edit front matter fields, excerpt, etc.)
+4. Commit to the PR branch with a message like "Update excerpt" or "Fix category"
 
-Or request changes:
+### Image Uploads
+1. Go to `public/blog_images/` folder
+2. Click "Add files" → "Upload files"
+3. Select Lina's image and upload
+4. This commit will be added to the PR
 
+### Requesting Changes
 1. Click **Review changes**
 2. Select **Request changes**
 3. Comment on specific lines with suggestions
-4. Submit review
+4. Submit review (Lina can then make changes)
 
-## Merging
+## Merging (Sammy's Task)
 
-Once approved:
+Once you're happy with all changes:
 
 1. Click **Merge pull request**
 2. Choose merge strategy (usually "Create a merge commit" is fine)
 3. Delete the branch (recommended)
-4. Verify the build runs successfully
+4. Verify the build runs successfully in GitHub Actions
+5. Post should appear on BWIB website!
 
 ## Questions to Ask Lina
 
-If a cross-post has issues:
+If a cross-post has issues that need her attention:
 
 - "Can you provide the high-res image?"
-- "What category does this belong in?"
+- "What category does this belong in for BWIB?"
 - "Should this post really be cross-posted?"
 - "Can you update the image URLs in your Jekyll post?"
+- "Can you clarify the excerpt for BWIB's audience?"
 
-## Disabling Cross-Posts
-
-If you want to pause cross-posting temporarily or permanently:
+## If You Want to Pause Cross-Posts
 
 Contact Lina and she can:
-- Disable the workflow in GitHub Actions
-- Update the configuration in `scripts/crosspost_config.json`
-- Set `"enabled": false` to stop processing
+- Disable the workflow temporarily in GitHub Actions
+- Update `scripts/crosspost_config.json` and set `"enabled": false`
+- Re-enable whenever you're ready
 
 ## Reference
 
