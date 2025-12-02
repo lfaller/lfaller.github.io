@@ -6,6 +6,8 @@ date:   2025-12-08 08:00:00 -0500
 categories: software-engineering
 ---
 
+![This is where you place your routing layer.](/assets/images/posts/2025-12-08-incremental-migration-pattern.png)
+
 **The Incremental Migration Pattern (Or: How to Rebuild the Plane While Flying It)**
 
 Your data pipeline is a mess of Jupyter notebooks held together with cron jobs and hope.
