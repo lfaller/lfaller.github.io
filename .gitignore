@@ -48,3 +48,6 @@ Thumbs.db
 .env
 .env.local
 scripts/.env_site/
+
+# Local documentation (not for GitHub)
+local_docs/

@@ -1,0 +1,69 @@
+name: Cross-post to BWIB Webpage
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - '_posts/**'
+  workflow_dispatch:
+    inputs:
+      post_file:
+        description: 'Specific post file to cross-post (leave empty for latest)'
+        required: false
+
+jobs:
+  crosspost:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout source repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          cd scripts
+          pip install -r requirements.txt
+
+      - name: Get new or modified posts
+        id: changed-files
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            if [ -n "${{ github.event.inputs.post_file }}" ]; then
+              POSTS="${{ github.event.inputs.post_file }}"
+            else
+              # Get the most recent post
+              POSTS=$(ls -t _posts/*.md | head -n 1)
+            fi
+            echo "posts=$POSTS" >> $GITHUB_OUTPUT
+          else
+            # Get changed files (added or modified markdown files in _posts/)
+            CHANGED_FILES=$(git diff --name-only HEAD^ HEAD -- _posts/*.md | tr '\n' ' ')
+            echo "posts=$CHANGED_FILES" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Transform and cross-post
+        if: steps.changed-files.outputs.posts != ''
+        env:
+          GH_TOKEN: ${{ secrets.CROSSPOST_GH_TOKEN }}
+          TARGET_REPO: ${{ secrets.CROSSPOST_TARGET_REPO }}
+        run: |
+          cd scripts
+          python3 crosspost_to_bwib.py ${{ steps.changed-files.outputs.posts }}
+
+      - name: Report status
+        if: always()
+        run: |
+          echo "Cross-post workflow completed"
+          if [ "${{ steps.changed-files.outputs.posts }}" != "" ]; then
+            echo "Posts processed: ${{ steps.changed-files.outputs.posts }}"
+          else
+            echo "No new posts to cross-post"
+          fi
