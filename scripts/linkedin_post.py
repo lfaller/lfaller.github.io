@@ -302,14 +302,14 @@ def post_to_linkedin(author_id, access_token, text, image_assets=None):
     else:
         return False, f"Error {response.status_code}: {response.text}", None
 
-def create_comment_on_post(post_urn, author_id, access_token, comment_text, retries=12, delay=5):
-    """Create a comment on a LinkedIn post with retries.
+def create_comment_on_post(post_urn, author_id, access_token, comment_text):
+    """Create a comment on a LinkedIn post.
 
-    LinkedIn posts may need 30-40 seconds to be indexed before accepting comments.
-    Retries up to 12 times with 5 second delays between attempts (55 seconds total).
+    Note: This feature requires 'Community Management API' product access,
+    which is currently unavailable on this app. Manual comments are recommended.
+
+    See local_docs/linkedin-api-investigation.md for details.
     """
-    import time
-
     url = f"https://api.linkedin.com/v2/comments?action=create"
 
     headers = {
@@ -326,28 +326,13 @@ def create_comment_on_post(post_urn, author_id, access_token, comment_text, retr
         "actor": author_id
     }
 
-    print(f"      Using post URN: {post_urn}")
+    response = requests.post(url, headers=headers, json=payload)
 
-    for attempt in range(retries):
-        if attempt > 0:
-            wait_time = delay
-            print(f"      Waiting {wait_time}s before retry {attempt}/{retries}...")
-            time.sleep(wait_time)
-
-        print(f"      Attempt {attempt + 1}/{retries}...")
-        response = requests.post(url, headers=headers, json=payload)
-
-        if response.status_code == 201:
-            return True, "Comment posted successfully!"
-        elif attempt < retries - 1:
-            print(f"      Got {response.status_code}, retrying...")
-            if attempt == 0:  # Show response on first attempt
-                print(f"      Response: {response.text[:200]}")
-            continue
-        else:
-            return False, f"Error {response.status_code}: {response.text}"
-
-    return False, "Failed to post comment after retries"
+    if response.status_code == 201:
+        return True, "Comment posted successfully!"
+    else:
+        # Don't retry - this is a known limitation
+        return False, f"Community Management API not accessible (requires product upgrade)"
 
 def is_tuesday_tactics_post(title, filename):
     """Check if this is a Tuesday Tactics post (should skip comments)"""
@@ -476,15 +461,15 @@ def main():
 
         # Create comment with link to full post (if applicable)
         if should_add_comment and blog_url and post_urn:
-            print(f"\nAdding comment with blog link...")
-            print(f"  Post URL for manual comment: {blog_url}")
+            print(f"\nAttempting automated comment...")
+            print(f"  Blog link for manual comment: {blog_url}")
             comment_text = f"Read the full story on my blog:\n{blog_url}"
             success, msg = create_comment_on_post(post_urn, author_id, access_token, comment_text)
             if success:
                 print(f"✓ {msg}")
             else:
-                print(f"⚠ Comment automation failed. Post is live, but you may need to add the comment manually.")
-                print(f"  ✗ {msg}")
+                print(f"⚠ Automated comment failed (known LinkedIn API limitation).")
+                print(f"  → Add manually: {blog_url}")
     else:
         print(f"✗ {message}")
         sys.exit(1)
