@@ -4,6 +4,7 @@ author: lina
 title:  "The Five Signals That Scream 'Hire a Data Person Now'"
 date:   2025-12-04 08:00:00 -0500
 categories: biotech
+summary: "Five warning signs that your Series A biotech company needs to hire a data engineer or data scientist now. If you're seeing multiple signals, it's costing you more than a data salary."
 ---
 
 
