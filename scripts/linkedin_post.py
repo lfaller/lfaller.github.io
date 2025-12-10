@@ -294,16 +294,18 @@ def post_to_linkedin(author_id, access_token, text, image_assets=None):
 
     if response.status_code == 201:
         data = response.json()
-        post_urn = data.get('id')
+        post_id = data.get('id')
+        # Convert ID to URN format for comments: urn:li:ugcPost:{id}
+        post_urn = f"urn:li:ugcPost:{post_id}" if post_id else None
         return True, "Post published successfully!", post_urn
     else:
         return False, f"Error {response.status_code}: {response.text}", None
 
-def create_comment_on_post(post_urn, author_id, access_token, comment_text, retries=3, delay=10):
+def create_comment_on_post(post_urn, author_id, access_token, comment_text, retries=3, delay=2):
     """Create a comment on a LinkedIn post with retries.
 
     LinkedIn posts may need a moment to be indexed before accepting comments.
-    Retries up to 3 times with 10 second delays.
+    Retries up to 3 times with 2 second delays.
     """
     import time
 
@@ -324,7 +326,8 @@ def create_comment_on_post(post_urn, author_id, access_token, comment_text, retr
     }
 
     for attempt in range(retries):
-        time.sleep(delay)  # Wait before posting comment
+        if attempt > 0:
+            time.sleep(delay)  # Wait before retrying
 
         response = requests.post(url, headers=headers, json=payload)
 
