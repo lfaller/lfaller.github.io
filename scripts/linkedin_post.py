@@ -295,17 +295,18 @@ def post_to_linkedin(author_id, access_token, text, image_assets=None):
     if response.status_code == 201:
         data = response.json()
         post_id = data.get('id')
-        # Convert ID to URN format for comments: urn:li:ugcPost:{id}
-        post_urn = f"urn:li:ugcPost:{post_id}" if post_id else None
+        # LinkedIn returns the ID as a share URN like "urn:li:share:1234567890"
+        # The comments API expects this share URN directly
+        post_urn = post_id if post_id else None
         return True, "Post published successfully!", post_urn
     else:
         return False, f"Error {response.status_code}: {response.text}", None
 
-def create_comment_on_post(post_urn, author_id, access_token, comment_text, retries=8, delay=5):
+def create_comment_on_post(post_urn, author_id, access_token, comment_text, retries=12, delay=5):
     """Create a comment on a LinkedIn post with retries.
 
-    LinkedIn posts may need 10-20 seconds to be indexed before accepting comments.
-    Retries up to 8 times with 5 second delays between attempts (40 seconds total).
+    LinkedIn posts may need 30-40 seconds to be indexed before accepting comments.
+    Retries up to 12 times with 5 second delays between attempts (55 seconds total).
     """
     import time
 
@@ -340,6 +341,8 @@ def create_comment_on_post(post_urn, author_id, access_token, comment_text, retr
             return True, "Comment posted successfully!"
         elif attempt < retries - 1:
             print(f"      Got {response.status_code}, retrying...")
+            if attempt == 0:  # Show response on first attempt
+                print(f"      Response: {response.text[:200]}")
             continue
         else:
             return False, f"Error {response.status_code}: {response.text}"
@@ -474,13 +477,14 @@ def main():
         # Create comment with link to full post (if applicable)
         if should_add_comment and blog_url and post_urn:
             print(f"\nAdding comment with blog link...")
+            print(f"  Post URL for manual comment: {blog_url}")
             comment_text = f"Read the full story on my blog:\n{blog_url}"
             success, msg = create_comment_on_post(post_urn, author_id, access_token, comment_text)
             if success:
                 print(f"✓ {msg}")
             else:
-                print(f"✗ {msg}")
-                # Don't exit on comment failure - post was successful
+                print(f"⚠ Comment automation failed. Post is live, but you may need to add the comment manually.")
+                print(f"  ✗ {msg}")
     else:
         print(f"✗ {message}")
         sys.exit(1)
