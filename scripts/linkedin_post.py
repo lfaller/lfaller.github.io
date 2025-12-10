@@ -301,11 +301,11 @@ def post_to_linkedin(author_id, access_token, text, image_assets=None):
     else:
         return False, f"Error {response.status_code}: {response.text}", None
 
-def create_comment_on_post(post_urn, author_id, access_token, comment_text, retries=3, delay=2):
+def create_comment_on_post(post_urn, author_id, access_token, comment_text, retries=5, delay=3):
     """Create a comment on a LinkedIn post with retries.
 
     LinkedIn posts may need a moment to be indexed before accepting comments.
-    Retries up to 3 times with 2 second delays.
+    Retries up to 5 times with 3 second delays between attempts.
     """
     import time
 
