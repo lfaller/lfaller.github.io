@@ -154,6 +154,54 @@ def extract_category_hashtags(categories):
 
     return hashtags
 
+def extract_summary_from_metadata(metadata):
+    """Extract summary from post metadata.
+
+    Posts should include a 'summary:' field in frontmatter for LinkedIn posts.
+    This gives authors full control over the 1-2 sentence summary posted to LinkedIn.
+
+    Example frontmatter:
+        ---
+        title: "My Post Title"
+        summary: "Brief 1-2 sentence summary for LinkedIn. Should be under 280 characters."
+        ---
+    """
+    return metadata.get('summary', None)
+
+def generate_blog_url(post_filename, base_url='https://linafaller.com'):
+    """Generate the full blog URL from post filename.
+
+    Post format: YYYY-MM-DD-slug.md
+    URL format: https://domain/category/year/month/day/slug
+    """
+    # Parse filename: 2025-12-04-five-signals-hire-data-person-now.md
+    match = re.match(r'(\d{4})-(\d{2})-(\d{2})-(.+)\.md', post_filename)
+    if not match:
+        return None
+
+    year, month, day, slug = match.groups()
+
+    # We need the category from metadata, so we'll build a simple version
+    # and let the caller pass category if needed
+    # For now, return parts that can be assembled with category
+    return {
+        'year': year,
+        'month': month,
+        'day': day,
+        'slug': slug,
+        'base_url': base_url
+    }
+
+def build_blog_url(url_parts, category=''):
+    """Build the full URL from url_parts dict and category."""
+    if category:
+        # Remove spaces/special chars from category for URL
+        category = category.strip().lower().replace(' ', '-')
+        return f"{url_parts['base_url']}/{category}/{url_parts['year']}/{url_parts['month']}/{url_parts['day']}/{url_parts['slug']}/"
+    else:
+        # Fallback without category
+        return f"{url_parts['base_url']}/{url_parts['year']}/{url_parts['month']}/{url_parts['day']}/{url_parts['slug']}/"
+
 def register_image_upload(author_id, access_token):
     """Step 1: Register an image upload with LinkedIn"""
     url = "https://api.linkedin.com/v2/assets?action=registerUpload"
@@ -245,9 +293,54 @@ def post_to_linkedin(author_id, access_token, text, image_assets=None):
     response = requests.post(url, headers=headers, json=payload)
 
     if response.status_code == 201:
-        return True, "Post published successfully!"
+        data = response.json()
+        post_urn = data.get('id')
+        return True, "Post published successfully!", post_urn
     else:
-        return False, f"Error {response.status_code}: {response.text}"
+        return False, f"Error {response.status_code}: {response.text}", None
+
+def create_comment_on_post(post_urn, author_id, access_token, comment_text, retries=3, delay=10):
+    """Create a comment on a LinkedIn post with retries.
+
+    LinkedIn posts may need a moment to be indexed before accepting comments.
+    Retries up to 3 times with 10 second delays.
+    """
+    import time
+
+    url = f"https://api.linkedin.com/v2/comments?action=create"
+
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': 'application/json',
+        'X-Restli-Protocol-Version': '2.0.0'
+    }
+
+    payload = {
+        "object": post_urn,
+        "message": {
+            "text": comment_text
+        },
+        "actor": author_id
+    }
+
+    for attempt in range(retries):
+        time.sleep(delay)  # Wait before posting comment
+
+        response = requests.post(url, headers=headers, json=payload)
+
+        if response.status_code == 201:
+            return True, "Comment posted successfully!"
+        elif attempt < retries - 1:
+            print(f"      Retrying comment ({attempt + 1}/{retries})...")
+            continue
+        else:
+            return False, f"Error {response.status_code}: {response.text}"
+
+    return False, "Failed to post comment after retries"
+
+def is_tuesday_tactics_post(title, filename):
+    """Check if this is a Tuesday Tactics post (should skip comments)"""
+    return 'tuesday' in title.lower() or 'tuesday-tactics' in filename.lower()
 
 def main():
     if len(sys.argv) < 2:
@@ -255,6 +348,7 @@ def main():
         sys.exit(1)
 
     post_file = sys.argv[1]
+    post_filename = Path(post_file).name
 
     # Load environment variables
     load_dotenv()
@@ -276,6 +370,18 @@ def main():
     print(f"Title: {title}")
     print(f"Categories: {categories}")
 
+    # Check if this is a Tuesday Tactics post (skip comments for those)
+    is_tt = is_tuesday_tactics_post(title, post_filename)
+    should_add_comment = not is_tt
+    blog_url = None
+
+    if should_add_comment:
+        # Generate blog URL for the comment
+        url_parts = generate_blog_url(post_filename)
+        if url_parts:
+            blog_url = build_blog_url(url_parts, categories)
+            print(f"Blog URL: {blog_url}")
+
     # Extract images before converting content
     image_paths = extract_image_paths(content, post_file)
     if image_paths:
@@ -283,8 +389,19 @@ def main():
         for img in image_paths:
             print(f"  - {img}")
 
-    # Convert to LinkedIn format
-    linkedin_text, html_hashtags = markdown_to_linkedin(content)
+    # Extract summary for LinkedIn post (if adding comment)
+    if should_add_comment:
+        summary = extract_summary_from_metadata(metadata)
+        if summary:
+            print(f"\nSummary from frontmatter: {summary[:100]}...")
+            linkedin_text = summary
+        else:
+            print(f"\n⚠ No 'summary:' field in frontmatter - post will use full content")
+            print(f"   Consider adding a 'summary:' field in the post frontmatter")
+            linkedin_text, _ = markdown_to_linkedin(content)
+    else:
+        # Full content for Tuesday Tactics (they're short)
+        linkedin_text, _ = markdown_to_linkedin(content)
 
     # Collect all hashtags (from categories and HTML comments)
     all_hashtags = []
@@ -292,9 +409,6 @@ def main():
     # Add category hashtags
     category_hashtags = extract_category_hashtags(categories)
     all_hashtags.extend(category_hashtags)
-
-    # Add HTML comment hashtags
-    all_hashtags.extend(html_hashtags)
 
     # Remove duplicates while preserving order
     seen = set()
@@ -342,12 +456,23 @@ def main():
 
     # Post to LinkedIn
     print("\nPosting to LinkedIn...")
-    success, message = post_to_linkedin(author_id, access_token, linkedin_text, image_assets)
+    success, message, post_urn = post_to_linkedin(author_id, access_token, linkedin_text, image_assets)
 
     if success:
         print(f"✓ {message}")
         if image_assets:
             print(f"✓ Posted with {len(image_assets)} image(s)")
+
+        # Create comment with link to full post (if applicable)
+        if should_add_comment and blog_url and post_urn:
+            print(f"\nAdding comment with blog link...")
+            comment_text = f"Read the full story on my blog:\n{blog_url}"
+            success, msg = create_comment_on_post(post_urn, author_id, access_token, comment_text)
+            if success:
+                print(f"✓ {msg}")
+            else:
+                print(f"✗ {msg}")
+                # Don't exit on comment failure - post was successful
     else:
         print(f"✗ {message}")
         sys.exit(1)

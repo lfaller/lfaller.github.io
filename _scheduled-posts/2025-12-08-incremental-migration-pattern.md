@@ -4,6 +4,7 @@ author: lina
 title:  "The Incremental Migration Pattern (Or: How to Rebuild the Plane While Flying It)"
 date:   2025-12-08 08:00:00 -0500
 categories: software-engineering
+summary: "The incremental migration pattern is how you rebuild legacy systems without stopping production. Avoid the 'big rewrite' trap by introducing a routing layer that gradually shifts traffic to the new system."
 ---
 
 ![This is where you place your routing layer.](/assets/images/posts/2025-12-08-incremental-migration-pattern.png)

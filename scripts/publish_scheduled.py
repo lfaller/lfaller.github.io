@@ -30,7 +30,12 @@ from linkedin_post import (
     extract_html_comment_hashtags,
     register_image_upload,
     upload_image_binary,
-    post_to_linkedin
+    post_to_linkedin,
+    extract_summary_from_metadata,
+    generate_blog_url,
+    build_blog_url,
+    create_comment_on_post,
+    is_tuesday_tactics_post
 )
 
 def parse_post_date(date_str):
@@ -68,22 +73,43 @@ def publish_post_to_linkedin(post_path, access_token, author_id):
         # Extract content
         metadata, content = extract_frontmatter_and_content(post_path)
         title = metadata.get('title', 'Untitled')
+        categories = metadata.get('categories', '')
+        post_filename = Path(post_path).name
 
         print(f"  Processing: {title}")
+
+        # Check if this is a Tuesday Tactics post (skip comments for those)
+        is_tt = is_tuesday_tactics_post(title, post_filename)
+        should_add_comment = not is_tt
+        blog_url = None
+
+        if should_add_comment:
+            # Generate blog URL for the comment
+            url_parts = generate_blog_url(post_filename)
+            if url_parts:
+                blog_url = build_blog_url(url_parts, categories)
 
         # Extract images
         image_paths = extract_image_paths(content, post_path)
         if image_paths:
             print(f"    Found {len(image_paths)} image(s)")
 
-        # Convert to LinkedIn format
-        linkedin_text, html_hashtags = markdown_to_linkedin(content)
+        # Extract summary for LinkedIn post (if adding comment)
+        if should_add_comment:
+            summary = extract_summary_from_metadata(metadata)
+            if summary:
+                linkedin_text = summary
+            else:
+                print(f"    ⚠ No 'summary:' field in frontmatter - will use full content")
+                linkedin_text, _ = markdown_to_linkedin(content)
+        else:
+            # Full content for Tuesday Tactics (they're short)
+            linkedin_text, _ = markdown_to_linkedin(content)
 
         # Collect hashtags
         all_hashtags = []
-        category_hashtags = extract_category_hashtags(metadata.get('categories', ''))
+        category_hashtags = extract_category_hashtags(categories)
         all_hashtags.extend(category_hashtags)
-        all_hashtags.extend(html_hashtags)
 
         # Remove duplicates
         seen = set()
@@ -117,10 +143,22 @@ def publish_post_to_linkedin(post_path, access_token, author_id):
 
         # Post to LinkedIn
         print(f"    Posting to LinkedIn...")
-        success, message = post_to_linkedin(author_id, access_token, linkedin_text, image_assets)
+        success, message, post_urn = post_to_linkedin(author_id, access_token, linkedin_text, image_assets)
 
         if success:
             print(f"    ✓ {message}")
+
+            # Create comment with link to full post (if applicable)
+            if should_add_comment and blog_url and post_urn:
+                print(f"    Adding comment with blog link...")
+                comment_text = f"Read the full story on my blog:\n{blog_url}"
+                success, msg = create_comment_on_post(post_urn, author_id, access_token, comment_text)
+                if success:
+                    print(f"    ✓ {msg}")
+                else:
+                    print(f"    ✗ {msg}")
+                    # Don't fail publish on comment failure
+
             return True
         else:
             print(f"    ✗ {message}")
@@ -128,6 +166,8 @@ def publish_post_to_linkedin(post_path, access_token, author_id):
 
     except Exception as e:
         print(f"    ✗ Error publishing post: {e}")
+        import traceback
+        traceback.print_exc()
         return False
 
 def main():
