@@ -31,7 +31,7 @@ from linkedin_post import (
     register_image_upload,
     upload_image_binary,
     post_to_linkedin,
-    extract_summary,
+    extract_summary_from_metadata,
     generate_blog_url,
     build_blog_url,
     create_comment_on_post,
@@ -94,10 +94,14 @@ def publish_post_to_linkedin(post_path, access_token, author_id):
         if image_paths:
             print(f"    Found {len(image_paths)} image(s)")
 
-        # Extract summary for LinkedIn post (if adding comment, truncate)
+        # Extract summary for LinkedIn post (if adding comment)
         if should_add_comment:
-            summary = extract_summary(content, max_sentences=2)
-            linkedin_text = summary
+            summary = extract_summary_from_metadata(metadata)
+            if summary:
+                linkedin_text = summary
+            else:
+                print(f"    ⚠ No 'summary:' field in frontmatter - will use full content")
+                linkedin_text, _ = markdown_to_linkedin(content)
         else:
             # Full content for Tuesday Tactics (they're short)
             linkedin_text, _ = markdown_to_linkedin(content)

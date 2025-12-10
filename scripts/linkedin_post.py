@@ -154,43 +154,19 @@ def extract_category_hashtags(categories):
 
     return hashtags
 
-def extract_summary(content, max_sentences=2):
-    """Extract the first 1-2 sentences from content as a summary.
+def extract_summary_from_metadata(metadata):
+    """Extract summary from post metadata.
 
-    Returns the summary text and the remaining content after the summary.
+    Posts should include a 'summary:' field in frontmatter for LinkedIn posts.
+    This gives authors full control over the 1-2 sentence summary posted to LinkedIn.
+
+    Example frontmatter:
+        ---
+        title: "My Post Title"
+        summary: "Brief 1-2 sentence summary for LinkedIn. Should be under 280 characters."
+        ---
     """
-    # Clean up the content first (remove images, markdown formatting)
-    clean = re.sub(r'!\[.*?\]\(.*?\)', '', content)
-    clean = re.sub(r'#+\s+', '', clean)  # Remove markdown headers
-    clean = re.sub(r'\*\*(.+?)\*\*', r'\1', clean)  # Remove bold markdown
-    clean = re.sub(r'_(.+?)_', r'\1', clean)  # Remove italic markdown
-    clean = clean.strip()
-
-    # Split by paragraph breaks first
-    paragraphs = [p.strip() for p in clean.split('\n\n') if p.strip()]
-
-    if not paragraphs:
-        return content[:200].strip()
-
-    # Get first paragraph(s) until we have enough sentences
-    summary = ""
-    sentence_count = 0
-
-    for para in paragraphs:
-        # Split paragraph into sentences
-        para_sentences = re.split(r'(?<=[.!?])\s+', para)
-
-        for sent in para_sentences:
-            if sentence_count >= max_sentences:
-                break
-            if sent.strip():
-                summary += (' ' if summary else '') + sent.strip()
-                sentence_count += 1
-
-        if sentence_count >= max_sentences:
-            break
-
-    return summary.strip()
+    return metadata.get('summary', None)
 
 def generate_blog_url(post_filename, base_url='https://linafaller.com'):
     """Generate the full blog URL from post filename.
@@ -413,21 +389,19 @@ def main():
         for img in image_paths:
             print(f"  - {img}")
 
-    # Extract summary for LinkedIn post (if adding comment, truncate)
+    # Extract summary for LinkedIn post (if adding comment)
     if should_add_comment:
-        summary = extract_summary(content, max_sentences=2)
-        print(f"\nSummary: {summary[:100]}...")
-        linkedin_text = summary
+        summary = extract_summary_from_metadata(metadata)
+        if summary:
+            print(f"\nSummary from frontmatter: {summary[:100]}...")
+            linkedin_text = summary
+        else:
+            print(f"\n⚠ No 'summary:' field in frontmatter - post will use full content")
+            print(f"   Consider adding a 'summary:' field in the post frontmatter")
+            linkedin_text, _ = markdown_to_linkedin(content)
     else:
         # Full content for Tuesday Tactics (they're short)
         linkedin_text, _ = markdown_to_linkedin(content)
-
-    # Convert to LinkedIn format (for non-summary content, still process markdown)
-    if should_add_comment:
-        # For summary, just do basic markdown cleanup
-        linkedin_text = linkedin_text.replace('![', '').replace('](', ' ').replace(')', '')  # Remove images
-    else:
-        linkedin_text, _ = markdown_to_linkedin(linkedin_text)
 
     # Collect all hashtags (from categories and HTML comments)
     all_hashtags = []
