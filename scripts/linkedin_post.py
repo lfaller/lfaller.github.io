@@ -159,16 +159,36 @@ def extract_summary(content, max_sentences=2):
 
     Returns the summary text and the remaining content after the summary.
     """
-    # Clean up the content first (remove images, etc.)
+    # Clean up the content first (remove images, markdown formatting)
     clean = re.sub(r'!\[.*?\]\(.*?\)', '', content)
+    clean = re.sub(r'#+\s+', '', clean)  # Remove markdown headers
+    clean = re.sub(r'\*\*(.+?)\*\*', r'\1', clean)  # Remove bold markdown
+    clean = re.sub(r'_(.+?)_', r'\1', clean)  # Remove italic markdown
     clean = clean.strip()
 
-    # Split into sentences (simple approach: split on . ! ?)
-    # This is a basic regex that handles most cases
-    sentences = re.split(r'(?<=[.!?])\s+', clean)
+    # Split by paragraph breaks first
+    paragraphs = [p.strip() for p in clean.split('\n\n') if p.strip()]
 
-    summary_sentences = sentences[:max_sentences]
-    summary = ' '.join(summary_sentences)
+    if not paragraphs:
+        return content[:200].strip()
+
+    # Get first paragraph(s) until we have enough sentences
+    summary = ""
+    sentence_count = 0
+
+    for para in paragraphs:
+        # Split paragraph into sentences
+        para_sentences = re.split(r'(?<=[.!?])\s+', para)
+
+        for sent in para_sentences:
+            if sentence_count >= max_sentences:
+                break
+            if sent.strip():
+                summary += (' ' if summary else '') + sent.strip()
+                sentence_count += 1
+
+        if sentence_count >= max_sentences:
+            break
 
     return summary.strip()
 
