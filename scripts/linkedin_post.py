@@ -301,11 +301,11 @@ def post_to_linkedin(author_id, access_token, text, image_assets=None):
     else:
         return False, f"Error {response.status_code}: {response.text}", None
 
-def create_comment_on_post(post_urn, author_id, access_token, comment_text, retries=5, delay=3):
+def create_comment_on_post(post_urn, author_id, access_token, comment_text, retries=8, delay=5):
     """Create a comment on a LinkedIn post with retries.
 
-    LinkedIn posts may need a moment to be indexed before accepting comments.
-    Retries up to 5 times with 3 second delays between attempts.
+    LinkedIn posts may need 10-20 seconds to be indexed before accepting comments.
+    Retries up to 8 times with 5 second delays between attempts (40 seconds total).
     """
     import time
 
@@ -325,16 +325,21 @@ def create_comment_on_post(post_urn, author_id, access_token, comment_text, retr
         "actor": author_id
     }
 
+    print(f"      Using post URN: {post_urn}")
+
     for attempt in range(retries):
         if attempt > 0:
-            time.sleep(delay)  # Wait before retrying
+            wait_time = delay
+            print(f"      Waiting {wait_time}s before retry {attempt}/{retries}...")
+            time.sleep(wait_time)
 
+        print(f"      Attempt {attempt + 1}/{retries}...")
         response = requests.post(url, headers=headers, json=payload)
 
         if response.status_code == 201:
             return True, "Comment posted successfully!"
         elif attempt < retries - 1:
-            print(f"      Retrying comment ({attempt + 1}/{retries})...")
+            print(f"      Got {response.status_code}, retrying...")
             continue
         else:
             return False, f"Error {response.status_code}: {response.text}"
