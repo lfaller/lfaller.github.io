@@ -4,6 +4,15 @@ author: lina
 title:  "The Only Five Metrics That Actually Matter for Data Pipelines"
 date:   2025-12-11 08:00:00 -0500
 categories: data-engineering
+summary: "Most dashboards have 50 metrics. You look at 5. After building monitoring systems at four biotech companies, I learned that these five metrics actually matter:
+
+1. **Data Freshness** - When was this data last updated?
+2. **Row Count Delta** - Did we get the expected amount of data?
+3. **Critical Column Null Rate** - Are we missing essential data?
+4. **Schema Drift Detection** - Did someone change the upstream format?
+5. **End-to-End Latency** - How long until scientists can use it?
+
+These catch 80% of problems. Everything else is noise. Read the full breakdown on the blog."
 ---
 
 ![Simple dashboard, with metrics that matter](/assets/images/posts/2025-12-11-five-metrics-that-actually-matter-for-data-pipelines.png)
