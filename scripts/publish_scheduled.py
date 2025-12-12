@@ -34,8 +34,7 @@ from linkedin_post import (
     extract_summary_from_metadata,
     generate_blog_url,
     build_blog_url,
-    create_comment_on_post,
-    is_tuesday_tactics_post
+    build_linkedin_post_text
 )
 
 def parse_post_date(date_str):
@@ -78,49 +77,24 @@ def publish_post_to_linkedin(post_path, access_token, author_id):
 
         print(f"  Processing: {title}")
 
-        # Check if this is a Tuesday Tactics post (skip comments for those)
-        is_tt = is_tuesday_tactics_post(title, post_filename)
-        should_add_comment = not is_tt
+        # Generate blog URL (will be included in post body)
+        url_parts = generate_blog_url(post_filename)
         blog_url = None
-
-        if should_add_comment:
-            # Generate blog URL for the comment
-            url_parts = generate_blog_url(post_filename)
-            if url_parts:
-                blog_url = build_blog_url(url_parts, categories)
+        if url_parts:
+            blog_url = build_blog_url(url_parts, categories)
 
         # Extract images
         image_paths = extract_image_paths(content, post_path)
         if image_paths:
             print(f"    Found {len(image_paths)} image(s)")
 
-        # Extract summary for LinkedIn post (if adding comment)
-        if should_add_comment:
-            summary = extract_summary_from_metadata(metadata)
-            if summary:
-                linkedin_text = summary
-            else:
-                print(f"    ⚠ No 'summary:' field in frontmatter - will use full content")
-                linkedin_text, _ = markdown_to_linkedin(content)
-        else:
-            # Full content for Tuesday Tactics (they're short)
-            linkedin_text, _ = markdown_to_linkedin(content)
+        # Extract summary for LinkedIn post
+        summary = extract_summary_from_metadata(metadata)
+        if not summary:
+            print(f"    ⚠ No 'summary:' field in frontmatter")
 
-        # Collect hashtags
-        all_hashtags = []
-        category_hashtags = extract_category_hashtags(categories)
-        all_hashtags.extend(category_hashtags)
-
-        # Remove duplicates
-        seen = set()
-        unique_hashtags = []
-        for tag in all_hashtags:
-            if tag.lower() not in seen:
-                seen.add(tag.lower())
-                unique_hashtags.append(tag)
-
-        if unique_hashtags:
-            linkedin_text += "\n\n" + " ".join(unique_hashtags)
+        # Build LinkedIn post text with summary and blog link
+        linkedin_text = build_linkedin_post_text(summary, blog_url, categories)
 
         # Upload images
         image_assets = []
@@ -147,18 +121,6 @@ def publish_post_to_linkedin(post_path, access_token, author_id):
 
         if success:
             print(f"    ✓ {message}")
-
-            # Create comment with link to full post (if applicable)
-            if should_add_comment and blog_url and post_urn:
-                print(f"    Adding comment with blog link...")
-                comment_text = f"Read the full story on my blog:\n{blog_url}"
-                success, msg = create_comment_on_post(post_urn, author_id, access_token, comment_text)
-                if success:
-                    print(f"    ✓ {msg}")
-                else:
-                    print(f"    ✗ {msg}")
-                    # Don't fail publish on comment failure
-
             return True
         else:
             print(f"    ✗ {message}")
