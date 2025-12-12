@@ -302,41 +302,38 @@ def post_to_linkedin(author_id, access_token, text, image_assets=None):
     else:
         return False, f"Error {response.status_code}: {response.text}", None
 
-def create_comment_on_post(post_urn, author_id, access_token, comment_text):
-    """Create a comment on a LinkedIn post.
-
-    Note: This feature requires 'Community Management API' product access,
-    which is currently unavailable on this app. Manual comments are recommended.
-
-    See local_docs/linkedin-api-investigation.md for details.
-    """
-    url = f"https://api.linkedin.com/v2/comments?action=create"
-
-    headers = {
-        'Authorization': f'Bearer {access_token}',
-        'Content-Type': 'application/json',
-        'X-Restli-Protocol-Version': '2.0.0'
-    }
-
-    payload = {
-        "object": post_urn,
-        "message": {
-            "text": comment_text
-        },
-        "actor": author_id
-    }
-
-    response = requests.post(url, headers=headers, json=payload)
-
-    if response.status_code == 201:
-        return True, "Comment posted successfully!"
-    else:
-        # Don't retry - this is a known limitation
-        return False, f"Community Management API not accessible (requires product upgrade)"
 
 def is_tuesday_tactics_post(title, filename):
     """Check if this is a Tuesday Tactics post (should skip comments)"""
     return 'tuesday' in title.lower() or 'tuesday-tactics' in filename.lower()
+
+def build_linkedin_post_text(summary, blog_url, categories):
+    """Build LinkedIn post text with summary and blog link.
+
+    Args:
+        summary: The summary from frontmatter (if available)
+        blog_url: The full blog URL
+        categories: Categories string for hashtag extraction
+
+    Returns:
+        Complete LinkedIn post text with summary, link, and hashtags
+    """
+    # Start with the summary
+    post_text = summary if summary else ""
+
+    # Add the blog link
+    if blog_url:
+        if post_text:
+            post_text += f"\n\nRead the whole story here:\n{blog_url}"
+        else:
+            post_text = f"Read the whole story here:\n{blog_url}"
+
+    # Add category hashtags
+    category_hashtags = extract_category_hashtags(categories)
+    if category_hashtags:
+        post_text += "\n\n" + " ".join(category_hashtags)
+
+    return post_text
 
 def main():
     if len(sys.argv) < 2:
@@ -366,17 +363,11 @@ def main():
     print(f"Title: {title}")
     print(f"Categories: {categories}")
 
-    # Check if this is a Tuesday Tactics post (skip comments for those)
-    is_tt = is_tuesday_tactics_post(title, post_filename)
-    should_add_comment = not is_tt
+    # Generate blog URL (will be included in post body)
+    url_parts = generate_blog_url(post_filename)
     blog_url = None
-
-    if should_add_comment:
-        # Generate blog URL for the comment
-        url_parts = generate_blog_url(post_filename)
-        if url_parts:
-            blog_url = build_blog_url(url_parts, categories)
-            print(f"Blog URL: {blog_url}")
+    if url_parts:
+        blog_url = build_blog_url(url_parts, categories)
 
     # Extract images before converting content
     image_paths = extract_image_paths(content, post_file)
@@ -385,38 +376,16 @@ def main():
         for img in image_paths:
             print(f"  - {img}")
 
-    # Extract summary for LinkedIn post (if adding comment)
-    if should_add_comment:
-        summary = extract_summary_from_metadata(metadata)
-        if summary:
-            print(f"\nSummary from frontmatter: {summary[:100]}...")
-            linkedin_text = summary
-        else:
-            print(f"\n⚠ No 'summary:' field in frontmatter - post will use full content")
-            print(f"   Consider adding a 'summary:' field in the post frontmatter")
-            linkedin_text, _ = markdown_to_linkedin(content)
+    # Extract summary for LinkedIn post
+    summary = extract_summary_from_metadata(metadata)
+    if summary:
+        print(f"\nSummary from frontmatter: {summary[:100]}...")
     else:
-        # Full content for Tuesday Tactics (they're short)
-        linkedin_text, _ = markdown_to_linkedin(content)
+        print(f"\n⚠ No 'summary:' field in frontmatter")
+        print(f"   Recommended: Add a 'summary:' field in the post frontmatter for LinkedIn")
 
-    # Collect all hashtags (from categories and HTML comments)
-    all_hashtags = []
-
-    # Add category hashtags
-    category_hashtags = extract_category_hashtags(categories)
-    all_hashtags.extend(category_hashtags)
-
-    # Remove duplicates while preserving order
-    seen = set()
-    unique_hashtags = []
-    for tag in all_hashtags:
-        if tag.lower() not in seen:
-            seen.add(tag.lower())
-            unique_hashtags.append(tag)
-
-    # Add hashtags to post
-    if unique_hashtags:
-        linkedin_text += "\n\n" + " ".join(unique_hashtags)
+    # Build LinkedIn post text with summary and blog link
+    linkedin_text = build_linkedin_post_text(summary, blog_url, categories)
 
     print(f"\nLinkedIn post preview:")
     print("-" * 60)
@@ -458,18 +427,6 @@ def main():
         print(f"✓ {message}")
         if image_assets:
             print(f"✓ Posted with {len(image_assets)} image(s)")
-
-        # Create comment with link to full post (if applicable)
-        if should_add_comment and blog_url and post_urn:
-            print(f"\nAttempting automated comment...")
-            print(f"  Blog link for manual comment: {blog_url}")
-            comment_text = f"Read the full story on my blog:\n{blog_url}"
-            success, msg = create_comment_on_post(post_urn, author_id, access_token, comment_text)
-            if success:
-                print(f"✓ {msg}")
-            else:
-                print(f"⚠ Automated comment failed (known LinkedIn API limitation).")
-                print(f"  → Add manually: {blog_url}")
     else:
         print(f"✗ {message}")
         sys.exit(1)
