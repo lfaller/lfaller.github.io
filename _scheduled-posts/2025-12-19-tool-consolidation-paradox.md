@@ -2,12 +2,12 @@
 layout: post
 author: lina
 title:  "The Tool Consolidation Paradox: Why Fewer Tools Often Means More Complexity"
-date:   2025-12-18 08:00:00 -0500
+date:   2025-12-19 08:00:00 -0500
 categories: data-science
 summary: "Leadership sees 15 tools and wants one platform. Scientists see the one platform and build 15 workarounds. Tool consolidation fails when you optimize for the org chart instead of the work. Strategic integration beats forced consolidation every time."
 ---
 
-![The Tool Consolidation Paradox](/assets/images/posts/2025-12-18-tool-consolidation-paradox.png)
+![The Tool Consolidation Paradox](/assets/images/posts/2025-12-19-tool-consolidation-paradox.png)
 
 **The Tool Consolidation Paradox: Why Fewer Tools Often Means More Complexity**
 
