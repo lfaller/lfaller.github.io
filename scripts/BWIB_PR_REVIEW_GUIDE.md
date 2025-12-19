@@ -1,12 +1,12 @@
-# BWIB Cross-Post PR Review Guide for Sammy
+# BWIB Cross-Post PR Review Guide
 
-This guide is for Sammy, the BWIB webpage maintainer, when reviewing cross-posted PRs from Lina's blog.
+This guide is for the BWIB web development team when reviewing cross-posted PRs from Lina's blog.
 
 ## About Cross-Posts
 
 Cross-posted PRs are automatically opened by Lina's blog GitHub Actions workflow. They transform Jekyll blog posts into Astro format with auto-generated metadata.
 
-**Your role (Sammy's tasks)**:
+**Your role (BWIB web development team tasks)**:
 - Review the transformation and auto-generated fields
 - Adjust/customize fields for BWIB's audience
 - Download and upload featured images to `public/blog_images/`
@@ -41,23 +41,24 @@ Better excerpt:
 ```
 
 #### ✅ Category
-- Verify it matches BWIB's available categories
-- Common categories: "Deep Dive", "Career", "Tools & Resources", "Podcast"
-- **If wrong**: Change from the auto-generated value
+- BWIB's categories are different from Lina's Jekyll categories
+- Default for cross-posts: **"Quick Take"** (unless a different category is more appropriate)
+- Common categories: "Quick Take", "Deep Dive", "Career", "Tools & Resources", "Podcast", "Video"
+- **Action**: Verify/set the appropriate category
 
 #### ✅ Tags
-- Should be relevant to the post content
-- Usually 3-5 tags
+- Auto-populated from Lina's Jekyll categories (converted to tags)
+- Usually 3-5 tags total
+- Use lowercase with dashes (e.g., `data-science` not `Data Science`)
 - Should match BWIB's existing tags where possible
-- **If needed**: Add or remove tags
+- **Action**: Review auto-generated tags and add/remove as needed
 
-Example:
+Example of auto-generated tags from Jekyll categories:
 ```yaml
 tags:
-  - biotech
+  - biotech          # from Jekyll "biotech" category
+  - data-science     # from Jekyll "data-science" category or added manually
   - career
-  - data-science
-  - communication
 ```
 
 #### ✅ Featured Image
@@ -115,12 +116,10 @@ Examples:
 - Verify images render properly (may need path updates)
 - Look for any broken links
 
-#### ✅ Attribution Link
-- Every cross-posted post includes a link back to the original:
-  ```
-  *Originally posted on [Lina L. Faller's blog](URL)*
-  ```
-- This is automatic and should be kept
+#### ✅ Attribution & Canonical Link
+- The `canonical` link in metadata automatically points back to Lina's original post
+- This provides proper attribution and SEO credit
+- No need to add a manual attribution link in the post content
 
 ## Common Issues & Fixes (Sammy's Troubleshooting)
 
@@ -178,7 +177,7 @@ For a standard cross-post PR:
 
 **Total**: ~5-10 minutes per post
 
-## Making Changes in the PR (Sammy's Tasks)
+## Making Changes in the PR (Web Development Team Tasks)
 
 You can make changes in several ways:
 
@@ -200,7 +199,7 @@ You can make changes in several ways:
 3. Comment on specific lines with suggestions
 4. Submit review (Lina can then make changes)
 
-## Merging (Sammy's Task)
+## Merging (Web Development Team Task)
 
 Once you're happy with all changes:
 
@@ -210,7 +209,7 @@ Once you're happy with all changes:
 4. Verify the build runs successfully in GitHub Actions
 5. Post should appear on BWIB website!
 
-## Questions to Ask Lina
+## Questions to Ask Lina (if needed)
 
 If a cross-post has issues that need her attention:
 

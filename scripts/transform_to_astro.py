@@ -123,19 +123,34 @@ def extract_first_image(content: str, post_date: str = None) -> Tuple[str, str]:
 
 def convert_date_format(jekyll_date: str) -> str:
     """
-    Convert Jekyll date format to ISO 8601 with timezone.
+    Convert Jekyll date format to ISO 8601 with timezone offset.
     Jekyll: "2025-11-27 08:00:00 -0500"
-    Astro: "2025-11-27T08:00:00Z"
+    Astro: "2025-11-27T08:00:00-05:00"
     """
     try:
-        # Parse Jekyll date format
-        dt = datetime.strptime(jekyll_date.split('-0')[0].split('-0500')[0].split('-')[0], '%Y-%m-%d %H:%M:%S' if 'T' not in jekyll_date else '%Y-%m-%dT%H:%M:%S')
-        # For simplicity, convert to ISO format with Z
-        # If it had timezone info, we'd preserve it, but Jekyll format loses it in conversion
-        dt_str = jekyll_date.split()[0] + 'T' + jekyll_date.split()[1] + 'Z'
-        return dt_str
+        # Jekyll format: "YYYY-MM-DD HH:MM:SS ±HHMM"
+        # Example: "2025-11-27 08:00:00 -0500"
+        parts = jekyll_date.strip().split()
+
+        if len(parts) >= 3:
+            date_part = parts[0]  # "2025-11-27"
+            time_part = parts[1]  # "08:00:00"
+            tz_part = parts[2]    # "-0500"
+
+            # Convert timezone format from "-0500" to "-05:00"
+            if tz_part.startswith('-') or tz_part.startswith('+'):
+                sign = tz_part[0]
+                tz_hours = tz_part[1:3]
+                tz_mins = tz_part[3:5] if len(tz_part) > 3 else '00'
+                tz_formatted = f"{sign}{tz_hours}:{tz_mins}"
+                return f"{date_part}T{time_part}{tz_formatted}"
+
+        # Fallback: just ensure it's ISO format with Z (UTC)
+        date_part = jekyll_date.split()[0]
+        time_part = jekyll_date.split()[1] if len(jekyll_date.split()) > 1 else '00:00:00'
+        return f"{date_part}T{time_part}Z"
     except Exception as e:
-        # Fallback: just ensure it's ISO format
+        # Ultimate fallback
         date_part = jekyll_date.split()[0]
         time_part = jekyll_date.split()[1] if len(jekyll_date.split()) > 1 else '00:00:00'
         return f"{date_part}T{time_part}Z"
@@ -181,21 +196,21 @@ def transform_to_astro(
     if author_linkedin:
         authors[0]['link'] = author_linkedin
 
-    # Map category
-    category_mapping = config.get('category_mapping', {})
-    if isinstance(categories, list) and categories:
-        category = category_mapping.get(categories[0], categories[0])
-    elif isinstance(categories, str):
-        category = category_mapping.get(categories, categories)
-    else:
-        category = "Deep Dive"
-
-    # Generate tags from categories
+    # Map categories to tags (Jekyll categories become BWIB tags)
+    # Default category is "Quick Take"
     tags = []
-    if isinstance(categories, list):
-        tags = [category_mapping.get(cat, cat) for cat in categories]
-    elif categories:
-        tags = [category_mapping.get(categories, categories)]
+    if isinstance(categories, list) and categories:
+        # Convert each Jekyll category to a tag (lowercase with dashes)
+        tags = [cat.lower().replace(' ', '-') for cat in categories]
+    elif isinstance(categories, str) and categories:
+        tags = [categories.lower().replace(' ', '-')]
+
+    # If no tags extracted, use empty list
+    if not tags:
+        tags = []
+
+    # Default category for cross-posts
+    category = config.get('default_category', 'Quick Take')
 
     # Generate metadata
     metadata = {
@@ -219,19 +234,14 @@ def transform_to_astro(
         "metadata": metadata
     }
 
-    # Add attribution link if requested
-    content_with_attribution = content
-    if include_attribution:
-        original_url = config.get('original_post_url_template', '').format(slug=slug)
-        if original_url:
-            attribution = f"\n\n---\n\n*Originally posted on [Lina L. Faller's blog]({original_url})*"
-            content_with_attribution = content + attribution
+    # Attribution is handled via canonical link in metadata, not in post content
+    # The canonical URL in the frontmatter provides proper attribution and SEO credit
 
     # Convert frontmatter to YAML
     yaml_output = yaml.dump(frontmatter, default_flow_style=False, sort_keys=False, allow_unicode=True)
 
     # Build complete file
-    astro_markdown = f"---\n{yaml_output}---\n\n{content_with_attribution}"
+    astro_markdown = f"---\n{yaml_output}---\n\n{content}"
 
     return astro_markdown
 

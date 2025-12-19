@@ -10,12 +10,7 @@
       "linkedin": "https://linkedin.com/in/linafaller"
     }
   },
-  "category_mapping": {
-    "biotech": "Deep Dive",
-    "bioinformatics": "Deep Dive",
-    "career": "Career",
-    "tools": "Tools & Resources"
-  },
+  "default_category": "Quick Take",
   "default_linkedin_url": "https://linkedin.com/in/linafaller",
   "original_post_url_template": "https://linafaller.github.io/posts/{slug}/",
   "canonical_url_template": "https://linafaller.github.io/posts/{slug}/",

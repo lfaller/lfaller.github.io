@@ -112,16 +112,16 @@ When you push new posts to the `_posts/` directory:
 7. Pushes the branch
 8. Opens a PR with a review checklist
 
-### PR Review & Merge Process (Sammy's Task)
+### PR Review & Merge Process (BWIB Web Development Team's Task)
 
-When a cross-post PR is opened on the BWIB repository, Sammy will:
+When a cross-post PR is opened on the BWIB repository, the web development team will:
 
 1. Review the auto-generated fields (see [BWIB_PR_REVIEW_GUIDE.md](BWIB_PR_REVIEW_GUIDE.md) for detailed checklist)
 2. Adjust any fields that need customization:
    - **excerpt**: May need to be more specific than auto-generated
    - **image**: Download/upload image to `public/blog_images/` and update path
-   - **tags**: Add additional relevant tags
-   - **category**: Confirm the category is appropriate
+   - **tags**: Add additional relevant tags (auto-populated from post categories)
+   - **category**: Set to appropriate BWIB category (default is "Quick Take")
 3. Upload featured image to `public/blog_images/` folder (optional but recommended)
 4. Edit the markdown content if needed
 5. Once approved, merge the PR
@@ -133,14 +133,15 @@ When a cross-post PR is opened on the BWIB repository, Sammy will:
 | `layout` | — | Removed in Astro |
 | `author: "lina"` | `authors: [{name: "...", link: "..."}]` | Mapped to author object |
 | `title` | `title` | Direct copy |
-| `date` | `publishDate` | Converted to ISO 8601 format |
-| `categories` | `category` + `tags` | categories → category + tags |
+| `date` | `publishDate` | Converted to ISO 8601 with timezone offset |
+| `categories` | `tags` | Jekyll categories become BWIB tags (lowercase) |
+| — | `category` | Set to default "Quick Take" (team adjusts per post) |
 | — | `slug` | Auto-generated from filename |
 | — | `excerpt` | Auto-generated from first paragraph (can be customized in PR) |
 | — | `image` | Auto-detected from first markdown image in post |
 | — | `imageAlt` | Auto-detected from image alt text |
 | — | `imagePosition` | Default: `top` (can be adjusted in PR) |
-| — | `metadata` | Auto-generated SEO metadata with canonical link |
+| — | `metadata` | Auto-generated SEO metadata with canonical link to your blog |
 
 ## Customization (Lina's Tasks)
 
@@ -159,19 +160,15 @@ In `scripts/crosspost_config.json`, the `author_mapping` section maps Jekyll aut
 
 Add more authors if you have guest posts.
 
-### Update Category Mapping
+### Change Default Category
 
-If you use different categories in your Jekyll posts, update the mapping in `scripts/crosspost_config.json`:
+The default category for all cross-posts is "Quick Take". To change it, update `scripts/crosspost_config.json`:
 
 ```json
-"category_mapping": {
-  "biotech": "Deep Dive",
-  "bioinformatics": "Deep Dive",
-  "career": "Career"
-}
+"default_category": "Quick Take"
 ```
 
-Make sure the values match the categories available in the BWIB Astro site.
+The BWIB web development team can change the specific category for individual posts when reviewing the PR.
 
 ### Update PR Template
 
@@ -181,15 +178,14 @@ The PR description is customizable in `scripts/crosspost_config.json`:
 "pr_description_template": "## Cross-Post from Lina's Blog\n..."
 ```
 
-### Change Attribution Link
+### Attribution Handling
 
-By default, posts include an attribution link at the end: `*Originally posted on [Lina L. Faller's blog](URL)*`
+Attribution is automatically handled via the `canonical` URL in the post's metadata. This provides:
+- Proper SEO credit to your original blog
+- A canonical link that search engines use
+- Better integration with BWIB's site (no duplicate content issues)
 
-To customize:
-
-1. Edit `scripts/transform_to_astro.py`
-2. Find the `content_with_attribution` section
-3. Modify the attribution text
+No manual attribution link is added to the post content.
 
 ## Troubleshooting (Lina's Tasks)
 
