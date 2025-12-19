@@ -37,12 +37,37 @@ def extract_frontmatter_and_content(file_path: str) -> Tuple[Dict, str]:
     return frontmatter, body
 
 
-def generate_slug(file_path: str) -> str:
+def generate_slug(file_path: str, author: str = 'lina') -> str:
     """
-    Generate slug from filename.
-    Example: 2025-11-27-thanksgiving-in-biotech.md -> 2025-11-27-thanksgiving-in-biotech
+    Generate slug from filename in format: YYYYMMDD_{description}_{author}
+
+    Handles both formats:
+    - Old Jekyll format: 2025-11-27-thanksgiving-in-biotech.md
+      → 20251127_thanksgiving-in-biotech_lina
+    - New format: 20251127_thanksgiving-in-biotech_lina.md
+      → 20251127_thanksgiving-in-biotech_lina
     """
     filename = Path(file_path).stem
+
+    # Check if it's already in new format
+    if '_' in filename and len(filename.split('_')[0]) == 8:
+        # Already in new format (YYYYMMDD_...)
+        return filename
+
+    # Convert from Jekyll format: YYYY-MM-DD-slug-name
+    parts = filename.split('-', 3)  # Split into [YYYY, MM, DD, rest]
+
+    if len(parts) >= 4 and parts[0].isdigit() and len(parts[0]) == 4:
+        # Valid Jekyll date format
+        year = parts[0]
+        month = parts[1]
+        day = parts[2]
+        description = parts[3]  # Everything after the date
+
+        # Convert to new format
+        return f"{year}{month}{day}_{description}_{author}"
+
+    # Fallback: return as-is if we can't parse it
     return filename
 
 
@@ -176,12 +201,8 @@ def transform_to_astro(
     categories = jekyll_frontmatter.get('categories', [])
 
     # Generate/extract fields
-    slug = generate_slug(config.get('source_file', ''))
-    excerpt = extract_excerpt(content, post_title=title)
-    image_path, image_alt = extract_first_image(content, slug.split('-')[0])
-    publish_date = convert_date_format(date)
-
-    # Map author
+    # Map author first so we can use it for slug generation
+    author_key = jekyll_frontmatter.get('author', 'unknown')
     author_mapping = config.get('author_mapping', {})
     if author_key in author_mapping:
         author_info = author_mapping[author_key]
@@ -190,6 +211,12 @@ def transform_to_astro(
     else:
         author_name = 'Lina L. Faller, PhD'
         author_linkedin = config.get('default_linkedin_url', '')
+
+    # Generate slug with author
+    slug = generate_slug(config.get('source_file', ''), author=author_key)
+    excerpt = extract_excerpt(content, post_title=title)
+    image_path, image_alt = extract_first_image(content, slug.split('_')[0])
+    publish_date = convert_date_format(date)
 
     # Build authors list
     authors = [{"name": author_name}]

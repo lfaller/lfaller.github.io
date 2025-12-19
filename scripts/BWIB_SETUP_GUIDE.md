@@ -136,7 +136,7 @@ When a cross-post PR is opened on the BWIB repository, the web development team 
 | `date` | `publishDate` | Converted to ISO 8601 with timezone offset |
 | `categories` | `tags` | Jekyll categories become BWIB tags (lowercase) |
 | — | `category` | Set to default "Quick Take" (team adjusts per post) |
-| — | `slug` | Auto-generated from filename |
+| — | `slug` | Auto-generated: `YYYYMMDD_{description}_{author}` |
 | — | `excerpt` | Auto-generated from first paragraph (can be customized in PR) |
 | — | `image` | Auto-detected from first markdown image in post |
 | — | `imageAlt` | Auto-detected from image alt text |
@@ -144,6 +144,20 @@ When a cross-post PR is opened on the BWIB repository, the web development team 
 | — | `metadata` | Auto-generated SEO metadata with canonical link to your blog |
 
 ## Customization (Lina's Tasks)
+
+### Slug Format
+
+Slugs are auto-generated from your Jekyll filenames in the format: `YYYYMMDD_{description}_{author}`
+
+Examples:
+- Jekyll file: `2025-11-27-thanksgiving-in-biotech.md` (author: lina)
+- Generated slug: `20251127_thanksgiving-in-biotech_lina`
+- Or use the new format directly: `20251127_thanksgiving-in-biotech_lina.md`
+
+This format is:
+- **Sortable by date** - Posts naturally sort chronologically
+- **Author-identified** - Easy to see who wrote it
+- **Human-readable** - Description is still clear
 
 ### Update Author Mapping
 
@@ -158,7 +172,7 @@ In `scripts/crosspost_config.json`, the `author_mapping` section maps Jekyll aut
 }
 ```
 
-Add more authors if you have guest posts.
+Add more authors if you have guest posts. The author key (e.g., "lina") is used in slug generation.
 
 ### Change Default Category
 
