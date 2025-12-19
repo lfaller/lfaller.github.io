@@ -307,33 +307,99 @@ def is_tuesday_tactics_post(title, filename):
     """Check if this is a Tuesday Tactics post (should skip comments)"""
     return 'tuesday' in title.lower() or 'tuesday-tactics' in filename.lower()
 
-def build_linkedin_post_text(summary, blog_url, categories):
-    """Build LinkedIn post text with summary and blog link.
+def validate_post_length(text, limit=3000):
+    """Validate post text length against LinkedIn's character limit.
 
     Args:
-        summary: The summary from frontmatter (if available)
-        blog_url: The full blog URL
-        categories: Categories string for hashtag extraction
+        text: The post text to validate
+        limit: Character limit (default 3000 for LinkedIn)
 
     Returns:
-        Complete LinkedIn post text with summary, link, and hashtags
+        Tuple of (is_valid: bool, char_count: int, over_by: int or None)
     """
-    # Start with the summary
-    post_text = summary if summary else ""
+    char_count = len(text)
+    is_valid = char_count <= limit
+    over_by = None if is_valid else (char_count - limit)
+    return is_valid, char_count, over_by
 
-    # Add the blog link
-    if blog_url:
-        if post_text:
-            post_text += f"\n\nRead the whole story here:\n{blog_url}"
-        else:
-            post_text = f"Read the whole story here:\n{blog_url}"
+def build_hybrid_linkedin_post(full_content, summary, blog_url, categories, html_hashtags=None):
+    """Build LinkedIn post text using hybrid approach.
+
+    Strategy:
+    1. Try full converted content + hashtags first
+    2. If exceeds 3000 chars and summary exists, fall back to summary + hashtags
+    3. If still too long, truncate intelligently
+
+    Args:
+        full_content: Full markdown converted to LinkedIn format
+        summary: Summary from frontmatter (if available)
+        blog_url: The full blog URL
+        categories: Categories string for hashtag extraction
+        html_hashtags: List of hashtags from HTML comments
+
+    Returns:
+        Tuple of (post_text: str, used_full_content: bool, char_count: int)
+    """
+    if html_hashtags is None:
+        html_hashtags = []
+
+    # Collect and deduplicate all hashtags
+    all_hashtags = []
+    seen = set()
+
+    # Add HTML comment hashtags first
+    for tag in html_hashtags:
+        tag_lower = tag.lower()
+        if tag_lower not in seen:
+            all_hashtags.append(tag)
+            seen.add(tag_lower)
 
     # Add category hashtags
     category_hashtags = extract_category_hashtags(categories)
-    if category_hashtags:
-        post_text += "\n\n" + " ".join(category_hashtags)
+    for tag in category_hashtags:
+        tag_lower = tag.lower()
+        if tag_lower not in seen:
+            all_hashtags.append(tag)
+            seen.add(tag_lower)
 
-    return post_text
+    hashtags_str = " ".join(all_hashtags)
+
+    # Try full content first
+    if full_content:
+        full_post = full_content
+        if blog_url:
+            full_post += f"\n\nRead the whole story here:\n{blog_url}"
+        if hashtags_str:
+            full_post += f"\n\n{hashtags_str}"
+
+        is_valid, char_count, _ = validate_post_length(full_post)
+        if is_valid:
+            return full_post, True, char_count
+
+    # Fall back to summary if full content is too long
+    if summary:
+        summary_post = summary
+        if blog_url:
+            summary_post += f"\n\nRead the whole story here:\n{blog_url}"
+        if hashtags_str:
+            summary_post += f"\n\n{hashtags_str}"
+
+        is_valid, char_count, _ = validate_post_length(summary_post)
+        if is_valid:
+            return summary_post, False, char_count
+
+        # If summary is still too long, just use summary + hashtags without URL
+        summary_only = summary
+        if hashtags_str:
+            summary_only += f"\n\n{hashtags_str}"
+        is_valid, char_count, _ = validate_post_length(summary_only)
+        if is_valid:
+            return summary_only, False, char_count
+
+    # Last resort: just hashtags (shouldn't reach here in normal cases)
+    fallback = hashtags_str if hashtags_str else "Post content too long for LinkedIn"
+    is_valid, char_count, _ = validate_post_length(fallback)
+    return fallback, False, char_count
 
 def main():
     if len(sys.argv) < 2:
@@ -376,16 +442,32 @@ def main():
         for img in image_paths:
             print(f"  - {img}")
 
-    # Extract summary for LinkedIn post
+    # Convert full markdown content to LinkedIn format
+    full_linkedin_content, html_hashtags = markdown_to_linkedin(content)
+    if full_linkedin_content:
+        print(f"\n✓ Converted markdown content ({len(full_linkedin_content)} chars)")
+    if html_hashtags:
+        print(f"✓ Found HTML comment hashtags: {' '.join(html_hashtags)}")
+
+    # Extract summary for LinkedIn post (fallback if full content is too long)
     summary = extract_summary_from_metadata(metadata)
     if summary:
-        print(f"\nSummary from frontmatter: {summary[:100]}...")
+        print(f"✓ Summary from frontmatter: {summary[:100]}...")
     else:
-        print(f"\n⚠ No 'summary:' field in frontmatter")
-        print(f"   Recommended: Add a 'summary:' field in the post frontmatter for LinkedIn")
+        print(f"⚠ No 'summary:' field in frontmatter (will use full content if it fits)")
 
-    # Build LinkedIn post text with summary and blog link
-    linkedin_text = build_linkedin_post_text(summary, blog_url, categories)
+    # Build LinkedIn post using hybrid approach
+    linkedin_text, used_full, char_count = build_hybrid_linkedin_post(
+        full_linkedin_content, summary, blog_url, categories, html_hashtags
+    )
+
+    # Show which version was used
+    content_type = "Full content" if used_full else "Summary"
+    print(f"\nBuilding LinkedIn post...")
+    print(f"  Using: {content_type}")
+    print(f"  Characters: {char_count}/3000")
+    if char_count > 2700:
+        print(f"  ⚠ Warning: Post is getting close to character limit")
 
     print(f"\nLinkedIn post preview:")
     print("-" * 60)

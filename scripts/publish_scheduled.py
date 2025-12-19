@@ -34,7 +34,7 @@ from linkedin_post import (
     extract_summary_from_metadata,
     generate_blog_url,
     build_blog_url,
-    build_linkedin_post_text
+    build_hybrid_linkedin_post
 )
 
 def parse_post_date(date_str):
@@ -88,13 +88,20 @@ def publish_post_to_linkedin(post_path, access_token, author_id):
         if image_paths:
             print(f"    Found {len(image_paths)} image(s)")
 
-        # Extract summary for LinkedIn post
-        summary = extract_summary_from_metadata(metadata)
-        if not summary:
-            print(f"    ⚠ No 'summary:' field in frontmatter")
+        # Convert full markdown content to LinkedIn format
+        full_linkedin_content, html_hashtags = markdown_to_linkedin(content)
+        if html_hashtags:
+            print(f"    Found HTML hashtags: {' '.join(html_hashtags)}")
 
-        # Build LinkedIn post text with summary and blog link
-        linkedin_text = build_linkedin_post_text(summary, blog_url, categories)
+        # Extract summary for LinkedIn post (fallback if full content is too long)
+        summary = extract_summary_from_metadata(metadata)
+
+        # Build LinkedIn post using hybrid approach
+        linkedin_text, used_full, char_count = build_hybrid_linkedin_post(
+            full_linkedin_content, summary, blog_url, categories, html_hashtags
+        )
+        content_type = "full content" if used_full else "summary"
+        print(f"    Using {content_type} ({char_count}/3000 chars)")
 
         # Upload images
         image_assets = []
