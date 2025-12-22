@@ -279,7 +279,9 @@ def crosspost_single_post(
         clone_or_update_target_repo(repo_url, temp_repo_dir, gh_token)
 
         # Create feature branch
+        print(f"DEBUG: About to call create_feature_branch")
         branch_name = create_feature_branch(temp_repo_dir, slug)
+        print(f"DEBUG: create_feature_branch returned: {branch_name}")
 
         # Parse Astro metadata from generated content
         # Extract the YAML frontmatter from astro_content
