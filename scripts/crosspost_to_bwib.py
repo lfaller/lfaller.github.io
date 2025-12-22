@@ -30,15 +30,14 @@ from transform_to_astro import (
 def run_command(cmd: list, cwd: str = None, capture_output: bool = False) -> str:
     """Run a shell command and return output if capture_output is True."""
     try:
+        # Always capture output so we can show error messages
+        result = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, check=True)
         if capture_output:
-            result = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, check=True)
             return result.stdout.strip()
         else:
-            subprocess.run(cmd, cwd=cwd, check=True)
             return ""
     except subprocess.CalledProcessError as e:
-        error_msg = e.stderr if capture_output else str(e)
-        print(f"Error running command {' '.join(cmd)}: {error_msg}")
+        print(f"Error running command {' '.join(cmd)}: {e.stderr}")
         raise
 
 
