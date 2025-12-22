@@ -127,6 +127,18 @@ def format_with_prettier(repo_dir: str, file_path: str) -> None:
         return
 
     try:
+        # Install npm dependencies in repo if package.json exists
+        # This ensures prettier plugins like prettier-plugin-astro are available
+        package_json = os.path.join(repo_dir, 'package.json')
+        if os.path.exists(package_json):
+            print(f"Installing npm dependencies for prettier plugins...")
+            try:
+                run_command(['npm', 'install'], cwd=repo_dir)
+                print(f"npm dependencies installed")
+            except subprocess.CalledProcessError as e:
+                print(f"Warning: npm install failed, attempting prettier anyway: {e}")
+                # Continue - prettier might still work with global installation
+
         # Convert file_path to relative path from repo root if it's absolute
         if os.path.isabs(file_path):
             file_path = os.path.relpath(file_path, repo_dir)
