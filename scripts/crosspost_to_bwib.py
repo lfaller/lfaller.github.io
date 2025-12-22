@@ -65,38 +65,24 @@ def clone_or_update_target_repo(repo_url: str, target_dir: str, gh_token: str = 
 
 def create_feature_branch(repo_dir: str, slug: str) -> str:
     """Create a feature branch for this cross-post."""
-    print(f"[DEBUG] Starting create_feature_branch for slug: {slug}")
-
     # Configure git user for commits
     run_command(['git', 'config', 'user.email', 'noreply@bwib.github.io'], cwd=repo_dir)
     run_command(['git', 'config', 'user.name', 'BWIB Cross-Post Bot'], cwd=repo_dir)
-    print(f"[DEBUG] Git user configured")
 
     # Ensure we're on main and up-to-date
     run_command(['git', 'checkout', 'main'], cwd=repo_dir)
     run_command(['git', 'pull', 'origin', 'main'], cwd=repo_dir)
-    print(f"[DEBUG] Checked out and pulled main")
 
     # Create feature branch from main
     branch_name = f"cross-post/{slug}"
-    print(f"[DEBUG] Branch name: {branch_name}")
 
-    # Ensure we have the latest remote info
-    run_command(['git', 'fetch', 'origin'], cwd=repo_dir)
-    print(f"[DEBUG] Fetched origin")
-
-    # Delete the remote branch if it already exists (for retries)
-    try:
-        run_command(['git', 'push', 'origin', '--delete', branch_name], cwd=repo_dir)
-        print(f"Deleted existing remote branch {branch_name}")
-    except subprocess.CalledProcessError as e:
-        # Branch might not exist, but log it for debugging
-        print(f"Note: Could not delete branch {branch_name}: {e.stderr[:100] if e.stderr else 'no stderr'}")
-
-    print(f"[DEBUG] About to checkout branch {branch_name}")
     # Create a fresh local branch from main (without tracking remote)
-    run_command(['git', 'checkout', '-b', branch_name, 'main'], cwd=repo_dir)
-    print(f"[DEBUG] Branch {branch_name} created")
+    try:
+        run_command(['git', 'checkout', '-b', branch_name, 'main'], cwd=repo_dir)
+    except subprocess.CalledProcessError:
+        # Branch might already exist locally, delete and recreate
+        run_command(['git', 'branch', '-D', branch_name], cwd=repo_dir)
+        run_command(['git', 'checkout', '-b', branch_name, 'main'], cwd=repo_dir)
 
     return branch_name
 
@@ -171,7 +157,8 @@ def format_with_prettier(repo_dir: str, file_path: str) -> None:
 def push_branch(repo_dir: str, branch_name: str, repo_url: str = None) -> None:
     """Push feature branch to remote."""
     # Always push to origin - authentication should be configured in the repo
-    run_command(['git', 'push', 'origin', branch_name], cwd=repo_dir)
+    # Use force-with-lease to handle cases where remote branch exists from previous attempts
+    run_command(['git', 'push', '--force-with-lease', 'origin', branch_name], cwd=repo_dir)
     print(f"Pushed branch {branch_name}")
 
 
@@ -277,15 +264,9 @@ def crosspost_single_post(
     try:
         # Clone/update target repo
         clone_or_update_target_repo(repo_url, temp_repo_dir, gh_token)
-        print(f"DEBUG: Clone completed, about to create feature branch")
-        sys.stdout.flush()
 
         # Create feature branch
-        print(f"DEBUG: About to call create_feature_branch with slug={slug}")
-        sys.stdout.flush()
         branch_name = create_feature_branch(temp_repo_dir, slug)
-        print(f"DEBUG: create_feature_branch returned: {branch_name}")
-        sys.stdout.flush()
 
         # Parse Astro metadata from generated content
         # Extract the YAML frontmatter from astro_content
