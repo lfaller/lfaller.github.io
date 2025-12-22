@@ -52,13 +52,9 @@ def load_config(config_path: str = None) -> dict:
 
 
 def clone_or_update_target_repo(repo_url: str, target_dir: str, gh_token: str = None) -> None:
-    """Clone target repo if needed, or update if it exists."""
-    if os.path.exists(target_dir):
-        print(f"Updating existing repo at {target_dir}")
-        run_command(['git', 'fetch', 'origin'], cwd=target_dir)
-    else:
-        print(f"Cloning repo to {target_dir}")
-        run_command(['git', 'clone', repo_url, target_dir])
+    """Clone target repo (assumes directory is clean)."""
+    print(f"Cloning repo to {target_dir}")
+    run_command(['git', 'clone', repo_url, target_dir])
 
 
 def create_feature_branch(repo_dir: str, slug: str) -> str:
