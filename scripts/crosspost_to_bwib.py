@@ -285,8 +285,8 @@ def crosspost_single_post(
         # Commit post
         target_file = commit_post_to_repo(temp_repo_dir, astro_content, slug)
 
-        # Format with prettier
-        format_with_prettier(temp_repo_dir, str(target_file))
+        # Format with prettier (optional - prettier might not be available)
+        # format_with_prettier(temp_repo_dir, str(target_file))
 
         # Get original URL
         original_url_template = config.get('original_post_url_template', '')
