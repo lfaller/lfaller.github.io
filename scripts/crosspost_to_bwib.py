@@ -51,10 +51,13 @@ def load_config(config_path: str = None) -> dict:
         return json.load(f)
 
 
-def clone_or_update_target_repo(repo_url: str, target_dir: str) -> None:
+def clone_or_update_target_repo(repo_url: str, target_dir: str, gh_token: str = None) -> None:
     """Clone target repo if needed, or update if it exists."""
     if os.path.exists(target_dir):
         print(f"Updating existing repo at {target_dir}")
+        # Configure git to use token if provided
+        if gh_token:
+            run_command(['git', 'config', 'url.https://x-access-token:' + gh_token + '@github.com/.insteadOf', 'https://github.com/'], cwd=target_dir)
         run_command(['git', 'fetch', 'origin'], cwd=target_dir)
     else:
         print(f"Cloning repo to {target_dir}")
@@ -211,7 +214,7 @@ def crosspost_single_post(
 
     try:
         # Clone/update target repo
-        clone_or_update_target_repo(repo_url, temp_repo_dir)
+        clone_or_update_target_repo(repo_url, temp_repo_dir, gh_token)
 
         # Create feature branch
         branch_name = create_feature_branch(temp_repo_dir, slug)
