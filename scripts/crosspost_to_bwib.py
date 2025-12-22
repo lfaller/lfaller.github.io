@@ -59,6 +59,10 @@ def clone_or_update_target_repo(repo_url: str, target_dir: str, gh_token: str = 
 
 def create_feature_branch(repo_dir: str, slug: str) -> str:
     """Create a feature branch for this cross-post."""
+    # Configure git user for commits
+    run_command(['git', 'config', 'user.email', 'noreply@bwib.github.io'], cwd=repo_dir)
+    run_command(['git', 'config', 'user.name', 'BWIB Cross-Post Bot'], cwd=repo_dir)
+
     # Ensure we're on main
     run_command(['git', 'checkout', 'main'], cwd=repo_dir)
     run_command(['git', 'pull', 'origin', 'main'], cwd=repo_dir)
