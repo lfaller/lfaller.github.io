@@ -206,6 +206,11 @@ def crosspost_single_post(
     # Use temp directory or create one
     if temp_repo_dir is None:
         temp_repo_dir = tempfile.mkdtemp(prefix='bwib_crosspost_')
+    else:
+        # If temp directory exists, remove it to ensure clean clone
+        if os.path.exists(temp_repo_dir):
+            shutil.rmtree(temp_repo_dir)
+        os.makedirs(temp_repo_dir, exist_ok=True)
 
     repo_url = f"https://x-access-token:{gh_token}@github.com/{target_repo}.git"
 
