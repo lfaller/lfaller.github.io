@@ -76,16 +76,19 @@ def create_feature_branch(repo_dir: str, slug: str) -> str:
     # Create feature branch from main
     branch_name = f"cross-post/{slug}"
 
+    # Ensure we have the latest remote info
+    run_command(['git', 'fetch', 'origin'], cwd=repo_dir)
+
     # Delete the remote branch if it already exists (for retries)
     try:
         run_command(['git', 'push', 'origin', '--delete', branch_name], cwd=repo_dir)
         print(f"Deleted existing remote branch {branch_name}")
-    except subprocess.CalledProcessError:
-        # Branch doesn't exist remotely, which is fine
-        pass
+    except subprocess.CalledProcessError as e:
+        # Branch might not exist, but log it for debugging
+        print(f"Note: Could not delete branch {branch_name}: {e.stderr[:100] if e.stderr else 'no stderr'}")
 
-    # Now create a fresh local branch from main
-    run_command(['git', 'checkout', '-b', branch_name], cwd=repo_dir)
+    # Create a fresh local branch from main (without tracking remote)
+    run_command(['git', 'checkout', '-b', branch_name, 'main'], cwd=repo_dir)
 
     return branch_name
 
