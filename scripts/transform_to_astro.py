@@ -15,6 +15,17 @@ from datetime import datetime
 from typing import Dict, Tuple, List
 import yaml
 
+# Custom YAML representer to output dates without quotes
+class LiteralString(str):
+    """String that will be output without quotes in YAML."""
+    pass
+
+def literal_presenter(dumper, data):
+    """Represent LiteralString as plain scalar (no quotes)."""
+    return dumper.represent_scalar('tag:yaml.org,2002:str', data, style=None)
+
+yaml.add_representer(LiteralString, literal_presenter)
+
 def extract_frontmatter_and_content(file_path: str) -> Tuple[Dict, str]:
     """Extract frontmatter and content from a Jekyll markdown file."""
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -247,8 +258,9 @@ def transform_to_astro(
     }
 
     # Build Astro frontmatter
+    # Use LiteralString for publishDate so it renders without quotes in YAML
     frontmatter = {
-        "publishDate": publish_date,
+        "publishDate": LiteralString(publish_date),
         "title": title,
         "slug": slug,
         "excerpt": excerpt,
