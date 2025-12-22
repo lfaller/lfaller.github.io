@@ -56,6 +56,13 @@ def clone_or_update_target_repo(repo_url: str, target_dir: str, gh_token: str = 
     print(f"Cloning repo to {target_dir}")
     run_command(['git', 'clone', repo_url, target_dir])
 
+    # Configure git to use the token for future operations
+    if gh_token:
+        run_command(
+            ['git', 'config', f'url.https://x-access-token:{gh_token}@github.com/.insteadOf', 'https://github.com/'],
+            cwd=target_dir
+        )
+
 
 def create_feature_branch(repo_dir: str, slug: str) -> str:
     """Create a feature branch for this cross-post."""
