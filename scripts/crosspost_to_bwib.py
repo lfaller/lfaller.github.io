@@ -152,7 +152,13 @@ def format_with_prettier(repo_dir: str, file_path: str) -> None:
 def push_branch(repo_dir: str, branch_name: str, repo_url: str = None) -> None:
     """Push feature branch to remote."""
     # Always push to origin - authentication should be configured in the repo
-    run_command(['git', 'push', 'origin', branch_name], cwd=repo_dir)
+    # Use force-with-lease to handle cases where the branch already exists remotely
+    try:
+        run_command(['git', 'push', 'origin', branch_name], cwd=repo_dir)
+    except subprocess.CalledProcessError:
+        # If push fails (e.g., non-fast-forward), try force-with-lease
+        print(f"Push failed, attempting force-with-lease...")
+        run_command(['git', 'push', '--force-with-lease', 'origin', branch_name], cwd=repo_dir)
     print(f"Pushed branch {branch_name}")
 
 
