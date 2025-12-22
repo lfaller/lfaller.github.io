@@ -56,13 +56,6 @@ def clone_or_update_target_repo(repo_url: str, target_dir: str, gh_token: str = 
     print(f"Cloning repo to {target_dir}")
     run_command(['git', 'clone', repo_url, target_dir])
 
-    # Configure git to use the token for future operations
-    if gh_token:
-        run_command(
-            ['git', 'config', f'url.https://x-access-token:{gh_token}@github.com/.insteadOf', 'https://github.com/'],
-            cwd=target_dir
-        )
-
 
 def create_feature_branch(repo_dir: str, slug: str) -> str:
     """Create a feature branch for this cross-post."""
@@ -116,9 +109,13 @@ def commit_post_to_repo(
     return target_file
 
 
-def push_branch(repo_dir: str, branch_name: str) -> None:
+def push_branch(repo_dir: str, branch_name: str, repo_url: str = None) -> None:
     """Push feature branch to remote."""
-    run_command(['git', 'push', 'origin', branch_name], cwd=repo_dir)
+    if repo_url:
+        # Use explicit repo URL to ensure token is included
+        run_command(['git', 'push', repo_url, f'HEAD:refs/heads/{branch_name}'], cwd=repo_dir)
+    else:
+        run_command(['git', 'push', 'origin', branch_name], cwd=repo_dir)
     print(f"Pushed branch {branch_name}")
 
 
@@ -254,7 +251,7 @@ def crosspost_single_post(
         pr_body = format_pr_description(config, jekyll_frontmatter, astro_metadata, original_url)
 
         # Push branch
-        push_branch(temp_repo_dir, branch_name)
+        push_branch(temp_repo_dir, branch_name, repo_url)
 
         # Open PR
         try:
