@@ -55,8 +55,14 @@ jobs:
           GH_TOKEN: ${{ secrets.CROSSPOST_GH_TOKEN }}
           TARGET_REPO: ${{ secrets.CROSSPOST_TARGET_REPO }}
         run: |
+          # Convert relative paths to work from scripts directory
+          POSTS="${{ steps.changed-files.outputs.posts }}"
+          # If post_file was provided via workflow_dispatch, prepend ../ for proper relative path
+          if [[ "$POSTS" == "_posts/"* ]]; then
+            POSTS="../${POSTS}"
+          fi
           cd scripts
-          python3 crosspost_to_bwib.py ${{ steps.changed-files.outputs.posts }}
+          python3 crosspost_to_bwib.py $POSTS
 
       - name: Report status
         if: always()
