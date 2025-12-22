@@ -59,7 +59,9 @@ def clone_or_update_target_repo(repo_url: str, target_dir: str, gh_token: str = 
     # Git may strip credentials from origin remote after cloning for security
     # Restore the authenticated URL so push operations work
     if 'x-access-token' in repo_url:
+        print(f"Configuring git remote with authentication")
         run_command(['git', 'remote', 'set-url', 'origin', repo_url], cwd=target_dir)
+        print(f"Git remote configured successfully")
 
 
 def create_feature_branch(repo_dir: str, slug: str) -> str:
