@@ -187,7 +187,10 @@ def open_pr(
         print(f"Opened PR: {pr_url}")
         return pr_url
     except subprocess.CalledProcessError as e:
-        print(f"Error opening PR: {e.stderr}")
+        error_msg = e.stderr if e.stderr else e.stdout
+        print(f"Error opening PR: {error_msg}")
+        print(f"Branch {head_branch} was successfully pushed to {repo}")
+        print(f"You may need to open the PR manually or check gh authentication")
         raise
     except FileNotFoundError:
         print("GitHub CLI (gh) not found. Please install it: https://cli.github.com/")
@@ -285,8 +288,8 @@ def crosspost_single_post(
         # Commit post
         target_file = commit_post_to_repo(temp_repo_dir, astro_content, slug)
 
-        # Format with prettier (optional - prettier might not be available)
-        # format_with_prettier(temp_repo_dir, str(target_file))
+        # Format with prettier to match BWIB repo's code style
+        format_with_prettier(temp_repo_dir, str(target_file))
 
         # Get original URL
         original_url_template = config.get('original_post_url_template', '')
