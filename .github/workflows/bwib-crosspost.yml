@@ -32,6 +32,15 @@ jobs:
           cd scripts
           pip install -r requirements.txt
 
+      - name: Setup Node.js for prettier
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install prettier
+        run: |
+          npm install -g prettier prettier-plugin-astro
+
       - name: Get new or modified posts
         id: changed-files
         run: |

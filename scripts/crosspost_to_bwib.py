@@ -115,6 +115,40 @@ def commit_post_to_repo(
     return target_file
 
 
+def format_with_prettier(repo_dir: str, file_path: str) -> None:
+    """Format file with prettier using the repo's config."""
+    try:
+        # Check if prettier is available
+        run_command(['which', 'prettier'], capture_output=True)
+    except subprocess.CalledProcessError:
+        print(f"Warning: prettier not found, skipping formatting")
+        return
+
+    try:
+        # Run prettier on the file
+        run_command(['prettier', '--write', file_path], cwd=repo_dir)
+        print(f"Formatted {file_path} with prettier")
+
+        # Stage the formatted changes
+        run_command(['git', 'add', file_path], cwd=repo_dir)
+
+        # Check if there are changes to commit
+        result = run_command(['git', 'diff', '--cached', '--quiet'], cwd=repo_dir, capture_output=False)
+        # If git diff --cached --quiet returns non-zero, there are changes
+        try:
+            run_command(['git', 'diff', '--cached', '--quiet'], cwd=repo_dir, capture_output=False)
+        except subprocess.CalledProcessError:
+            # There are changes, commit them
+            run_command(
+                ['git', 'commit', '-m', 'Prettier formatting', '--author', 'BWIB Cross-Post Bot <noreply@bwib.github.io>'],
+                cwd=repo_dir
+            )
+            print(f"Committed prettier formatting")
+    except subprocess.CalledProcessError as e:
+        print(f"Warning: prettier formatting failed: {e}")
+        # Continue anyway - formatting is nice to have but not critical
+
+
 def push_branch(repo_dir: str, branch_name: str, repo_url: str = None) -> None:
     """Push feature branch to remote."""
     # Always push to origin - authentication should be configured in the repo
@@ -243,7 +277,10 @@ def crosspost_single_post(
                     astro_metadata[key.strip()] = value.strip().strip('"\'')
 
         # Commit post
-        commit_post_to_repo(temp_repo_dir, astro_content, slug)
+        target_file = commit_post_to_repo(temp_repo_dir, astro_content, slug)
+
+        # Format with prettier
+        format_with_prettier(temp_repo_dir, str(target_file))
 
         # Get original URL
         original_url_template = config.get('original_post_url_template', '')
