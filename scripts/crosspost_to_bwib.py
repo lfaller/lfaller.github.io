@@ -125,7 +125,11 @@ def format_with_prettier(repo_dir: str, file_path: str) -> None:
         return
 
     try:
-        # Run prettier on the file
+        # Convert file_path to relative path from repo root if it's absolute
+        if os.path.isabs(file_path):
+            file_path = os.path.relpath(file_path, repo_dir)
+
+        # Run prettier on the file (run from repo_dir so it finds .prettierrc.cjs)
         run_command(['prettier', '--write', file_path], cwd=repo_dir)
         print(f"Formatted {file_path} with prettier")
 
@@ -133,7 +137,6 @@ def format_with_prettier(repo_dir: str, file_path: str) -> None:
         run_command(['git', 'add', file_path], cwd=repo_dir)
 
         # Check if there are changes to commit
-        result = run_command(['git', 'diff', '--cached', '--quiet'], cwd=repo_dir, capture_output=False)
         # If git diff --cached --quiet returns non-zero, there are changes
         try:
             run_command(['git', 'diff', '--cached', '--quiet'], cwd=repo_dir, capture_output=False)
