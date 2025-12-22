@@ -15,16 +15,22 @@ from datetime import datetime
 from typing import Dict, Tuple, List
 import yaml
 
-# Custom YAML representer to output dates without quotes
-class LiteralString(str):
-    """String that will be output without quotes in YAML."""
+# Custom YAML dumper to handle unquoted date strings
+class UnquotedDumper(yaml.SafeDumper):
+    """Custom YAML dumper that outputs date strings without quotes."""
     pass
 
-def literal_presenter(dumper, data):
-    """Represent LiteralString as plain scalar (no quotes)."""
-    return dumper.represent_scalar('tag:yaml.org,2002:str', data, style=None)
+def unquoted_str_representer(dumper, data):
+    """Represent strings - let plain ISO dates stay unquoted."""
+    # Check if string looks like an ISO 8601 datetime (starts with digit)
+    # These should be output as plain scalars without quotes
+    if data and isinstance(data, str) and data[0].isdigit():
+        # Use style=None for plain scalar (no quotes)
+        return dumper.represent_scalar('tag:yaml.org,2002:str', data, style=None)
+    # For other strings, use default quoting
+    return dumper.represent_scalar('tag:yaml.org,2002:str', data)
 
-yaml.add_representer(LiteralString, literal_presenter)
+UnquotedDumper.add_representer(str, unquoted_str_representer)
 
 def extract_frontmatter_and_content(file_path: str) -> Tuple[Dict, str]:
     """Extract frontmatter and content from a Jekyll markdown file."""
@@ -258,9 +264,8 @@ def transform_to_astro(
     }
 
     # Build Astro frontmatter
-    # Use LiteralString for publishDate so it renders without quotes in YAML
     frontmatter = {
-        "publishDate": LiteralString(publish_date),
+        "publishDate": publish_date,
         "title": title,
         "slug": slug,
         "excerpt": excerpt,
@@ -276,8 +281,16 @@ def transform_to_astro(
     # Attribution is handled via canonical link in metadata, not in post content
     # The canonical URL in the frontmatter provides proper attribution and SEO credit
 
-    # Convert frontmatter to YAML
-    yaml_output = yaml.dump(frontmatter, default_flow_style=False, sort_keys=False, allow_unicode=True)
+    # Convert frontmatter to YAML using our custom dumper to output dates unquoted
+    yaml_output = yaml.dump(frontmatter, Dumper=UnquotedDumper, default_flow_style=False, sort_keys=False, allow_unicode=True)
+
+    # Post-process to remove quotes from publishDate if it looks like an ISO 8601 date
+    # This ensures Astro parses it as a date object, not a string
+    yaml_output = re.sub(
+        r"publishDate: '[^']*(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2})[^']*'",
+        r"publishDate: \1",
+        yaml_output
+    )
 
     # Build complete file
     astro_markdown = f"---\n{yaml_output}---\n\n{content}"
