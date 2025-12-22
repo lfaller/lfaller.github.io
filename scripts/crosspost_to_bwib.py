@@ -69,18 +69,23 @@ def create_feature_branch(repo_dir: str, slug: str) -> str:
     run_command(['git', 'config', 'user.email', 'noreply@bwib.github.io'], cwd=repo_dir)
     run_command(['git', 'config', 'user.name', 'BWIB Cross-Post Bot'], cwd=repo_dir)
 
-    # Ensure we're on main
+    # Ensure we're on main and up-to-date
     run_command(['git', 'checkout', 'main'], cwd=repo_dir)
     run_command(['git', 'pull', 'origin', 'main'], cwd=repo_dir)
 
-    # Create feature branch
+    # Create feature branch from main
     branch_name = f"cross-post/{slug}"
+
+    # Delete the remote branch if it already exists (for retries)
     try:
-        run_command(['git', 'checkout', '-b', branch_name], cwd=repo_dir)
+        run_command(['git', 'push', 'origin', '--delete', branch_name], cwd=repo_dir)
+        print(f"Deleted existing remote branch {branch_name}")
     except subprocess.CalledProcessError:
-        # Branch might already exist
-        run_command(['git', 'checkout', branch_name], cwd=repo_dir)
-        run_command(['git', 'reset', '--hard', 'origin/main'], cwd=repo_dir)
+        # Branch doesn't exist remotely, which is fine
+        pass
+
+    # Now create a fresh local branch from main
+    run_command(['git', 'checkout', '-b', branch_name], cwd=repo_dir)
 
     return branch_name
 
@@ -155,13 +160,7 @@ def format_with_prettier(repo_dir: str, file_path: str) -> None:
 def push_branch(repo_dir: str, branch_name: str, repo_url: str = None) -> None:
     """Push feature branch to remote."""
     # Always push to origin - authentication should be configured in the repo
-    # Use force-with-lease to handle cases where the branch already exists remotely
-    try:
-        run_command(['git', 'push', 'origin', branch_name], cwd=repo_dir)
-    except subprocess.CalledProcessError:
-        # If push fails (e.g., non-fast-forward), try force-with-lease
-        print(f"Push failed, attempting force-with-lease...")
-        run_command(['git', 'push', '--force-with-lease', 'origin', branch_name], cwd=repo_dir)
+    run_command(['git', 'push', 'origin', branch_name], cwd=repo_dir)
     print(f"Pushed branch {branch_name}")
 
 
