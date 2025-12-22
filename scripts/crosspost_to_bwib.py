@@ -117,6 +117,72 @@ def commit_post_to_repo(
     return target_file
 
 
+def copy_image_to_repo(
+    repo_dir: str,
+    image_path: str,
+    jekyll_post_path: str,
+    post_slug: str
+) -> str:
+    """
+    Copy featured image from Jekyll post to BWIB repo's public/blog_images/ directory.
+    Returns the new image path relative to repo root, or original path if copy fails.
+    """
+    if not image_path or image_path.startswith('http'):
+        # Don't copy external URLs or empty paths
+        return image_path
+
+    # Determine source file path
+    if image_path.startswith('/'):
+        # Absolute path from Jekyll - need to find the file in the blog
+        jekyll_post_dir = Path(jekyll_post_path).parent.parent  # Go up to repo root
+        source_file = jekyll_post_dir / image_path.lstrip('/')
+    else:
+        # Relative path
+        source_file = Path(jekyll_post_path).parent / image_path
+
+    if not source_file.exists():
+        print(f"Warning: Image file not found at {source_file}, keeping original path")
+        return image_path
+
+    try:
+        # Extract just the filename from the original path
+        filename = Path(image_path).name
+
+        # Ensure blog_images directory exists
+        target_dir = Path(repo_dir) / 'public' / 'blog_images'
+        target_dir.mkdir(parents=True, exist_ok=True)
+
+        # Copy the image file
+        target_file = target_dir / filename
+        shutil.copy2(source_file, target_file)
+        print(f"Copied image to {target_file}")
+
+        # Return the new path (relative to repo root)
+        new_path = f"/blog_images/{filename}"
+        return new_path
+
+    except Exception as e:
+        print(f"Warning: Could not copy image: {e}, keeping original path")
+        return image_path
+
+
+def update_image_path_in_content(
+    astro_content: str,
+    original_path: str,
+    new_path: str
+) -> str:
+    """Update the image path in the Astro frontmatter and content."""
+    if not original_path or original_path == new_path:
+        return astro_content
+
+    # Update in frontmatter (image: field)
+    astro_content = astro_content.replace(f"image: {original_path}", f"image: {new_path}")
+    astro_content = astro_content.replace(f"image: '{original_path}'", f"image: {new_path}")
+    astro_content = astro_content.replace(f'image: "{original_path}"', f"image: {new_path}")
+
+    return astro_content
+
+
 def format_with_prettier(repo_dir: str, file_path: str) -> None:
     """Format file with prettier using the repo's config."""
     try:
@@ -299,6 +365,45 @@ def crosspost_single_post(
 
         # Commit post
         target_file = commit_post_to_repo(temp_repo_dir, astro_content, slug)
+
+        # Extract image path from frontmatter before copying
+        image_path = None
+        for line in astro_content.split('\n'):
+            if line.startswith('image:'):
+                # Extract the image path from the line
+                image_path = line.split(':', 1)[1].strip().strip('"\'')
+                break
+
+        # Copy image to repo if it exists locally
+        new_image_path = image_path
+        if image_path:
+            new_image_path = copy_image_to_repo(temp_repo_dir, image_path, jekyll_post_path, slug)
+
+            # If image path changed, update the post content and re-commit
+            if new_image_path != image_path:
+                astro_content = update_image_path_in_content(astro_content, image_path, new_image_path)
+
+                # Re-write the post with updated image path
+                with open(target_file, 'w', encoding='utf-8') as f:
+                    f.write(astro_content)
+                print(f"Updated image path from {image_path} to {new_image_path}")
+
+        # Stage the image file for commit
+        image_files = list(Path(temp_repo_dir).glob('public/blog_images/*'))
+        if image_files:
+            for img_file in image_files:
+                run_command(['git', 'add', str(img_file)], cwd=temp_repo_dir)
+
+            # Commit the image
+            try:
+                run_command(
+                    ['git', 'commit', '-m', 'Add featured image', '--author', 'BWIB Cross-Post Bot <noreply@bwib.github.io>'],
+                    cwd=temp_repo_dir
+                )
+                print(f"Committed image files")
+            except subprocess.CalledProcessError:
+                # No image changes to commit (image already existed)
+                pass
 
         # Format with prettier to match BWIB repo's code style
         format_with_prettier(temp_repo_dir, str(target_file))
