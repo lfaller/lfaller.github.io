@@ -65,19 +65,25 @@ def clone_or_update_target_repo(repo_url: str, target_dir: str, gh_token: str = 
 
 def create_feature_branch(repo_dir: str, slug: str) -> str:
     """Create a feature branch for this cross-post."""
+    print(f"[DEBUG] Starting create_feature_branch for slug: {slug}")
+
     # Configure git user for commits
     run_command(['git', 'config', 'user.email', 'noreply@bwib.github.io'], cwd=repo_dir)
     run_command(['git', 'config', 'user.name', 'BWIB Cross-Post Bot'], cwd=repo_dir)
+    print(f"[DEBUG] Git user configured")
 
     # Ensure we're on main and up-to-date
     run_command(['git', 'checkout', 'main'], cwd=repo_dir)
     run_command(['git', 'pull', 'origin', 'main'], cwd=repo_dir)
+    print(f"[DEBUG] Checked out and pulled main")
 
     # Create feature branch from main
     branch_name = f"cross-post/{slug}"
+    print(f"[DEBUG] Branch name: {branch_name}")
 
     # Ensure we have the latest remote info
     run_command(['git', 'fetch', 'origin'], cwd=repo_dir)
+    print(f"[DEBUG] Fetched origin")
 
     # Delete the remote branch if it already exists (for retries)
     try:
@@ -87,8 +93,10 @@ def create_feature_branch(repo_dir: str, slug: str) -> str:
         # Branch might not exist, but log it for debugging
         print(f"Note: Could not delete branch {branch_name}: {e.stderr[:100] if e.stderr else 'no stderr'}")
 
+    print(f"[DEBUG] About to checkout branch {branch_name}")
     # Create a fresh local branch from main (without tracking remote)
     run_command(['git', 'checkout', '-b', branch_name, 'main'], cwd=repo_dir)
+    print(f"[DEBUG] Branch {branch_name} created")
 
     return branch_name
 
