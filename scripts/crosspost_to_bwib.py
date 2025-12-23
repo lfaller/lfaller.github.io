@@ -388,7 +388,21 @@ def crosspost_single_post(
                     f.write(astro_content)
                 print(f"Updated image path from {image_path} to {new_image_path}")
 
-        # Stage the image file for commit
+                # Add the updated post file to staging
+                run_command(['git', 'add', str(target_file)], cwd=temp_repo_dir)
+
+                # Commit the updated post with new image path
+                try:
+                    run_command(
+                        ['git', 'commit', '-m', 'Update image path', '--author', 'BWIB Cross-Post Bot <noreply@bwib.github.io>'],
+                        cwd=temp_repo_dir
+                    )
+                    print(f"Committed updated image path")
+                except subprocess.CalledProcessError:
+                    # No changes to commit
+                    pass
+
+        # Stage and commit the image files
         image_files = list(Path(temp_repo_dir).glob('public/blog_images/*'))
         if image_files:
             for img_file in image_files:
