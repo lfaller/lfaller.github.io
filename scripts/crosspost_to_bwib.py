@@ -131,14 +131,17 @@ def copy_image_to_repo(
         # Don't copy external URLs or empty paths
         return image_path
 
+    # Make jekyll_post_path absolute to handle relative paths correctly
+    jekyll_post_path_abs = Path(jekyll_post_path).resolve()
+
     # Determine source file path
     if image_path.startswith('/'):
-        # Absolute path from Jekyll - need to find the file in the blog
-        jekyll_post_dir = Path(jekyll_post_path).parent.parent  # Go up to repo root
+        # Absolute path from Jekyll - find repo root and look from there
+        jekyll_post_dir = jekyll_post_path_abs.parent.parent  # Go up from _posts to repo root
         source_file = jekyll_post_dir / image_path.lstrip('/')
     else:
-        # Relative path
-        source_file = Path(jekyll_post_path).parent / image_path
+        # Relative path - relative to the post directory
+        source_file = jekyll_post_path_abs.parent / image_path
 
     if not source_file.exists():
         print(f"Warning: Image file not found at {source_file}, keeping original path")
