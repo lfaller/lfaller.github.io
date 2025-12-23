@@ -7,7 +7,7 @@ technologies: ["Python", "Streamlit", "SQLite", "Docker", "YAML"]
 impact_metric: "90% reduction in data discovery time (30-60 min → 2-5 min)"
 impact_metrics:
   - "90% reduction in data discovery time (30-60 min → 2-5 min)"
-  - "14,000 samples across 27 datasets cataloged"
+  - "~15,000 samples samples across nearly 30 datasets cataloged"
   - "6 modalities searchable for the first time"
   - "New datasets onboarded in under 5 minutes"
 problem_statement: "Multi-modal discovery data scattered across teams with no catalog, inconsistent metadata, and knowledge locked in individuals"
@@ -40,7 +40,7 @@ And when people left the company? Their knowledge left with them.
 
 ### Building the Solution (Together)
 
-I partnered closely with a wetlab scientist who knew the data landscape. Every conversation with a domain expert taught me something new - they were busy, especially during the holiday season, but getting on their calendars was essential.
+I partnered closely with a wetlab scientist who knew the data landscape. Every conversation with a domain expert taught me something new - they were busy, especially during the a busy season, but getting on their calendars was essential.
 
 Together, we designed a pragmatic system:
 
@@ -64,7 +64,7 @@ Why SQLite? It's lightweight and perfect for a proof of concept. Why JSON arrays
 
 **People were tired.** They'd heard about efforts like these before. Everyone had a full plate, and me coming to ask for information was "yet another thing." This wasn't resistance exactly - just the weight of competing priorities and past initiatives that hadn't stuck.
 
-**SQLite got slow towards the end.** With 14,000 samples and 185 metadata fields, query performance started to degrade. Good enough for the MVP, but a clear signal that the next phase needs a different backend.
+**SQLite got slow towards the end.** With ~15,000 samples samples and 185 metadata fields, query performance started to degrade. Good enough for the MVP, but a clear signal that the next phase needs a different backend.
 
 ### The Impact
 
@@ -78,8 +78,8 @@ Why SQLite? It's lightweight and perfect for a proof of concept. Why JSON arrays
 
 **By the Numbers**:
 - 6 modalities supported
-- 27 datasets cataloged
-- 14,000 samples indexed
+- Nearly 30 datasets cataloged
+- ~15,000 samples samples indexed
 - 185 metadata fields normalized
 - 80% of samples linked to source files
 - New datasets onboarded in under 5 minutes
