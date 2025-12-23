@@ -139,10 +139,11 @@ def extract_excerpt(content: str, max_length: int = 200, post_title: str = None)
     return excerpt
 
 
-def extract_first_image(content: str, post_date: str = None) -> Tuple[str, str]:
+def extract_first_image(content: str, post_date: str = None, source_file: str = None) -> Tuple[str, str]:
     """
     Extract first image from content.
     Returns (image_path, image_alt_text).
+    If source_file is provided, converts the image path to /blog_images/original-filename.png
     """
     # Look for markdown image syntax: ![alt](path)
     match = re.search(r'!\[([^\]]*)\]\(([^\)]+)\)', content)
@@ -151,11 +152,10 @@ def extract_first_image(content: str, post_date: str = None) -> Tuple[str, str]:
         alt_text = match.group(1) or "Featured image"
         image_path = match.group(2)
 
-        # If path starts with /, keep as-is, otherwise adjust
-        # Convert paths like /assets/images/posts/... to relative paths for Astro
-        if image_path.startswith('/'):
-            # For now, keep the original path - she'll need to handle image migration
-            pass
+        # If source_file is provided, use /blog_images/ with original filename
+        if source_file:
+            original_filename = Path(source_file).stem + '.png'
+            image_path = f"/blog_images/{original_filename}"
 
         return image_path, alt_text
 
@@ -290,7 +290,7 @@ def transform_to_astro(
     # Generate slug with author
     base_slug = generate_slug(config.get('source_file', ''), author=author_key)
     excerpt = extract_excerpt(content, post_title=title)
-    image_path, image_alt = extract_first_image(content, base_slug.split('_')[0])
+    image_path, image_alt = extract_first_image(content, base_slug.split('_')[0], source_file=config.get('source_file', ''))
     publish_date = convert_date_format(date)
     
     # Default category for cross-posts (will be set later, but need it now for slug)
@@ -374,6 +374,20 @@ def transform_to_astro(
     # Attribution is handled via canonical link in metadata, not in post content
     # The canonical URL in the frontmatter provides proper attribution and SEO credit
 
+    # Remove the first image from content since it's rendered from frontmatter
+    content_without_first_image = re.sub(r'!\[([^\]]*)\]\(([^\)]+)\)', '', content, count=1)
+
+    # Remove the title if it appears at the start of the content (usually as **Title** or # Title)
+    # This handles both bold (**Title**) and heading formats (# Title or ## Title, etc.)
+    title_pattern = re.escape(title)
+    # Match the title in various formats: **Title**, # Title, ## Title, etc.
+    content_without_title = re.sub(
+        rf'^\s*(?:\*\*{title_pattern}\*\*|#{1,6}\s+{title_pattern})\s*\n+',
+        '',
+        content_without_first_image,
+        flags=re.IGNORECASE
+    )
+
     # Convert frontmatter to YAML using our custom dumper to output dates unquoted
     yaml_output = yaml.dump(frontmatter, Dumper=UnquotedDumper, default_flow_style=False, sort_keys=False, allow_unicode=True)
 
@@ -386,7 +400,7 @@ def transform_to_astro(
     )
 
     # Build complete file
-    astro_markdown = f"---\n{yaml_output}---\n\n{content}"
+    astro_markdown = f"---\n{yaml_output}---\n\n{content_without_title.strip()}"
 
     return astro_markdown
 
