@@ -275,9 +275,10 @@ def format_pr_description(config: dict, jekyll_frontmatter: dict, astro_metadata
 def crosspost_single_post(
     jekyll_post_path: str,
     config: dict,
-    temp_repo_dir: str = None
+    temp_repo_dir: str = None,
+    print_only: bool = False
 ) -> bool:
-    """Cross-post a single Jekyll post to BWIB repo."""
+    """Cross-post a single Jekyll post to BWIB repo, or just print the output if print_only=True."""
     print(f"\n{'='*60}")
     print(f"Cross-posting: {jekyll_post_path}")
     print(f"{'='*60}\n")
@@ -295,10 +296,24 @@ def crosspost_single_post(
 
     # Transform to Astro format
     try:
-        astro_content = transform_to_astro(jekyll_frontmatter, jekyll_content, config, include_attribution=True)
+        # Add source file to config for slug generation in transform_to_astro
+        config_with_source = config.copy()
+        config_with_source['source_file'] = jekyll_post_path
+        astro_content = transform_to_astro(jekyll_frontmatter, jekyll_content, config_with_source, include_attribution=True)
     except Exception as e:
         print(f"Error transforming post: {e}")
         return False
+
+    # If print_only mode, just output the transformed content and return
+    if print_only:
+        print(f"\n{'='*60}")
+        print(f"TRANSFORMED MARKDOWN")
+        print(f"{'='*60}\n")
+        print(astro_content)
+        print(f"\n{'='*60}")
+        print(f"File would be saved as: src/content/post/{slug}.md")
+        print(f"{'='*60}\n")
+        return True
 
     # Prepare repository
     target_repo = config.get('target_repo')
@@ -424,7 +439,19 @@ def crosspost_single_post(
 def main():
     """Main entry point."""
     if len(sys.argv) < 2:
-        print("Usage: crosspost_to_bwib.py <post1.md> [post2.md ...]")
+        print("Usage: crosspost_to_bwib.py [--print] <post1.md> [post2.md ...]")
+        print("  --print: Print transformed markdown instead of creating a PR")
+        sys.exit(1)
+
+    # Check for --print flag
+    print_only = False
+    posts = sys.argv[1:]
+    if posts and posts[0] == '--print':
+        print_only = True
+        posts = posts[1:]
+
+    if not posts:
+        print("Error: No posts specified")
         sys.exit(1)
 
     # Load configuration
@@ -434,22 +461,20 @@ def main():
         print("Error: crosspost_config.json not found")
         sys.exit(1)
 
-    if not config.get('enabled'):
+    if not config.get('enabled') and not print_only:
         print("Cross-posting is disabled in configuration")
         sys.exit(0)
 
-    # Process each post
-    posts = sys.argv[1:]
     success_count = 0
     failure_count = 0
 
-    # Create a shared temp directory for all posts in this run
-    temp_repo_dir = tempfile.mkdtemp(prefix='bwib_crosspost_')
+    # Only create temp directory if not in print_only mode
+    temp_repo_dir = None if print_only else tempfile.mkdtemp(prefix='bwib_crosspost_')
 
     try:
         for post_path in posts:
             try:
-                if crosspost_single_post(post_path, config, temp_repo_dir):
+                if crosspost_single_post(post_path, config, temp_repo_dir, print_only=print_only):
                     success_count += 1
                 else:
                     failure_count += 1
@@ -458,22 +483,24 @@ def main():
                 failure_count += 1
 
         # Summary
-        print(f"\n{'='*60}")
-        print(f"Cross-post Summary")
-        print(f"{'='*60}")
-        print(f"Successful: {success_count}")
-        print(f"Failed: {failure_count}")
-        print(f"{'='*60}\n")
+        if not print_only:
+            print(f"\n{'='*60}")
+            print(f"Cross-post Summary")
+            print(f"{'='*60}")
+            print(f"Successful: {success_count}")
+            print(f"Failed: {failure_count}")
+            print(f"{'='*60}\n")
 
         sys.exit(0 if failure_count == 0 else 1)
 
     finally:
-        # Clean up temp directory
-        try:
-            shutil.rmtree(temp_repo_dir)
-            print(f"Cleaned up temp directory")
-        except Exception as e:
-            print(f"Warning: Could not clean up temp directory: {e}")
+        # Clean up temp directory if it was created
+        if temp_repo_dir:
+            try:
+                shutil.rmtree(temp_repo_dir)
+                print(f"Cleaned up temp directory")
+            except Exception as e:
+                print(f"Warning: Could not clean up temp directory: {e}")
 
 
 if __name__ == '__main__':

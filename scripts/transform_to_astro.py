@@ -56,13 +56,13 @@ def extract_frontmatter_and_content(file_path: str) -> Tuple[Dict, str]:
 
 def generate_slug(file_path: str, author: str = 'lina') -> str:
     """
-    Generate slug from filename in format: YYYYMMDD_{description}_{author}
+    Generate slug from filename in format: YYYYMMDD_post_{Author}
 
     Handles both formats:
     - Old Jekyll format: 2025-11-27-thanksgiving-in-biotech.md
-      → 20251127_thanksgiving-in-biotech_lina
-    - New format: 20251127_thanksgiving-in-biotech_lina.md
-      → 20251127_thanksgiving-in-biotech_lina
+      → 20251127_post_Lina
+    - New format: 20251127_post_Lina.md
+      → 20251127_post_Lina
     """
     filename = Path(file_path).stem
 
@@ -79,10 +79,12 @@ def generate_slug(file_path: str, author: str = 'lina') -> str:
         year = parts[0]
         month = parts[1]
         day = parts[2]
-        description = parts[3]  # Everything after the date
 
-        # Convert to new format
-        return f"{year}{month}{day}_{description}_{author}"
+        # Capitalize author name for filename (Lina, not lina)
+        author_capitalized = author.capitalize()
+
+        # Convert to new format: YYYYMMDD_post_Author
+        return f"{year}{month}{day}_post_{author_capitalized}"
 
     # Fallback: return as-is if we can't parse it
     return filename
@@ -137,10 +139,11 @@ def extract_excerpt(content: str, max_length: int = 200, post_title: str = None)
     return excerpt
 
 
-def extract_first_image(content: str, post_date: str = None) -> Tuple[str, str]:
+def extract_first_image(content: str, post_date: str = None, source_file: str = None) -> Tuple[str, str]:
     """
     Extract first image from content.
     Returns (image_path, image_alt_text).
+    If source_file is provided, converts the image path to /blog_images/original-filename.png
     """
     # Look for markdown image syntax: ![alt](path)
     match = re.search(r'!\[([^\]]*)\]\(([^\)]+)\)', content)
@@ -149,11 +152,10 @@ def extract_first_image(content: str, post_date: str = None) -> Tuple[str, str]:
         alt_text = match.group(1) or "Featured image"
         image_path = match.group(2)
 
-        # If path starts with /, keep as-is, otherwise adjust
-        # Convert paths like /assets/images/posts/... to relative paths for Astro
-        if image_path.startswith('/'):
-            # For now, keep the original path - she'll need to handle image migration
-            pass
+        # If source_file is provided, use /blog_images/ with original filename
+        if source_file:
+            original_filename = Path(source_file).stem + '.png'
+            image_path = f"/blog_images/{original_filename}"
 
         return image_path, alt_text
 
@@ -161,6 +163,62 @@ def extract_first_image(content: str, post_date: str = None) -> Tuple[str, str]:
     if post_date:
         return f"/images/posts/{post_date}-featured.png", "Featured image"
     return "/images/posts/featured.png", "Featured image"
+
+
+def generate_jekyll_url(file_path: str, base_url: str = "https://lfaller.github.io") -> str:
+    """
+    Generate the Jekyll blog URL from a post filename.
+    
+    Example:
+    - Input: /path/to/_posts/2025-12-04-five-signals-hire-data-person-now.md
+    - Output: https://lfaller.github.io/biotech/2025/12/04/five-signals-hire-data-person-now
+    """
+    filename = Path(file_path).stem  # Remove .md extension
+    
+    # Parse Jekyll filename format: YYYY-MM-DD-slug-name
+    parts = filename.split('-', 3)  # Split into [YYYY, MM, DD, rest]
+    
+    if len(parts) >= 4 and parts[0].isdigit() and len(parts[0]) == 4:
+        year = parts[0]
+        month = parts[1]
+        day = parts[2]
+        description = parts[3]  # Everything after the date
+        
+        # Assuming all posts are in /biotech category
+        # Format: https://base_url/biotech/YYYY/MM/DD/slug
+        return f"{base_url}/biotech/{year}/{month}/{day}/{description}"
+    
+    # Fallback if we can't parse
+    return f"{base_url}/posts/{filename}"
+
+
+def extract_tags_from_comments(content: str) -> List[str]:
+    """
+    Extract tags from HTML comments at the end of the post.
+    Looks for patterns like: <!-- #Tag1 #Tag2 #Tag3 -->
+    Converts CamelCase tags like #DataScience to data-science.
+    Returns list of tag names (lowercase with dashes, no # symbol).
+    """
+    # Look for HTML comments containing hashtags
+    match = re.search(r'<!--\s*([^-]*)\s*-->', content)
+    
+    if not match:
+        return []
+    
+    comment_text = match.group(1)
+    
+    # Extract all hashtag words
+    tags = re.findall(r'#([\w-]+)', comment_text)
+    
+    # Normalize tags: convert CamelCase to kebab-case and lowercase
+    normalized_tags = []
+    for tag in tags:
+        # Insert hyphen before uppercase letters (CamelCase to kebab-case)
+        # DataScience -> Data-Science -> data-science
+        kebab = re.sub(r'(?<!^)(?=[A-Z])', '-', tag)
+        normalized_tags.append(kebab.lower())
+    
+    return normalized_tags
 
 
 def convert_date_format(jekyll_date: str) -> str:
@@ -230,10 +288,33 @@ def transform_to_astro(
         author_linkedin = config.get('default_linkedin_url', '')
 
     # Generate slug with author
-    slug = generate_slug(config.get('source_file', ''), author=author_key)
+    base_slug = generate_slug(config.get('source_file', ''), author=author_key)
     excerpt = extract_excerpt(content, post_title=title)
-    image_path, image_alt = extract_first_image(content, slug.split('_')[0])
+    image_path, image_alt = extract_first_image(content, base_slug.split('_')[0], source_file=config.get('source_file', ''))
     publish_date = convert_date_format(date)
+    
+    # Default category for cross-posts (will be set later, but need it now for slug)
+    category = config.get('default_category', 'Quick Take')
+    
+    # Generate slug with category prefix based on original Jekyll filename
+    # Extract description from original Jekyll filename for the slug
+    source_file = config.get('source_file', '')
+    if source_file:
+        filename = Path(source_file).stem
+        # Parse Jekyll filename format: YYYY-MM-DD-slug-name
+        parts = filename.split('-', 3)
+        if len(parts) >= 4 and parts[0].isdigit() and len(parts[0]) == 4:
+            # Extract the description part
+            description = parts[3]
+        else:
+            # Fallback: use the full filename
+            description = filename
+    else:
+        description = "post"
+    
+    # Create full slug with category prefix: blog/category/description
+    category_slug = category.lower().replace(' ', '')
+    slug = f"blog/{category_slug}/{description}"
 
     # Build authors list
     authors = [{"name": author_name}]
@@ -241,26 +322,38 @@ def transform_to_astro(
         authors[0]['link'] = author_linkedin
 
     # Map categories to tags (Jekyll categories become BWIB tags)
-    # Default category is "Quick Take"
+    # Also extract tags from HTML comments in the content
     tags = []
+    
+    # First, add tags from Jekyll categories
     if isinstance(categories, list) and categories:
         # Convert each Jekyll category to a tag (lowercase with dashes)
         tags = [cat.lower().replace(' ', '-') for cat in categories]
     elif isinstance(categories, str) and categories:
         tags = [categories.lower().replace(' ', '-')]
-
-    # If no tags extracted, use empty list
-    if not tags:
-        tags = []
-
-    # Default category for cross-posts
-    category = config.get('default_category', 'Quick Take')
+    
+    # Then, add tags from HTML comments (# hashtags)
+    comment_tags = extract_tags_from_comments(content)
+    tags.extend(comment_tags)
+    
+    # Remove duplicates while preserving order
+    seen = set()
+    unique_tags = []
+    for tag in tags:
+        if tag and tag not in seen:
+            seen.add(tag)
+            unique_tags.append(tag)
+    tags = unique_tags
 
     # Generate metadata
+    # Get the correct canonical URL from Jekyll URL structure
+    source_file = config.get('source_file', '')
+    canonical_url = generate_jekyll_url(source_file) if source_file else ''
+    
     metadata = {
         "title": title,
         "description": excerpt,
-        "canonical": config.get('canonical_url_template', '').format(slug=slug) if config.get('canonical_url_template') else ''
+        "canonical": canonical_url
     }
 
     # Build Astro frontmatter
@@ -281,6 +374,20 @@ def transform_to_astro(
     # Attribution is handled via canonical link in metadata, not in post content
     # The canonical URL in the frontmatter provides proper attribution and SEO credit
 
+    # Remove the first image from content since it's rendered from frontmatter
+    content_without_first_image = re.sub(r'!\[([^\]]*)\]\(([^\)]+)\)', '', content, count=1)
+
+    # Remove the title if it appears at the start of the content (usually as **Title** or # Title)
+    # This handles both bold (**Title**) and heading formats (# Title or ## Title, etc.)
+    title_pattern = re.escape(title)
+    # Match the title in various formats: **Title**, # Title, ## Title, etc.
+    content_without_title = re.sub(
+        rf'^\s*(?:\*\*{title_pattern}\*\*|#{1,6}\s+{title_pattern})\s*\n+',
+        '',
+        content_without_first_image,
+        flags=re.IGNORECASE
+    )
+
     # Convert frontmatter to YAML using our custom dumper to output dates unquoted
     yaml_output = yaml.dump(frontmatter, Dumper=UnquotedDumper, default_flow_style=False, sort_keys=False, allow_unicode=True)
 
@@ -293,7 +400,7 @@ def transform_to_astro(
     )
 
     # Build complete file
-    astro_markdown = f"---\n{yaml_output}---\n\n{content}"
+    astro_markdown = f"---\n{yaml_output}---\n\n{content_without_title.strip()}"
 
     return astro_markdown
 
