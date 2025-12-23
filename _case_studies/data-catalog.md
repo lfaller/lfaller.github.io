@@ -54,6 +54,10 @@ Why SQLite? It's lightweight and perfect for a proof of concept. Why JSON arrays
 
 **Technical Stack**: Python, Streamlit, SQLite, Docker, YAML
 
+#### Workflow Transformation Visualization
+
+{% include case-studies/data-catalog-flow.html %}
+
 ### The Reality Check
 
 **The data wasn't in easy-to-access places.** For each modality, I had to talk to a different wetlab person to get the data, metadata, and mapping information. Six weeks was enough to build the system and catalog what we could access - but we could have gone further if a standardized file structure had already been in place.
