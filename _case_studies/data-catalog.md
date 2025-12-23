@@ -54,7 +54,7 @@ Why SQLite? It's lightweight and perfect for a proof of concept. Why JSON arrays
 
 **Technical Stack**: Python, Streamlit, SQLite, Docker, YAML
 
-#### Workflow Transformation Visualization
+### Workflow Transformation Visualization
 
 {% include case-studies/data-catalog-flow.html %}
 
