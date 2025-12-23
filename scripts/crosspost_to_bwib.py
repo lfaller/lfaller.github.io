@@ -117,56 +117,34 @@ def commit_post_to_repo(
     return target_file
 
 
-def copy_image_to_repo(
-    repo_dir: str,
+def convert_image_to_absolute_url(
     image_path: str,
-    jekyll_post_path: str,
-    post_slug: str
+    blog_url: str = "https://linafaller.github.io"
 ) -> str:
     """
-    Copy featured image from Jekyll post to BWIB repo's public/blog_images/ directory.
-    Returns the new image path relative to repo root, or original path if copy fails.
+    Convert Jekyll image paths to absolute URLs pointing to your blog.
+
+    This avoids copying images to BWIB repo and uses your blog as the single
+    source of truth for images. Automatically updates when you update images
+    on your blog.
+
+    Examples:
+        /assets/images/posts/image.png -> https://linafaller.github.io/assets/images/posts/image.png
+        assets/images/posts/image.png -> https://linafaller.github.io/assets/images/posts/image.png
     """
     if not image_path or image_path.startswith('http'):
-        # Don't copy external URLs or empty paths
+        # Already a URL or empty
         return image_path
 
-    # Make jekyll_post_path absolute to handle relative paths correctly
-    jekyll_post_path_abs = Path(jekyll_post_path).resolve()
-
-    # Determine source file path
+    # Convert Jekyll image paths to absolute URLs
     if image_path.startswith('/'):
-        # Absolute path from Jekyll - find repo root and look from there
-        jekyll_post_dir = jekyll_post_path_abs.parent.parent  # Go up from _posts to repo root
-        source_file = jekyll_post_dir / image_path.lstrip('/')
+        absolute_url = f"{blog_url}{image_path}"
     else:
-        # Relative path - relative to the post directory
-        source_file = jekyll_post_path_abs.parent / image_path
+        # Relative paths get converted too
+        absolute_url = f"{blog_url}/{image_path}"
 
-    if not source_file.exists():
-        print(f"Warning: Image file not found at {source_file}, keeping original path")
-        return image_path
-
-    try:
-        # Extract just the filename from the original path
-        filename = Path(image_path).name
-
-        # Ensure blog_images directory exists
-        target_dir = Path(repo_dir) / 'public' / 'blog_images'
-        target_dir.mkdir(parents=True, exist_ok=True)
-
-        # Copy the image file
-        target_file = target_dir / filename
-        shutil.copy2(source_file, target_file)
-        print(f"Copied image to {target_file}")
-
-        # Return the new path (relative to repo root)
-        new_path = f"/blog_images/{filename}"
-        return new_path
-
-    except Exception as e:
-        print(f"Warning: Could not copy image: {e}, keeping original path")
-        return image_path
+    print(f"Converted image path: {image_path} -> {absolute_url}")
+    return absolute_url
 
 
 def update_image_path_in_content(
@@ -369,7 +347,7 @@ def crosspost_single_post(
         # Commit post
         target_file = commit_post_to_repo(temp_repo_dir, astro_content, slug)
 
-        # Extract image path from frontmatter before copying
+        # Extract image path from frontmatter and convert to absolute URL
         image_path = None
         for line in astro_content.split('\n'):
             if line.startswith('image:'):
@@ -377,19 +355,20 @@ def crosspost_single_post(
                 image_path = line.split(':', 1)[1].strip().strip('"\'')
                 break
 
-        # Copy image to repo if it exists locally
+        # Convert image paths to absolute URLs pointing to your blog
+        # This avoids copying images and uses your blog as the single source of truth
         new_image_path = image_path
         if image_path:
-            new_image_path = copy_image_to_repo(temp_repo_dir, image_path, jekyll_post_path, slug)
+            new_image_path = convert_image_to_absolute_url(image_path)
 
-            # If image path changed, update the post content and re-commit
+            # If image path changed, update the post content
             if new_image_path != image_path:
                 astro_content = update_image_path_in_content(astro_content, image_path, new_image_path)
 
                 # Re-write the post with updated image path
                 with open(target_file, 'w', encoding='utf-8') as f:
                     f.write(astro_content)
-                print(f"Updated image path from {image_path} to {new_image_path}")
+                print(f"Updated image path to point to your blog")
 
                 # Add the updated post file to staging
                 run_command(['git', 'add', str(target_file)], cwd=temp_repo_dir)
@@ -397,30 +376,13 @@ def crosspost_single_post(
                 # Commit the updated post with new image path
                 try:
                     run_command(
-                        ['git', 'commit', '-m', 'Update image path', '--author', 'BWIB Cross-Post Bot <noreply@bwib.github.io>'],
+                        ['git', 'commit', '-m', 'Update image path to blog URL', '--author', 'BWIB Cross-Post Bot <noreply@bwib.github.io>'],
                         cwd=temp_repo_dir
                     )
                     print(f"Committed updated image path")
                 except subprocess.CalledProcessError:
                     # No changes to commit
                     pass
-
-        # Stage and commit the image files
-        image_files = list(Path(temp_repo_dir).glob('public/blog_images/*'))
-        if image_files:
-            for img_file in image_files:
-                run_command(['git', 'add', str(img_file)], cwd=temp_repo_dir)
-
-            # Commit the image
-            try:
-                run_command(
-                    ['git', 'commit', '-m', 'Add featured image', '--author', 'BWIB Cross-Post Bot <noreply@bwib.github.io>'],
-                    cwd=temp_repo_dir
-                )
-                print(f"Committed image files")
-            except subprocess.CalledProcessError:
-                # No image changes to commit (image already existed)
-                pass
 
         # Format with prettier to match BWIB repo's code style
         format_with_prettier(temp_repo_dir, str(target_file))
