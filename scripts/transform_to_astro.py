@@ -56,13 +56,13 @@ def extract_frontmatter_and_content(file_path: str) -> Tuple[Dict, str]:
 
 def generate_slug(file_path: str, author: str = 'lina') -> str:
     """
-    Generate slug from filename in format: YYYYMMDD_post_{author}
+    Generate slug from filename in format: YYYYMMDD_post_{Author}
 
     Handles both formats:
     - Old Jekyll format: 2025-11-27-thanksgiving-in-biotech.md
-      → 20251127_post_lina
-    - New format: 20251127_post_lina.md
-      → 20251127_post_lina
+      → 20251127_post_Lina
+    - New format: 20251127_post_Lina.md
+      → 20251127_post_Lina
     """
     filename = Path(file_path).stem
 
@@ -80,8 +80,11 @@ def generate_slug(file_path: str, author: str = 'lina') -> str:
         month = parts[1]
         day = parts[2]
 
-        # Convert to new format: YYYYMMDD_post_author
-        return f"{year}{month}{day}_post_{author}"
+        # Capitalize author name for filename (Lina, not lina)
+        author_capitalized = author.capitalize()
+
+        # Convert to new format: YYYYMMDD_post_Author
+        return f"{year}{month}{day}_post_{author_capitalized}"
 
     # Fallback: return as-is if we can't parse it
     return filename
