@@ -322,7 +322,7 @@ def validate_post_length(text, limit=3000):
     over_by = None if is_valid else (char_count - limit)
     return is_valid, char_count, over_by
 
-def build_hybrid_linkedin_post(full_content, summary, blog_url, categories, html_hashtags=None):
+def build_hybrid_linkedin_post(full_content, summary, blog_url, categories, html_hashtags=None, skip_blog_url=False):
     """Build LinkedIn post text using hybrid approach.
 
     Strategy:
@@ -336,6 +336,7 @@ def build_hybrid_linkedin_post(full_content, summary, blog_url, categories, html
         blog_url: The full blog URL
         categories: Categories string for hashtag extraction
         html_hashtags: List of hashtags from HTML comments
+        skip_blog_url: If True, don't include the blog URL link
 
     Returns:
         Tuple of (post_text: str, used_full_content: bool, char_count: int)
@@ -367,7 +368,7 @@ def build_hybrid_linkedin_post(full_content, summary, blog_url, categories, html
     # Try full content first
     if full_content:
         full_post = full_content
-        if blog_url:
+        if blog_url and not skip_blog_url:
             full_post += f"\n\nRead the whole story here:\n{blog_url}"
         if hashtags_str:
             full_post += f"\n\n{hashtags_str}"
@@ -379,7 +380,7 @@ def build_hybrid_linkedin_post(full_content, summary, blog_url, categories, html
     # Fall back to summary if full content is too long
     if summary:
         summary_post = summary
-        if blog_url:
+        if blog_url and not skip_blog_url:
             summary_post += f"\n\nRead the whole story here:\n{blog_url}"
         if hashtags_str:
             summary_post += f"\n\n{hashtags_str}"
@@ -456,9 +457,15 @@ def main():
     else:
         print(f"⚠ No 'summary:' field in frontmatter (will use full content if it fits)")
 
+    # Check if this is a Tuesday Tactics post (they don't need blog URL)
+    is_tuesday_tactics = is_tuesday_tactics_post(title, post_filename)
+    if is_tuesday_tactics:
+        print("✓ Detected Tuesday Tactics post - skipping blog URL")
+
     # Build LinkedIn post using hybrid approach
     linkedin_text, used_full, char_count = build_hybrid_linkedin_post(
-        full_linkedin_content, summary, blog_url, categories, html_hashtags
+        full_linkedin_content, summary, blog_url, categories, html_hashtags,
+        skip_blog_url=is_tuesday_tactics
     )
 
     # Show which version was used
