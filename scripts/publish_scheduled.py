@@ -34,7 +34,8 @@ from linkedin_post import (
     extract_summary_from_metadata,
     generate_blog_url,
     build_blog_url,
-    build_hybrid_linkedin_post
+    build_hybrid_linkedin_post,
+    is_tuesday_tactics_post
 )
 
 def parse_post_date(date_str):
@@ -96,9 +97,15 @@ def publish_post_to_linkedin(post_path, access_token, author_id):
         # Extract summary for LinkedIn post (fallback if full content is too long)
         summary = extract_summary_from_metadata(metadata)
 
+        # Check if this is a Tuesday Tactics post (they don't need blog URL)
+        is_tuesday_tactics = is_tuesday_tactics_post(title, post_filename)
+        if is_tuesday_tactics:
+            print(f"    (Tuesday Tactics - skipping blog URL)")
+
         # Build LinkedIn post using hybrid approach
         linkedin_text, used_full, char_count = build_hybrid_linkedin_post(
-            full_linkedin_content, summary, blog_url, categories, html_hashtags
+            full_linkedin_content, summary, blog_url, categories, html_hashtags,
+            skip_blog_url=is_tuesday_tactics
         )
         content_type = "full content" if used_full else "summary"
         print(f"    Using {content_type} ({char_count}/3000 chars)")
