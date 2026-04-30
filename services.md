@@ -34,6 +34,6 @@ When scientists have **frictionless access** to their data, **breakthroughs happ
 
 ### Let's Talk
 
-Ready to **unlock your team's productivity**? Let's discuss how I can help remove your data bottlenecks.
+I'm currently engaged full-time. I'm always happy to connect with people working on interesting problems in life sciences data.
 
-[Schedule a 30-minute consultation](https://calendly.com/lina-l-faller/30min) or connect with me on [LinkedIn](https://linkedin.com/in/linafaller)
+[Say hello](https://calendly.com/lina-l-faller/30min) or reach out on [LinkedIn](https://linkedin.com/in/linafaller)
