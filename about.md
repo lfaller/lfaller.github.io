@@ -12,7 +12,7 @@ I'm a **technology leader** with 10+ years of experience building **scalable dat
 
 ## Current Role
 
-**Director, Data Science Ecosystem Data Product Lead** at **Bayer** *(2025–present)*
+**Director, Data Science Ecosystem Data Product Lead** at **Bayer** *(2026–present)*
 
 Driving the development of Bayer's Data Science Ecosystem — a unified platform for pharma R&D data, analytics, and AI/ML — with a focus on data democratization, FAIR data principles, and translating complex scientific and governance requirements into scalable, pragmatic data capabilities.
 
